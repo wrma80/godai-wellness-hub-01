@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle, Mail, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
-import { SITE, whatsappLink } from "@/lib/site";
+import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export function Footer() {
+  const { data } = useSettings();
+  const s = data ?? DEFAULT_SETTINGS;
   return (
     <footer className="bg-sage text-cream">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4 lg:px-10">
