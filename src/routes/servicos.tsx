@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Clock, Users, ArrowRight } from "lucide-react";
 import servicesImg from "@/assets/services-corporate.jpg";
-import { SERVICES, PRICING } from "@/lib/site";
+import { useServices, usePricing } from "@/lib/cms";
 
 export const Route = createFileRoute("/servicos")({
   head: () => ({
