@@ -1,9 +1,10 @@
-import { whatsappLink } from "@/lib/site";
+import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export function WhatsAppFloat() {
+  const { data } = useSettings();
   return (
     <a
-      href={whatsappLink()}
+      href={buildWhatsappLink(data ?? DEFAULT_SETTINGS)}
       target="_blank"
       rel="noreferrer"
       aria-label="Falar no WhatsApp"

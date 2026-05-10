@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, Heart, Leaf, Wind, Flame, Mountain, Droplets, Check } from "lucide-react";
 import heroImg from "@/assets/hero-massage.jpg";
 import zenImg from "@/assets/about-zen.jpg";
-import { PRICING, whatsappLink } from "@/lib/site";
+import { useSettings, usePricing, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,6 +32,10 @@ const BENEFITS = [
 ];
 
 function HomePage() {
+  const { data: settings } = useSettings();
+  const { data: pricing } = usePricing();
+  const s = settings ?? DEFAULT_SETTINGS;
+  const rows = pricing ?? [];
   return (
     <>
       {/* HERO */}
@@ -57,7 +61,7 @@ function HomePage() {
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
               <a
-                href={whatsappLink()}
+                href={buildWhatsappLink(s)}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-sage/30 px-6 py-3 text-sm font-medium text-sage-deep transition-all hover:border-sage hover:bg-sage/5"
@@ -177,27 +181,27 @@ function HomePage() {
               <div>2 Terapeutas</div>
               <div>Capacidade</div>
             </div>
-            {PRICING.map((row) => (
-              <div key={row.time} className="grid grid-cols-2 gap-y-2 border-b border-sage/5 px-6 py-5 text-sm last:border-0 md:grid-cols-5 md:items-center md:gap-4">
+            {rows.map((row) => (
+              <div key={row.id} className="grid grid-cols-2 gap-y-2 border-b border-sage/5 px-6 py-5 text-sm last:border-0 md:grid-cols-5 md:items-center md:gap-4">
                 <div className="md:col-span-1">
                   <p className="text-xs uppercase tracking-wider text-muted-foreground md:hidden">Tempo</p>
-                  <p className="text-2xl font-bold text-sage md:text-xl">{row.time}</p>
+                  <p className="text-2xl font-bold text-sage md:text-xl">{row.time_label}</p>
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-muted-foreground md:hidden">1 Terapeuta</p>
-                  <p className="font-semibold text-sage-deep">{row.solo}</p>
+                  <p className="font-semibold text-sage-deep">{row.solo_price}</p>
                 </div>
                 <div className="text-muted-foreground">
                   <p className="text-xs uppercase tracking-wider md:hidden">Capacidade</p>
-                  {row.soloCap}
+                  {row.solo_capacity}
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-muted-foreground md:hidden">2 Terapeutas</p>
-                  <p className="font-semibold text-sage-deep">{row.duo}</p>
+                  <p className="font-semibold text-sage-deep">{row.duo_price}</p>
                 </div>
                 <div className="text-muted-foreground">
                   <p className="text-xs uppercase tracking-wider md:hidden">Capacidade</p>
-                  {row.duoCap}
+                  {row.duo_capacity}
                 </div>
               </div>
             ))}

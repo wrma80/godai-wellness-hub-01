@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle, Mail, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
-import { SITE, whatsappLink } from "@/lib/site";
+import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export function Footer() {
+  const { data } = useSettings();
+  const s = data ?? DEFAULT_SETTINGS;
   return (
     <footer className="bg-sage text-cream">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4 lg:px-10">
@@ -34,20 +36,20 @@ export function Footer() {
           </h4>
           <ul className="mt-4 space-y-3 text-sm text-cream/85">
             <li className="flex items-center gap-2">
-              <MapPin size={14} /> {SITE.city}
+              <MapPin size={14} /> {s.city}
             </li>
             <li>
-              <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 hover:text-cream">
-                <Mail size={14} /> {SITE.email}
+              <a href={`mailto:${s.email}`} className="flex items-center gap-2 hover:text-cream">
+                <Mail size={14} /> {s.email}
               </a>
             </li>
             <li>
-              <a href={whatsappLink()} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
+              <a href={buildWhatsappLink(s)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
                 <MessageCircle size={14} /> WhatsApp
               </a>
             </li>
             <li>
-              <a href={SITE.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
+              <a href={s.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
                 <Instagram size={14} /> Instagram
               </a>
             </li>
@@ -58,7 +60,10 @@ export function Footer() {
       <div className="border-t border-cream/15">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-2 px-6 py-6 text-xs text-cream/60 md:flex-row md:items-center lg:px-10">
           <p>© {new Date().getFullYear()} Godai Terapias Integrativas. Todos os direitos reservados.</p>
-          <p>Bem-estar corporativo com equilíbrio e acolhimento.</p>
+          <div className="flex items-center gap-4">
+            <p>Bem-estar corporativo com equilíbrio e acolhimento.</p>
+            <Link to="/admin" className="text-cream/40 hover:text-cream/80">Painel</Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Clock, Users, ArrowRight } from "lucide-react";
 import servicesImg from "@/assets/services-corporate.jpg";
-import { SERVICES, PRICING } from "@/lib/site";
+import { useServices, usePricing } from "@/lib/cms";
 
 export const Route = createFileRoute("/servicos")({
   head: () => ({
@@ -14,6 +14,8 @@ export const Route = createFileRoute("/servicos")({
 });
 
 function ServicosPage() {
+  const { data: services } = useServices();
+  const { data: pricing } = usePricing();
   return (
     <>
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
@@ -31,9 +33,9 @@ function ServicosPage() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s) => (
+          {(services ?? []).map((s) => (
             <article
-              key={s.title}
+              key={s.id}
               className="group relative overflow-hidden rounded-2xl border border-sage/10 bg-white p-7 transition-all hover:-translate-y-1 hover:border-sage/30 hover:shadow-xl"
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sage via-leaf to-sage opacity-0 transition-opacity group-hover:opacity-100" />
@@ -63,22 +65,22 @@ function ServicosPage() {
               Valores corporativos com emissão de Nota Fiscal. Atendimento in company.
             </p>
             <div className="mt-8 space-y-3">
-              {PRICING.map((row) => (
-                <div key={row.time} className="rounded-xl border border-sage/10 p-5">
+              {(pricing ?? []).map((row) => (
+                <div key={row.id} className="rounded-xl border border-sage/10 p-5">
                   <div className="flex items-center justify-between">
-                    <p className="text-2xl font-bold text-sage">{row.time}</p>
+                    <p className="text-2xl font-bold text-sage">{row.time_label}</p>
                     <span className="text-xs uppercase tracking-wider text-muted-foreground">por jornada</span>
                   </div>
                   <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <p className="text-xs text-muted-foreground">1 terapeuta</p>
-                      <p className="font-semibold text-sage-deep">{row.solo}</p>
-                      <p className="text-xs text-muted-foreground">{row.soloCap}</p>
+                      <p className="font-semibold text-sage-deep">{row.solo_price}</p>
+                      <p className="text-xs text-muted-foreground">{row.solo_capacity}</p>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">2 terapeutas</p>
-                      <p className="font-semibold text-sage-deep">{row.duo}</p>
-                      <p className="text-xs text-muted-foreground">{row.duoCap}</p>
+                      <p className="font-semibold text-sage-deep">{row.duo_price}</p>
+                      <p className="text-xs text-muted-foreground">{row.duo_capacity}</p>
                     </div>
                   </div>
                 </div>
