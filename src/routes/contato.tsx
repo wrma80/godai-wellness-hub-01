@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { MapPin, Mail, MessageCircle, Instagram, Send, Check } from "lucide-react";
-import { SITE, whatsappLink } from "@/lib/site";
+import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
