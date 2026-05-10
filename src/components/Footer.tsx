@@ -36,20 +36,20 @@ export function Footer() {
           </h4>
           <ul className="mt-4 space-y-3 text-sm text-cream/85">
             <li className="flex items-center gap-2">
-              <MapPin size={14} /> {SITE.city}
+              <MapPin size={14} /> {s.city}
             </li>
             <li>
-              <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 hover:text-cream">
-                <Mail size={14} /> {SITE.email}
+              <a href={`mailto:${s.email}`} className="flex items-center gap-2 hover:text-cream">
+                <Mail size={14} /> {s.email}
               </a>
             </li>
             <li>
-              <a href={whatsappLink()} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
+              <a href={buildWhatsappLink(s)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
                 <MessageCircle size={14} /> WhatsApp
               </a>
             </li>
             <li>
-              <a href={SITE.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
+              <a href={s.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
                 <Instagram size={14} /> Instagram
               </a>
             </li>
