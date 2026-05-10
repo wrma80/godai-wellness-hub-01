@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, Heart, Leaf, Wind, Flame, Mountain, Droplets, Check } from "lucide-react";
 import heroImg from "@/assets/hero-massage.jpg";
 import zenImg from "@/assets/about-zen.jpg";
-import { PRICING, whatsappLink } from "@/lib/site";
+import { useSettings, usePricing, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export const Route = createFileRoute("/")({
   head: () => ({
