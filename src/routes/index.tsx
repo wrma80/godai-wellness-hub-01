@@ -32,6 +32,10 @@ const BENEFITS = [
 ];
 
 function HomePage() {
+  const { data: settings } = useSettings();
+  const { data: pricing } = usePricing();
+  const s = settings ?? DEFAULT_SETTINGS;
+  const rows = pricing ?? [];
   return (
     <>
       {/* HERO */}
