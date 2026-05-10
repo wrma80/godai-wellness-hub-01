@@ -14,6 +14,8 @@ export const Route = createFileRoute("/servicos")({
 });
 
 function ServicosPage() {
+  const { data: services } = useServices();
+  const { data: pricing } = usePricing();
   return (
     <>
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
