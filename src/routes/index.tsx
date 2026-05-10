@@ -61,7 +61,7 @@ function HomePage() {
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
               <a
-                href={whatsappLink()}
+                href={buildWhatsappLink(s)}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-sage/30 px-6 py-3 text-sm font-medium text-sage-deep transition-all hover:border-sage hover:bg-sage/5"
