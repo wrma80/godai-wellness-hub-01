@@ -33,9 +33,9 @@ function ServicosPage() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s) => (
+          {(services ?? []).map((s) => (
             <article
-              key={s.title}
+              key={s.id}
               className="group relative overflow-hidden rounded-2xl border border-sage/10 bg-white p-7 transition-all hover:-translate-y-1 hover:border-sage/30 hover:shadow-xl"
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sage via-leaf to-sage opacity-0 transition-opacity group-hover:opacity-100" />
