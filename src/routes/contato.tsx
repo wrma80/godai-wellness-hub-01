@@ -38,7 +38,7 @@ function ContatoPage() {
       `Mensagem: ${mensagem}`,
     ].join("\n");
 
-    const url = `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/${s.whatsappNumber}?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
     setSent(true);
   };
@@ -61,18 +61,18 @@ function ContatoPage() {
               <span className="grid h-9 w-9 place-items-center rounded-full bg-sage/10 text-sage">
                 <MapPin size={16} />
               </span>
-              {SITE.city}
+              {s.city}
             </li>
             <li>
-              <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 text-sage-deep hover:text-sage">
+              <a href={`mailto:${s.email}`} className="flex items-center gap-3 text-sage-deep hover:text-sage">
                 <span className="grid h-9 w-9 place-items-center rounded-full bg-sage/10 text-sage">
                   <Mail size={16} />
                 </span>
-                {SITE.email}
+                {s.email}
               </a>
             </li>
             <li>
-              <a href={whatsappLink()} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sage-deep hover:text-sage">
+              <a href={buildWhatsappLink(s)} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sage-deep hover:text-sage">
                 <span className="grid h-9 w-9 place-items-center rounded-full bg-sage/10 text-sage">
                   <MessageCircle size={16} />
                 </span>
@@ -80,7 +80,7 @@ function ContatoPage() {
               </a>
             </li>
             <li>
-              <a href={SITE.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sage-deep hover:text-sage">
+              <a href={s.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sage-deep hover:text-sage">
                 <span className="grid h-9 w-9 place-items-center rounded-full bg-sage/10 text-sage">
                   <Instagram size={16} />
                 </span>
