@@ -181,27 +181,27 @@ function HomePage() {
               <div>2 Terapeutas</div>
               <div>Capacidade</div>
             </div>
-            {PRICING.map((row) => (
-              <div key={row.time} className="grid grid-cols-2 gap-y-2 border-b border-sage/5 px-6 py-5 text-sm last:border-0 md:grid-cols-5 md:items-center md:gap-4">
+            {rows.map((row) => (
+              <div key={row.id} className="grid grid-cols-2 gap-y-2 border-b border-sage/5 px-6 py-5 text-sm last:border-0 md:grid-cols-5 md:items-center md:gap-4">
                 <div className="md:col-span-1">
                   <p className="text-xs uppercase tracking-wider text-muted-foreground md:hidden">Tempo</p>
-                  <p className="text-2xl font-bold text-sage md:text-xl">{row.time}</p>
+                  <p className="text-2xl font-bold text-sage md:text-xl">{row.time_label}</p>
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-muted-foreground md:hidden">1 Terapeuta</p>
-                  <p className="font-semibold text-sage-deep">{row.solo}</p>
+                  <p className="font-semibold text-sage-deep">{row.solo_price}</p>
                 </div>
                 <div className="text-muted-foreground">
                   <p className="text-xs uppercase tracking-wider md:hidden">Capacidade</p>
-                  {row.soloCap}
+                  {row.solo_capacity}
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-muted-foreground md:hidden">2 Terapeutas</p>
-                  <p className="font-semibold text-sage-deep">{row.duo}</p>
+                  <p className="font-semibold text-sage-deep">{row.duo_price}</p>
                 </div>
                 <div className="text-muted-foreground">
                   <p className="text-xs uppercase tracking-wider md:hidden">Capacidade</p>
-                  {row.duoCap}
+                  {row.duo_capacity}
                 </div>
               </div>
             ))}
