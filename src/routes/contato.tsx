@@ -14,6 +14,8 @@ export const Route = createFileRoute("/contato")({
 });
 
 function ContatoPage() {
+  const { data: settings } = useSettings();
+  const s = settings ?? DEFAULT_SETTINGS;
   const [sent, setSent] = useState(false);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
