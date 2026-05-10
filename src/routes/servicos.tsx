@@ -65,22 +65,22 @@ function ServicosPage() {
               Valores corporativos com emissão de Nota Fiscal. Atendimento in company.
             </p>
             <div className="mt-8 space-y-3">
-              {PRICING.map((row) => (
-                <div key={row.time} className="rounded-xl border border-sage/10 p-5">
+              {(pricing ?? []).map((row) => (
+                <div key={row.id} className="rounded-xl border border-sage/10 p-5">
                   <div className="flex items-center justify-between">
-                    <p className="text-2xl font-bold text-sage">{row.time}</p>
+                    <p className="text-2xl font-bold text-sage">{row.time_label}</p>
                     <span className="text-xs uppercase tracking-wider text-muted-foreground">por jornada</span>
                   </div>
                   <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <p className="text-xs text-muted-foreground">1 terapeuta</p>
-                      <p className="font-semibold text-sage-deep">{row.solo}</p>
-                      <p className="text-xs text-muted-foreground">{row.soloCap}</p>
+                      <p className="font-semibold text-sage-deep">{row.solo_price}</p>
+                      <p className="text-xs text-muted-foreground">{row.solo_capacity}</p>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">2 terapeutas</p>
-                      <p className="font-semibold text-sage-deep">{row.duo}</p>
-                      <p className="text-xs text-muted-foreground">{row.duoCap}</p>
+                      <p className="font-semibold text-sage-deep">{row.duo_price}</p>
+                      <p className="text-xs text-muted-foreground">{row.duo_capacity}</p>
                     </div>
                   </div>
                 </div>
