@@ -1,0 +1,5 @@
+[
+  { "id": "p1", "time_label": "4h", "solo_price": "R$ 600", "solo_capacity": "até 24 pessoas", "duo_price": "R$ 1.150", "duo_capacity": "até 48 pessoas", "display_order": 1 },
+  { "id": "p2", "time_label": "6h", "solo_price": "R$ 850", "solo_capacity": "até 36 pessoas", "duo_price": "R$ 1.650", "duo_capacity": "até 72 pessoas", "display_order": 2 },
+  { "id": "p3", "time_label": "8h", "solo_price": "R$ 1.100", "solo_capacity": "até 48 pessoas", "duo_price": "R$ 2.150", "duo_capacity": "até 96 pessoas", "display_order": 3 }
+]

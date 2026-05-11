@@ -1,0 +1,7 @@
+# Bloqueia acesso direto a arquivos sensíveis em qualquer servidor Apache.
+<FilesMatch "\.json$">
+  Require all denied
+</FilesMatch>
+
+# Página inicial
+DirectoryIndex index.php index.html
