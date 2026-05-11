@@ -3,22 +3,25 @@ name: Deploy via FTP (Locaweb)
 on:
   push:
     branches:
-      - "main"
+      - main
     paths:
       - "html-version/**"
+
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: FTP Deploy Locaweb
-        uses: locaweb/ftp-deploy@1.0.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.HOST }}
-          user: ${{ secrets.USER }}
+          server: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
-          localDir: "html-version"
-          remoteDir: "public_html"
+          local-dir: ./html-version/
+          server-dir: /public_html/
