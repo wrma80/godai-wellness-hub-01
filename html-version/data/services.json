@@ -1,0 +1,50 @@
+[
+  {
+    "id": "s1",
+    "title": "Quick Massage 4 horas",
+    "duration": "4h",
+    "capacity": "Até 24 pessoas",
+    "description": "Sessões de 10 minutos por colaborador, ideais para equipes pequenas e ações pontuais de bem-estar.",
+    "display_order": 1
+  },
+  {
+    "id": "s2",
+    "title": "Quick Massage 6 horas",
+    "duration": "6h",
+    "capacity": "Até 36 pessoas",
+    "description": "Formato intermediário, recomendado para SIPATs e dias temáticos de qualidade de vida.",
+    "display_order": 2
+  },
+  {
+    "id": "s3",
+    "title": "Quick Massage 8 horas",
+    "duration": "8h",
+    "capacity": "Até 48 pessoas",
+    "description": "Jornada completa para grandes equipes, com possibilidade de 2 terapeutas simultâneos.",
+    "display_order": 3
+  },
+  {
+    "id": "s4",
+    "title": "SIPAT e Eventos",
+    "duration": "Sob demanda",
+    "capacity": "Personalizado",
+    "description": "Atendimentos para semanas internas de prevenção, eventos corporativos e ações especiais.",
+    "display_order": 4
+  },
+  {
+    "id": "s5",
+    "title": "Programa Mensal Contínuo",
+    "duration": "Recorrente",
+    "capacity": "Plano sob medida",
+    "description": "Programa fixo mensal de bem-estar, com cronograma de atendimentos contínuos na empresa.",
+    "display_order": 5
+  },
+  {
+    "id": "s6",
+    "title": "Atendimento In Company",
+    "duration": "Personalizado",
+    "capacity": "A definir",
+    "description": "Equipe, cadeiras ergonômicas e ambiente preparado entregues e montados no seu espaço.",
+    "display_order": 6
+  }
+]
