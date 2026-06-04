@@ -9,28 +9,40 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
 import { Route as SobreRouteImport } from './routes/sobre'
-import { Route as ServicosRouteImport } from './routes/servicos'
-import { Route as MetodologiaRouteImport } from './routes/metodologia'
+import { Route as QuickMassageRouteImport } from './routes/quick-massage'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
+const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
+  id: '/termos-de-uso',
+  path: '/termos-de-uso',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicosRoute = ServicosRouteImport.update({
-  id: '/servicos',
-  path: '/servicos',
+const QuickMassageRoute = QuickMassageRouteImport.update({
+  id: '/quick-massage',
+  path: '/quick-massage',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MetodologiaRoute = MetodologiaRouteImport.update({
-  id: '/metodologia',
-  path: '/metodologia',
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -63,18 +75,22 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/contato': typeof ContatoRoute
-  '/metodologia': typeof MetodologiaRoute
-  '/servicos': typeof ServicosRoute
+  '/faq': typeof FaqRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/quick-massage': typeof QuickMassageRoute
   '/sobre': typeof SobreRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
-  '/metodologia': typeof MetodologiaRoute
-  '/servicos': typeof ServicosRoute
+  '/faq': typeof FaqRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/quick-massage': typeof QuickMassageRoute
   '/sobre': typeof SobreRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -83,9 +99,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/contato': typeof ContatoRoute
-  '/metodologia': typeof MetodologiaRoute
-  '/servicos': typeof ServicosRoute
+  '/faq': typeof FaqRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/quick-massage': typeof QuickMassageRoute
   '/sobre': typeof SobreRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -95,18 +113,22 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/contato'
-    | '/metodologia'
-    | '/servicos'
+    | '/faq'
+    | '/politica-de-privacidade'
+    | '/quick-massage'
     | '/sobre'
+    | '/termos-de-uso'
     | '/admin/login'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contato'
-    | '/metodologia'
-    | '/servicos'
+    | '/faq'
+    | '/politica-de-privacidade'
+    | '/quick-massage'
     | '/sobre'
+    | '/termos-de-uso'
     | '/admin/login'
     | '/admin'
   id:
@@ -114,9 +136,11 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/contato'
-    | '/metodologia'
-    | '/servicos'
+    | '/faq'
+    | '/politica-de-privacidade'
+    | '/quick-massage'
     | '/sobre'
+    | '/termos-de-uso'
     | '/admin/login'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -125,13 +149,22 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   ContatoRoute: typeof ContatoRoute
-  MetodologiaRoute: typeof MetodologiaRoute
-  ServicosRoute: typeof ServicosRoute
+  FaqRoute: typeof FaqRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
+  QuickMassageRoute: typeof QuickMassageRoute
   SobreRoute: typeof SobreRoute
+  TermosDeUsoRoute: typeof TermosDeUsoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos-de-uso': {
+      id: '/termos-de-uso'
+      path: '/termos-de-uso'
+      fullPath: '/termos-de-uso'
+      preLoaderRoute: typeof TermosDeUsoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sobre': {
       id: '/sobre'
       path: '/sobre'
@@ -139,18 +172,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SobreRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/servicos': {
-      id: '/servicos'
-      path: '/servicos'
-      fullPath: '/servicos'
-      preLoaderRoute: typeof ServicosRouteImport
+    '/quick-massage': {
+      id: '/quick-massage'
+      path: '/quick-massage'
+      fullPath: '/quick-massage'
+      preLoaderRoute: typeof QuickMassageRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/metodologia': {
-      id: '/metodologia'
-      path: '/metodologia'
-      fullPath: '/metodologia'
-      preLoaderRoute: typeof MetodologiaRouteImport
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -207,9 +247,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   ContatoRoute: ContatoRoute,
-  MetodologiaRoute: MetodologiaRoute,
-  ServicosRoute: ServicosRoute,
+  FaqRoute: FaqRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
+  QuickMassageRoute: QuickMassageRoute,
   SobreRoute: SobreRoute,
+  TermosDeUsoRoute: TermosDeUsoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

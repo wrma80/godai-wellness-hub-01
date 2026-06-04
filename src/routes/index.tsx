@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, Heart, Leaf, Wind, Flame, Mountain, Droplets, Check } from "lucide-react";
+import { ArrowRight, Sparkles, Heart, Leaf, Wind, Flame, Mountain, Droplets, Check, Globe2, HandHeart, Package, GraduationCap, Building2, UserCheck } from "lucide-react";
 import heroImg from "@/assets/hero-massage.jpg";
 import zenImg from "@/assets/about-zen.jpg";
-import { useSettings, usePricing, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
+import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,7 +19,7 @@ const ELEMENTS = [
   { icon: Droplets, label: "Água" },
   { icon: Flame, label: "Fogo" },
   { icon: Wind, label: "Ar" },
-  { icon: Sparkles, label: "Éter" },
+  { icon: Sparkles, label: "Vazio" },
 ];
 
 const BENEFITS = [
@@ -31,11 +31,54 @@ const BENEFITS = [
   "Experiência corporativa diferenciada",
 ];
 
+const DIFERENCIAIS = [
+  { icon: Globe2, text: "Experiência internacional" },
+  { icon: HandHeart, text: "Atendimento humanizado" },
+  { icon: Package, text: "Estrutura completa inclusa" },
+  { icon: GraduationCap, text: "Profissionais qualificados" },
+  { icon: Building2, text: "Experiência corporativa premium" },
+  { icon: UserCheck, text: "Atendimento personalizado" },
+];
+
+const PLANOS = [
+  {
+    title: "Avulso",
+    subtitle: "Ação Pontual",
+    desc: "Perfeito para SIPAT, eventos internos e campanhas de bem-estar.",
+    items: [
+      "Agendamento único",
+      "Ideal para ações pontuais",
+      "Ideal para datas comemorativas",
+      "Contratação por período de atendimento",
+    ],
+  },
+  {
+    title: "Pacote Corporativo",
+    subtitle: "Flexibilidade de Utilização",
+    desc: "Ideal para empresas que desejam múltiplos atendimentos corporativos sem fidelização recorrente.",
+    items: [
+      "Utilização conforme agenda da empresa",
+      "Condições corporativas diferenciadas",
+      "Melhor custo-benefício",
+      "Ideal para SIPATs e campanhas periódicas",
+    ],
+  },
+  {
+    title: "Programa Corporativo",
+    subtitle: "Parceria Estratégica",
+    desc: "Programa contínuo de bem-estar para empresas com visão de longo prazo.",
+    items: [
+      "Atendimento recorrente",
+      "Planejamento contínuo das ações",
+      "Organização do calendário corporativo",
+      "Programa estruturado de qualidade de vida",
+    ],
+  },
+];
+
 function HomePage() {
   const { data: settings } = useSettings();
-  const { data: pricing } = usePricing();
   const s = settings ?? DEFAULT_SETTINGS;
-  const rows = pricing ?? [];
   return (
     <>
       {/* HERO */}
@@ -88,7 +131,7 @@ function HomePage() {
                   <Heart size={18} />
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground">+ saúde corporativa</p>
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">Saúde corporativa</p>
                   <p className="text-sm font-semibold text-sage-deep">15 min que renovam</p>
                 </div>
               </div>
@@ -116,7 +159,7 @@ function HomePage() {
                 acolhimento e bem-estar através das terapias corporais.
               </p>
               <p>
-                Inspirada no conceito oriental dos cinco elementos — Terra, Água, Fogo, Ar e Éter —
+                Inspirada no conceito oriental dos cinco elementos — Terra, Água, Fogo, Ar e Vazio —
                 a marca traduz harmonia entre corpo, mente e ambiente.
               </p>
               <p>
@@ -129,7 +172,7 @@ function HomePage() {
             <div className="mt-10 grid grid-cols-5 gap-3">
               {ELEMENTS.map(({ icon: Icon, label }) => (
                 <div key={label} className="flex flex-col items-center gap-2 rounded-xl border border-sage/10 bg-cream/50 p-3 transition-colors hover:border-sage/30 hover:bg-cream">
-                  <Icon size={20} className="text-sage" />
+                  <Icon size={20} className="text-sage" strokeWidth={1.5} />
                   <span className="text-[11px] tracking-wide text-sage-deep">{label}</span>
                 </div>
               ))}
@@ -138,7 +181,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* BENEFÍCIOS */}
+      {/* PARA SUA EMPRESA */}
       <section className="bg-sage py-20 text-cream md:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="max-w-2xl">
@@ -153,7 +196,7 @@ function HomePage() {
             {BENEFITS.map((b) => (
               <div key={b} className="group flex items-start gap-3 rounded-xl border border-cream/15 bg-cream/5 p-5 transition-colors hover:bg-cream/10">
                 <span className="mt-0.5 grid h-6 w-6 place-items-center rounded-full bg-cream/15">
-                  <Check size={14} />
+                  <Check size={14} strokeWidth={1.75} />
                 </span>
                 <p className="text-sm text-cream/95">{b}</p>
               </div>
@@ -162,62 +205,83 @@ function HomePage() {
         </div>
       </section>
 
-      {/* TABELA DE PREÇOS */}
-      <section className="bg-cream py-20 md:py-28" id="planos">
+      {/* DIFERENCIAIS */}
+      <section className="bg-white py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="text-center">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Planos</span>
-            <h2 className="mt-4 text-3xl text-sage-deep md:text-4xl">Tabela de atendimento</h2>
-            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Formatos pensados para diferentes tamanhos de equipe e durações de evento.
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Diferenciais</span>
+            <h2 className="mt-4 text-3xl text-sage-deep md:text-4xl">Por que escolher a Godai.</h2>
+            <p className="mt-4 text-muted-foreground">
+              Cuidado, estrutura e experiência corporativa premium em todos os atendimentos.
             </p>
           </div>
-
-          <div className="mt-12 overflow-hidden rounded-2xl border border-sage/10 bg-white shadow-sm">
-            <div className="hidden grid-cols-5 gap-4 border-b border-sage/10 bg-sage/5 px-6 py-4 text-xs font-semibold uppercase tracking-wider text-sage-deep md:grid">
-              <div>Tempo</div>
-              <div>1 Terapeuta</div>
-              <div>Capacidade</div>
-              <div>2 Terapeutas</div>
-              <div>Capacidade</div>
-            </div>
-            {rows.map((row) => (
-              <div key={row.id} className="grid grid-cols-2 gap-y-2 border-b border-sage/5 px-6 py-5 text-sm last:border-0 md:grid-cols-5 md:items-center md:gap-4">
-                <div className="md:col-span-1">
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground md:hidden">Tempo</p>
-                  <p className="text-2xl font-bold text-sage md:text-xl">{row.time_label}</p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground md:hidden">1 Terapeuta</p>
-                  <p className="font-semibold text-sage-deep">{row.solo_price}</p>
-                </div>
-                <div className="text-muted-foreground">
-                  <p className="text-xs uppercase tracking-wider md:hidden">Capacidade</p>
-                  {row.solo_capacity}
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground md:hidden">2 Terapeutas</p>
-                  <p className="font-semibold text-sage-deep">{row.duo_price}</p>
-                </div>
-                <div className="text-muted-foreground">
-                  <p className="text-xs uppercase tracking-wider md:hidden">Capacidade</p>
-                  {row.duo_capacity}
-                </div>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {DIFERENCIAIS.map(({ icon: Icon, text }) => (
+              <div key={text} className="group flex items-start gap-3 rounded-xl border border-sage/15 bg-cream/40 p-5 transition-colors hover:border-sage/30 hover:bg-cream">
+                <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-sage/10 text-sage">
+                  <Icon size={18} strokeWidth={1.5} />
+                </span>
+                <p className="pt-1 text-sm text-sage-deep">{text}</p>
               </div>
             ))}
           </div>
-          <p className="mt-4 text-center text-xs text-muted-foreground">
-            Valores corporativos para atendimento in company com emissão de Nota Fiscal.
-          </p>
+        </div>
+      </section>
 
-          <div className="mt-10 text-center">
-            <Link
-              to="/contato"
-              className="inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-sm font-medium text-cream transition-all hover:bg-sage-deep"
-            >
-              Solicitar orçamento personalizado <ArrowRight size={16} />
-            </Link>
+      {/* FORMAS DE CONTRATAÇÃO */}
+      <section className="bg-cream py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="text-center">
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Formas de Contratação</span>
+            <h2 className="mt-4 text-3xl text-sage-deep md:text-4xl">Escolha o formato ideal para sua empresa</h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+              Três modalidades pensadas para diferentes momentos e necessidades corporativas.
+            </p>
           </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {PLANOS.map((p, i) => (
+              <div
+                key={p.title}
+                className={`relative flex flex-col rounded-2xl border bg-white p-8 shadow-sm transition-all hover:shadow-md ${
+                  i === 1 ? "border-sage/40 ring-1 ring-sage/30" : "border-sage/10"
+                }`}
+              >
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-sage">{p.subtitle}</span>
+                <h3 className="mt-3 text-2xl text-sage-deep">{p.title}</h3>
+                <p className="mt-3 text-sm text-muted-foreground">{p.desc}</p>
+                <ul className="mt-6 space-y-3 text-sm">
+                  {p.items.map((it) => (
+                    <li key={it} className="flex items-start gap-2 text-sage-deep">
+                      <Check size={16} className="mt-0.5 text-sage" strokeWidth={1.75} />
+                      <span>{it}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/contato"
+                  className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-sage/30 px-5 py-2.5 text-sm font-medium text-sage-deep transition-all hover:border-sage hover:bg-sage/5"
+                >
+                  Solicitar orçamento <ArrowRight size={14} />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA FINAL */}
+      <section className="bg-sage py-20 text-cream">
+        <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
+          <h2 className="text-3xl md:text-4xl">
+            Vamos construir uma experiência de bem-estar para a sua equipe?
+          </h2>
+          <Link
+            to="/contato"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-medium text-sage-deep transition-transform hover:scale-[1.02]"
+          >
+            Solicitar orçamento <ArrowRight size={16} />
+          </Link>
         </div>
       </section>
     </>

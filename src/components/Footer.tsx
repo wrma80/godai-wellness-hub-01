@@ -15,6 +15,9 @@ export function Footer() {
             Bem-estar corporativo com equilíbrio e acolhimento. Levamos a Quick Massage
             até a sua empresa para promover saúde, produtividade e qualidade de vida.
           </p>
+          <p className="mt-4 text-xs uppercase tracking-[0.2em] text-cream/60">
+            Região de atendimento: Indaiatuba/SP e demais regiões mediante consulta
+          </p>
         </div>
 
         <div>
@@ -22,11 +25,13 @@ export function Footer() {
             Navegação
           </h4>
           <ul className="mt-4 space-y-2 text-sm">
-            <li><Link to="/" className="text-cream/85 hover:text-cream">Início</Link></li>
+            <li><Link to="/" className="text-cream/85 hover:text-cream">Home</Link></li>
             <li><Link to="/sobre" className="text-cream/85 hover:text-cream">Sobre</Link></li>
-            <li><Link to="/servicos" className="text-cream/85 hover:text-cream">Serviços</Link></li>
-            <li><Link to="/metodologia" className="text-cream/85 hover:text-cream">Metodologia</Link></li>
+            <li><Link to="/quick-massage" className="text-cream/85 hover:text-cream">Quick Massage</Link></li>
+            <li><Link to="/faq" className="text-cream/85 hover:text-cream">FAQ</Link></li>
             <li><Link to="/contato" className="text-cream/85 hover:text-cream">Contato</Link></li>
+            <li className="pt-2"><Link to="/politica-de-privacidade" className="text-cream/70 hover:text-cream">Política de Privacidade</Link></li>
+            <li><Link to="/termos-de-uso" className="text-cream/70 hover:text-cream">Termos de Uso</Link></li>
           </ul>
         </div>
 
@@ -61,7 +66,6 @@ export function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-2 px-6 py-6 text-xs text-cream/60 md:flex-row md:items-center lg:px-10">
           <p>© {new Date().getFullYear()} Godai Terapias Integrativas. Todos os direitos reservados.</p>
           <div className="flex items-center gap-4">
-            <p>Bem-estar corporativo com equilíbrio e acolhimento.</p>
             <Link to="/admin" className="text-cream/40 hover:text-cream/80">Painel</Link>
           </div>
         </div>

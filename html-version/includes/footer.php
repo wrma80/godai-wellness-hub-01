@@ -7,15 +7,18 @@
         <img src="<?= e(base_url('assets/img/godai-logo.png')) ?>" alt="Godai Terapias Integrativas">
       </span>
       <p>Bem-estar corporativo com equilíbrio e acolhimento. Levamos a Quick Massage até a sua empresa para promover saúde, produtividade e qualidade de vida.</p>
+      <p class="footer-region">Região de atendimento: Indaiatuba/SP e demais regiões mediante consulta</p>
     </div>
     <div>
       <h4>Navegação</h4>
       <ul>
-        <li><a href="<?= e(base_url('index.php')) ?>">Início</a></li>
+        <li><a href="<?= e(base_url('index.php')) ?>">Home</a></li>
         <li><a href="<?= e(base_url('sobre.php')) ?>">Sobre</a></li>
-        <li><a href="<?= e(base_url('servicos.php')) ?>">Serviços</a></li>
-        <li><a href="<?= e(base_url('metodologia.php')) ?>">Metodologia</a></li>
+        <li><a href="<?= e(base_url('quick-massage.php')) ?>">Quick Massage</a></li>
+        <li><a href="<?= e(base_url('faq.php')) ?>">FAQ</a></li>
         <li><a href="<?= e(base_url('contato.php')) ?>">Contato</a></li>
+        <li style="margin-top:10px;"><a href="<?= e(base_url('politica-de-privacidade.php')) ?>">Política de Privacidade</a></li>
+        <li><a href="<?= e(base_url('termos-de-uso.php')) ?>">Termos de Uso</a></li>
       </ul>
     </div>
     <div>
