@@ -1,4 +1,4 @@
-// Godai — JS de interface (header scroll + nav mobile)
+// Godai — JS de interface (header scroll + nav mobile + accordion)
 (function () {
   const header = document.getElementById('siteHeader');
   if (header) {
@@ -23,4 +23,14 @@
       }
     });
   }
+
+  // FAQ accordion
+  document.querySelectorAll('.accordion-q').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.accordion-item');
+      if (!item) return;
+      const isOpen = item.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
 })();
