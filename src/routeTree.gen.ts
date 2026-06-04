@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as QuickMassageRouteImport } from './routes/quick-massage'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -26,6 +27,11 @@ const SobreRoute = SobreRouteImport.update({
 const QuickMassageRoute = QuickMassageRouteImport.update({
   id: '/quick-massage',
   path: '/quick-massage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quick-massage': typeof QuickMassageRoute
   '/sobre': typeof SobreRoute
   '/admin/login': typeof AdminLoginRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quick-massage': typeof QuickMassageRoute
   '/sobre': typeof SobreRoute
   '/admin/login': typeof AdminLoginRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quick-massage': typeof QuickMassageRoute
   '/sobre': typeof SobreRoute
   '/admin/login': typeof AdminLoginRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contato'
     | '/faq'
+    | '/politica-de-privacidade'
     | '/quick-massage'
     | '/sobre'
     | '/admin/login'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/faq'
+    | '/politica-de-privacidade'
     | '/quick-massage'
     | '/sobre'
     | '/admin/login'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contato'
     | '/faq'
+    | '/politica-de-privacidade'
     | '/quick-massage'
     | '/sobre'
     | '/admin/login'
@@ -126,6 +138,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   ContatoRoute: typeof ContatoRoute
   FaqRoute: typeof FaqRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   QuickMassageRoute: typeof QuickMassageRoute
   SobreRoute: typeof SobreRoute
 }
@@ -144,6 +157,13 @@ declare module '@tanstack/react-router' {
       path: '/quick-massage'
       fullPath: '/quick-massage'
       preLoaderRoute: typeof QuickMassageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -208,9 +228,20 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   ContatoRoute: ContatoRoute,
   FaqRoute: FaqRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   QuickMassageRoute: QuickMassageRoute,
   SobreRoute: SobreRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
