@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as QuickMassageRouteImport } from './routes/quick-massage'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
@@ -25,6 +26,11 @@ const SobreRoute = SobreRouteImport.update({
 const QuickMassageRoute = QuickMassageRouteImport.update({
   id: '/quick-massage',
   path: '/quick-massage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
   '/quick-massage': typeof QuickMassageRoute
   '/sobre': typeof SobreRoute
   '/admin/login': typeof AdminLoginRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
   '/quick-massage': typeof QuickMassageRoute
   '/sobre': typeof SobreRoute
   '/admin/login': typeof AdminLoginRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
   '/quick-massage': typeof QuickMassageRoute
   '/sobre': typeof SobreRoute
   '/admin/login': typeof AdminLoginRoute
@@ -86,17 +95,26 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/contato'
+    | '/faq'
     | '/quick-massage'
     | '/sobre'
     | '/admin/login'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contato' | '/quick-massage' | '/sobre' | '/admin/login' | '/admin'
+  to:
+    | '/'
+    | '/contato'
+    | '/faq'
+    | '/quick-massage'
+    | '/sobre'
+    | '/admin/login'
+    | '/admin'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/contato'
+    | '/faq'
     | '/quick-massage'
     | '/sobre'
     | '/admin/login'
@@ -107,6 +125,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   ContatoRoute: typeof ContatoRoute
+  FaqRoute: typeof FaqRoute
   QuickMassageRoute: typeof QuickMassageRoute
   SobreRoute: typeof SobreRoute
 }
@@ -125,6 +144,13 @@ declare module '@tanstack/react-router' {
       path: '/quick-massage'
       fullPath: '/quick-massage'
       preLoaderRoute: typeof QuickMassageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -181,6 +207,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   ContatoRoute: ContatoRoute,
+  FaqRoute: FaqRoute,
   QuickMassageRoute: QuickMassageRoute,
   SobreRoute: SobreRoute,
 }
