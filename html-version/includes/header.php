@@ -3,11 +3,11 @@ require_once __DIR__ . '/config.php';
 $s = get_settings();
 $page = current_page();
 $nav = [
-  ['index',       'Início'],
-  ['sobre',       'Sobre'],
-  ['servicos',    'Serviços'],
-  ['metodologia', 'Metodologia'],
-  ['contato',     'Contato'],
+  ['index',        'Home'],
+  ['sobre',        'Sobre'],
+  ['quick-massage','Quick Massage'],
+  ['faq',          'FAQ'],
+  ['contato',      'Contato'],
 ];
 $pageTitle = $pageTitle ?? 'Godai Terapias Integrativas — Quick Massage Corporativa';
 $pageDesc  = $pageDesc  ?? 'Bem-estar corporativo que transforma ambientes. Quick Massage in company para empresas, SIPATs e programas de qualidade de vida.';
