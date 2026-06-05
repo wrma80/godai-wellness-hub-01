@@ -76,12 +76,12 @@ include __DIR__ . '/includes/header.php';
     <p class="lead" style="margin-top:16px;">Cuidado, estrutura e experiência corporativa premium em todos os atendimentos.</p>
     <div class="diff-grid">
       <?php foreach ([
+        ['🏆','20+ anos de expertise'],
         ['🌍','Experiência internacional'],
-        ['🤝','Atendimento humanizado'],
-        ['📦','Estrutura completa inclusa'],
         ['🎓','Profissionais qualificados'],
         ['🏢','Experiência corporativa premium'],
-        ['👤','Atendimento personalizado'],
+        ['📦','Estrutura completa inclusa'],
+        ['🤝','Atendimento humanizado'],
       ] as [$ic,$txt]): ?>
         <div class="diff-item">
           <span class="ico"><?= $ic ?></span>
@@ -107,9 +107,9 @@ include __DIR__ . '/includes/header.php';
         ['Programa Corporativo','Parceria Estratégica','Programa contínuo de bem-estar para empresas com visão de longo prazo.', ['Atendimento recorrente','Planejamento contínuo das ações','Organização do calendário corporativo','Programa estruturado de qualidade de vida'], false],
       ]; foreach ($plans as [$t,$sub,$desc,$items,$feat]): ?>
         <div class="plan-card<?= $feat ? ' is-featured' : '' ?>">
-          <span class="plan-sub"><?= e($sub) ?></span>
-          <h3><?= e($t) ?></h3>
-          <p class="plan-desc"><?= e($desc) ?></p>
+          <span class="plan-sub" style="text-align:center;display:block;"><?= e($sub) ?></span>
+          <h3 style="text-align:center;"><?= e($t) ?></h3>
+          <p class="plan-desc" style="text-align:center;"><?= e($desc) ?></p>
           <ul>
             <?php foreach ($items as $i): ?><li><?= e($i) ?></li><?php endforeach; ?>
           </ul>

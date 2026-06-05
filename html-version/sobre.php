@@ -1,61 +1,91 @@
 <?php
 require_once __DIR__ . '/includes/config.php';
 $pageTitle = 'Sobre — Godai Terapias Integrativas';
-$pageDesc  = 'Conheça a história, missão, valores e equipe da Godai Terapias Integrativas — wellness corporativo humanizado.';
+$pageDesc  = 'Conheça a história, a fundadora e a trajetória da Godai Terapias Integrativas — bem-estar corporativo com experiência nacional e internacional.';
 include __DIR__ . '/includes/header.php';
 ?>
 
 <section class="page-hero container">
   <span class="eyebrow">Sobre a Godai</span>
-  <h1 style="margin-top:24px;">Equilíbrio, acolhimento e bem-estar.</h1>
-  <p>A GODAI Terapias Integrativas nasceu com o propósito de promover equilíbrio, acolhimento e bem-estar através das terapias corporais. Inspirada no conceito oriental dos cinco elementos — Terra, Água, Fogo, Ar e Vazio — a marca traduz harmonia entre corpo, mente e ambiente.</p>
+  <h1 style="margin-top:24px;">Uma história construída pelo cuidado com as pessoas.</h1>
+  <p>Há mais de duas décadas, nossa trajetória é guiada por um propósito simples: promover experiências de bem-estar que contribuam para uma rotina mais equilibrada, saudável e humana.</p>
+  <p style="margin-top:14px;">Hoje, a Godai Terapias Integrativas reúne experiência nacional e internacional para levar às empresas soluções de bem-estar voltadas à valorização das pessoas e à qualidade de vida no ambiente corporativo.</p>
 </section>
 
+<!-- NOSSA ORIGEM -->
 <section class="bg-white">
-  <div class="container grid grid-2" style="align-items:start;">
+  <div class="container grid grid-2" style="align-items:center;">
     <div style="border-radius:20px;overflow:hidden;">
       <img src="<?= e(base_url('assets/img/about-zen.jpg')) ?>" alt="Equilíbrio zen" loading="lazy" style="aspect-ratio:4/5;width:100%;object-fit:cover;">
     </div>
     <div>
-      <span class="eyebrow">Nossa história</span>
-      <h2 style="margin-top:16px;">Uma trajetória feita de cuidado e propósito.</h2>
+      <span class="eyebrow">Nossa origem</span>
+      <h2 style="margin-top:16px;">Como nasceu a Godai</h2>
       <div style="margin-top:24px;color:var(--muted);line-height:1.7;display:flex;flex-direction:column;gap:14px;">
-        <p>A GODAI Terapias Integrativas nasceu da união entre experiência terapêutica, vivência corporativa e propósito humano.</p>
-        <p>A trajetória de Erica Aires nas terapias integrativas começou em 2001, com formação em Naturopatia, Shiatsu e Acupuntura, em São Paulo. Desde então, sua atuação sempre esteve voltada ao cuidado físico, emocional e ao desenvolvimento de experiências terapêuticas humanizadas.</p>
-        <p>Ao longo dos anos, Erica atuou em atendimentos domiciliares, clínicas, quiosques e espaços especializados em Quick Massage, além de desenvolver trabalhos em empresas e ambientes corporativos. Sua trajetória também inclui experiências internacionais no Japão, México e especializações em Chiang Mai, na Tailândia — referência mundial em terapias tradicionais e massagem tailandesa.</p>
-        <p>Foi justamente a vivência no Japão, em ambientes industriais e de alta exigência física e emocional, que fortaleceu a percepção sobre a importância do bem-estar dentro das organizações.</p>
-        <p>Nesse processo, Wellington Aires passou a integrar o projeto, contribuindo com sua experiência em ambientes corporativos e industriais, além da formação em Quick Massage pelo Senac. Sua atuação trouxe uma visão estratégica voltada à estruturação dos atendimentos corporativos, organização operacional e desenvolvimento da experiência oferecida às empresas.</p>
-        <p>Da união dessas experiências nasceu a GODAI Terapias Integrativas: uma empresa criada para promover qualidade de vida, equilíbrio e valorização humana dentro das organizações.</p>
-        <p>Inspirada nos cinco elementos da filosofia japonesa — Terra, Água, Fogo, Ar e Vazio — a GODAI acredita que ambientes mais saudáveis geram pessoas mais engajadas, produtivas e equilibradas.</p>
-        <p>Hoje, a empresa atua levando experiências de bem-estar corporativo através da Quick Massage e de abordagens integrativas voltadas à redução do estresse, alívio de tensões e promoção da qualidade de vida no ambiente de trabalho.</p>
+        <p>A Godai Terapias Integrativas nasceu da união entre experiência, propósito e paixão pelo cuidado humano.</p>
+        <p>Após mais de 20 anos de atuação em terapias integrativas, atendimentos corporativos e experiências de bem-estar em diferentes países, surgiu o desejo de transformar essa trajetória em um projeto capaz de levar equilíbrio, acolhimento e qualidade de vida para empresas e colaboradores.</p>
+        <p>Inspirada pelo conceito japonês <em>"Godai"</em>, que representa os cinco elementos da natureza, a empresa foi criada para promover experiências que conectam corpo, mente e bem-estar.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- TIMELINE DA FUNDADORA -->
 <section style="background:var(--cream);">
-  <div class="container">
-    <span class="eyebrow">Filosofia</span>
-    <h2 style="margin-top:16px;">Os cinco elementos</h2>
-    <p class="lead" style="margin-top:16px;">Cada elemento carrega uma força que inspira a forma como cuidamos do outro. Juntos, formam o nome e a essência da Godai.</p>
-    <div class="diff-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
-      <?php foreach ([
-        ['🏔','Terra','Estabilidade e enraizamento.'],
-        ['💧','Água','Fluidez e adaptação.'],
-        ['🔥','Fogo','Energia e transformação.'],
-        ['🌬','Ar','Leveza e respiração.'],
-        ['✨','Vazio','Conexão e essência.'],
-      ] as [$ic,$lbl,$d]): ?>
-        <div class="diff-item" style="flex-direction:column;text-align:center;align-items:center;">
-          <span class="ico" style="font-size:1.3rem;"><?= $ic ?></span>
-          <p style="font-weight:600;color:var(--sage-deep);margin-top:10px;"><?= e($lbl) ?></p>
-          <p style="margin-top:4px;font-size:.85rem;color:var(--muted);"><?= e($d) ?></p>
-        </div>
+  <div class="container" style="max-width:920px;">
+    <div class="text-center">
+      <span class="eyebrow">Trajetória</span>
+      <h2 style="margin-top:16px;">Timeline da Fundadora</h2>
+    </div>
+    <ol class="timeline">
+      <?php $tl = [
+        ['2001', ['Início da formação em Naturopatia, Shiatsu, Acupuntura e Bambuterapia.']],
+        ['2002', ['Primeiros atendimentos terapêuticos em domicílio.']],
+        ['2005', ['Início da atuação em Quick Massage Corporativa.', 'Empresas atendidas: Procter & Gamble, Braskem, Locaweb.']],
+        ['2013', ['Mudança para o Japão.', 'Continuidade dos atendimentos terapêuticos.']],
+        ['2016', ['Especialização em Chiang Mai (Tailândia).', 'Formações em Thai Table Massage, Reflexologia e Foot Massage.']],
+        ['2016–2024', ['Atendimentos e vivência internacional.', 'Países: Japão, Tailândia, México e Estados Unidos.']],
+        ['Atualmente', ['Fundação da Godai Terapias Integrativas no Brasil.']],
+      ]; foreach ($tl as [$year, $items]): ?>
+        <li class="timeline-item">
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <p class="timeline-year"><?= e($year) ?></p>
+          <ul class="timeline-list">
+            <?php foreach ($items as $i): ?><li><?= e($i) ?></li><?php endforeach; ?>
+          </ul>
+        </li>
       <?php endforeach; ?>
+    </ol>
+  </div>
+</section>
+
+<!-- EXPANSÃO E ATUAÇÃO CONJUNTA -->
+<section class="bg-white">
+  <div class="container" style="max-width:820px;">
+    <span class="eyebrow">Expansão e atuação conjunta</span>
+    <h2 style="margin-top:16px;">Duas trajetórias, um mesmo propósito</h2>
+    <div style="margin-top:24px;color:var(--muted);line-height:1.7;display:flex;flex-direction:column;gap:14px;">
+      <p>Com a expansão da Godai, Wellington Aires passou a integrar oficialmente a empresa como sócio proprietário e terapeuta.</p>
+      <p>Com formação em Quick Massage pelo Senac e experiência corporativa em ambientes industriais e organizacionais, contribui para o desenvolvimento das experiências de bem-estar voltadas às empresas.</p>
+      <p>A união de diferentes experiências fortalece a atuação da Godai e amplia a capacidade de oferecer atendimentos humanizados, profissionais e alinhados às necessidades do ambiente corporativo.</p>
     </div>
   </div>
 </section>
 
+<!-- EXPERIÊNCIA INTERNACIONAL -->
+<section class="bg-sage">
+  <div class="container text-center" style="max-width:780px;">
+    <span class="ico" style="display:inline-grid;place-items:center;width:56px;height:56px;border-radius:999px;background:rgba(244,241,234,.12);color:var(--cream);font-size:1.5rem;">🌍</span>
+    <span class="eyebrow on-dark" style="display:inline-block;margin-top:18px;">Experiência internacional</span>
+    <h2 style="margin-top:14px;">Uma visão global sobre bem-estar</h2>
+    <div style="margin-top:18px;color:rgba(244,241,234,.85);line-height:1.7;display:flex;flex-direction:column;gap:14px;">
+      <p>Nossa trajetória inclui atendimentos e experiências profissionais em diferentes países, permitindo compreender como o cuidado com as pessoas é valorizado em diferentes culturas.</p>
+      <p>Essa vivência internacional influencia diretamente a forma como desenvolvemos experiências de bem-estar corporativo: com atenção aos detalhes, acolhimento e foco na experiência do colaborador.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MISSÃO, VISÃO E VALORES -->
 <section class="bg-white">
   <div class="container">
     <div class="text-center">
@@ -76,17 +106,22 @@ include __DIR__ . '/includes/header.php';
       <div class="mvv-card">
         <span class="ico">♡</span>
         <h3>Valores</h3>
-        <p>Cuidado com as pessoas, qualidade e excelência, ética e transparência, humanização dos ambientes corporativos.</p>
+        <ul class="mvv-values">
+          <?php foreach (['Cuidado com as pessoas','Cliente em primeiro lugar','Qualidade e excelência','Ética e transparência','Humanização'] as $v): ?>
+            <li><?= e($v) ?></li>
+          <?php endforeach; ?>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FUNDADORES / CERTIFICAÇÕES -->
 <section style="background:var(--cream);">
   <div class="container" style="max-width:1000px;">
     <div class="text-center">
-      <span class="eyebrow">Certificações</span>
-      <h2 style="margin-top:16px;">Formação e especializações</h2>
+      <span class="eyebrow">Certificações e formações</span>
+      <h2 style="margin-top:16px;">Fundadores</h2>
     </div>
     <div class="cert-grid">
       <div class="cert-card">
@@ -105,17 +140,35 @@ include __DIR__ . '/includes/header.php';
   </div>
 </section>
 
-<section class="bg-white" style="padding:60px 0;">
-  <div class="container text-center" style="max-width:680px;">
-    <span class="ico" style="display:inline-grid;place-items:center;width:48px;height:48px;border-radius:999px;background:rgba(86,108,80,.1);color:var(--sage);font-size:1.3rem;">📍</span>
-    <h2 style="margin-top:16px;font-size:1.6rem;">Região de atendimento</h2>
-    <p style="color:var(--muted);margin-top:10px;">Indaiatuba/SP — demais regiões mediante consulta.</p>
+<!-- REDE DE PROFISSIONAIS PARCEIROS -->
+<section class="bg-white">
+  <div class="container text-center" style="max-width:820px;">
+    <span class="ico" style="display:inline-grid;place-items:center;width:56px;height:56px;border-radius:999px;background:rgba(86,108,80,.1);color:var(--sage);font-size:1.5rem;">👥</span>
+    <span class="eyebrow" style="display:inline-block;margin-top:18px;">Parcerias</span>
+    <h2 style="margin-top:14px;">Rede de Profissionais Parceiros</h2>
+    <div style="margin-top:18px;color:var(--muted);line-height:1.7;display:flex;flex-direction:column;gap:14px;">
+      <p>A Godai está preparada para ampliar sua capacidade de atendimento através de uma rede de terapeutas parceiros cuidadosamente selecionados.</p>
+      <p>Todos os profissionais passam por critérios de avaliação relacionados à formação, experiência, postura profissional, qualidade do atendimento e alinhamento aos valores da empresa.</p>
+      <p>Nosso compromisso é garantir uma experiência de bem-estar consistente, humanizada e de excelência, independentemente do tamanho da ação ou do número de profissionais envolvidos.</p>
+    </div>
   </div>
 </section>
 
+<!-- REGIÃO DE ATENDIMENTO -->
+<section style="background:var(--cream);padding:60px 0;">
+  <div class="container text-center" style="max-width:680px;">
+    <span class="ico" style="display:inline-grid;place-items:center;width:48px;height:48px;border-radius:999px;background:rgba(86,108,80,.1);color:var(--sage);font-size:1.3rem;">📍</span>
+    <h2 style="margin-top:16px;font-size:1.6rem;">Região de atendimento</h2>
+    <p style="color:var(--muted);margin-top:10px;">Atendemos empresas em <strong style="color:var(--sage-deep);">Indaiatuba/SP</strong>.<br>Demais regiões mediante consulta.</p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
 <section class="bg-sage">
   <div class="container cta-block">
-    <h2>Pronto para levar bem-estar à sua empresa?</h2>
+    <span class="eyebrow on-dark">Vamos juntos</span>
+    <h2 style="margin-top:14px;">Leve experiências de bem-estar para sua empresa</h2>
+    <p style="margin-top:16px;color:rgba(244,241,234,.85);max-width:640px;margin-left:auto;margin-right:auto;">Conheça nossas soluções de Quick Massage Corporativa e descubra como promover mais qualidade de vida, equilíbrio e valorização para sua equipe.</p>
     <div class="actions">
       <a href="<?= e(base_url('contato.php')) ?>" class="btn btn-cream btn-pill">Solicitar orçamento</a>
     </div>

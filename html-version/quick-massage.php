@@ -14,8 +14,9 @@ include __DIR__ . '/includes/header.php';
   </div>
 </section>
 
+<!-- O QUE É -->
 <section class="bg-white">
-  <div class="container grid grid-2">
+  <div class="container grid grid-2" style="align-items:center;">
     <div>
       <span class="eyebrow">O que é</span>
       <h2 style="margin-top:16px;">O que é a Quick Massage</h2>
@@ -23,23 +24,52 @@ include __DIR__ . '/includes/header.php';
       <p style="color:var(--muted);margin-top:14px;line-height:1.7;">Com sessões de 10 a 15 minutos, o atendimento é realizado com o colaborador sentado e vestido, tornando a experiência prática, eficiente e ideal para o ambiente corporativo.</p>
     </div>
     <div style="border-radius:20px;overflow:hidden;box-shadow:var(--shadow-xl);">
-      <img src="<?= e(base_url('assets/img/hero-massage.jpg')) ?>" alt="Sessão Quick Massage" loading="lazy" style="aspect-ratio:4/3;width:100%;object-fit:cover;">
+      <img src="<?= e(base_url('assets/img/quick-massage-session.jpg')) ?>" alt="Sessão de Quick Massage corporativa em escritório" loading="lazy" style="aspect-ratio:4/3;width:100%;object-fit:cover;">
     </div>
   </div>
 </section>
 
+<!-- PROCESSO -->
 <section style="background:var(--cream);">
   <div class="container">
-    <span class="eyebrow">Processo</span>
-    <h2 style="margin-top:16px;">Como funciona</h2>
-    <div class="como-grid">
-      <?php foreach (['Atendimento realizado na empresa','Sessões de 10 a 15 minutos','Cadeira ergonômica inclusa','Sem necessidade de troca de roupa'] as $c): ?>
-        <div class="como-item"><span class="ico">⏱</span><p><?= e($c) ?></p></div>
+    <div style="max-width:640px;">
+      <span class="eyebrow">Processo</span>
+      <h2 style="margin-top:16px;">Como funciona</h2>
+      <p style="margin-top:14px;color:var(--muted);line-height:1.7;">Da solicitação ao resultado: quatro etapas para uma experiência simples, fluida e eficiente.</p>
+    </div>
+
+    <div class="process-grid">
+      <?php
+      $proc = [
+        ['01','📅','Agendamento','A empresa define a data, horário e quantidade de colaboradores que participarão da ação.'],
+        ['02','🛠','Montagem','A equipe da Godai realiza toda a preparação necessária no local, levando a estrutura de atendimento e organizando o espaço para a realização das sessões.'],
+        ['03','🤝','Atendimento','Sessões de Quick Massage de 10 a 15 minutos por colaborador, focadas em ombros, costas e braços, proporcionando alívio imediato das tensões musculares.'],
+        ['04','✨','Resultado','Colaboradores mais relaxados, valorizados e engajados, contribuindo para um ambiente corporativo mais saudável.'],
+      ];
+      foreach ($proc as $i => [$n,$ic,$t,$d]): ?>
+        <div class="process-card">
+          <div class="process-head">
+            <span class="process-ico"><?= $ic ?></span>
+            <span class="process-num"><?= e($n) ?></span>
+          </div>
+          <h3><?= e($t) ?></h3>
+          <p><?= e($d) ?></p>
+          <?php if ($i < count($proc) - 1): ?><span class="process-arrow" aria-hidden="true">›</span><?php endif; ?>
+        </div>
       <?php endforeach; ?>
+    </div>
+
+    <div class="process-callout">
+      <span class="callout-ico">ℹ</span>
+      <div>
+        <p class="callout-title">Não é necessário trocar de roupa.</p>
+        <p>O atendimento é realizado diretamente na cadeira ergonômica de massagem, de forma rápida, discreta e eficiente, sem impactar a rotina de trabalho.</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- BENEFÍCIOS -->
 <section class="bg-sage">
   <div class="container">
     <span class="eyebrow on-dark">Benefícios</span>
@@ -52,6 +82,7 @@ include __DIR__ . '/includes/header.php';
   </div>
 </section>
 
+<!-- INDICAÇÕES -->
 <section class="bg-white">
   <div class="container">
     <span class="eyebrow">Indicações</span>
@@ -67,6 +98,7 @@ include __DIR__ . '/includes/header.php';
   </div>
 </section>
 
+<!-- EXPERIÊNCIA CORPORATIVA -->
 <section style="background:var(--cream);padding:80px 0;">
   <div class="container text-center" style="max-width:760px;">
     <span class="eyebrow">Experiência corporativa</span>
@@ -74,21 +106,7 @@ include __DIR__ . '/includes/header.php';
   </div>
 </section>
 
-<section class="bg-white">
-  <div class="container">
-    <span class="eyebrow">Diferenciais</span>
-    <h2 style="margin-top:16px;">Diferenciais Godai</h2>
-    <div class="diff-grid">
-      <?php foreach ([
-        ['🏆','20+ anos de expertise'],['📄','Relatórios para o RH'],['🌍','Experiência internacional'],
-        ['⚡','Agilidade e praticidade'],['🏢','Grandes empresas'],['📍','Atendimento local'],
-      ] as [$ic,$t]): ?>
-        <div class="diff-item"><span class="ico"><?= $ic ?></span><p><?= e($t) ?></p></div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-
+<!-- CTA -->
 <section class="bg-sage">
   <div class="container cta-block">
     <h2>Leve mais bem-estar e qualidade de vida para sua empresa.</h2>

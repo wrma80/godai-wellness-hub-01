@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, Heart, Leaf, Wind, Flame, Mountain, Droplets, Check, Globe2, HandHeart, Package, GraduationCap, Building2, UserCheck } from "lucide-react";
+import { ArrowRight, Sparkles, Heart, Leaf, Wind, Flame, Mountain, Droplets, Check, Globe2, HandHeart, Package, GraduationCap, Building2, Award } from "lucide-react";
 import heroImg from "@/assets/hero-massage.jpg";
 import zenImg from "@/assets/about-zen.jpg";
 import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
@@ -32,12 +32,12 @@ const BENEFITS = [
 ];
 
 const DIFERENCIAIS = [
+  { icon: Award, text: "20+ anos de expertise" },
   { icon: Globe2, text: "Experiência internacional" },
-  { icon: HandHeart, text: "Atendimento humanizado" },
-  { icon: Package, text: "Estrutura completa inclusa" },
   { icon: GraduationCap, text: "Profissionais qualificados" },
   { icon: Building2, text: "Experiência corporativa premium" },
-  { icon: UserCheck, text: "Atendimento personalizado" },
+  { icon: Package, text: "Estrutura completa inclusa" },
+  { icon: HandHeart, text: "Atendimento humanizado" },
 ];
 
 const PLANOS = [
@@ -247,9 +247,9 @@ function HomePage() {
                   i === 1 ? "border-sage/40 ring-1 ring-sage/30" : "border-sage/10"
                 }`}
               >
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-sage">{p.subtitle}</span>
-                <h3 className="mt-3 text-2xl text-sage-deep">{p.title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">{p.desc}</p>
+                <span className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-sage">{p.subtitle}</span>
+                <h3 className="mt-3 text-center text-2xl text-sage-deep">{p.title}</h3>
+                <p className="mt-3 text-center text-sm text-muted-foreground">{p.desc}</p>
                 <ul className="mt-6 space-y-3 text-sm">
                   {p.items.map((it) => (
                     <li key={it} className="flex items-start gap-2 text-sage-deep">
