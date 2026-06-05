@@ -408,3 +408,34 @@ section { padding: 80px 0; }
 .cta-block .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 .cta-block .btn-outline-cream { background: transparent; color: var(--cream); border: 1px solid rgba(244,241,234,.4); }
 .cta-block .btn-outline-cream:hover { background: rgba(244,241,234,.1); }
+
+/* ===== Timeline (Sobre) ===== */
+.timeline { list-style: none; margin: 56px 0 0; padding: 0 0 0 32px; border-left: 1px solid rgba(86,108,80,.2); position: relative; }
+.timeline-item { position: relative; margin-bottom: 40px; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot { position: absolute; left: -41px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--sage); background: var(--cream); }
+.timeline-year { font-size: .8rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--sage); }
+.timeline-list { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; color: var(--muted); line-height: 1.6; }
+
+/* ===== Valores em bullets ===== */
+.mvv-values { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; color: var(--muted); font-size: .92rem; }
+.mvv-values li { position: relative; padding-left: 20px; }
+.mvv-values li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--sage); font-weight: 700; }
+
+/* ===== Processo Quick Massage ===== */
+.process-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+@media (max-width: 980px) { .process-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+@media (max-width: 560px) { .process-grid { grid-template-columns: 1fr; } }
+.process-card { position: relative; background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: var(--shadow-sm); transition: box-shadow .2s; }
+.process-card:hover { box-shadow: var(--shadow-md); }
+.process-head { display: flex; align-items: center; gap: 12px; }
+.process-ico { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; background: rgba(86,108,80,.1); font-size: 1.2rem; }
+.process-num { font-size: 1.5rem; font-weight: 300; color: rgba(86,108,80,.55); }
+.process-card h3 { margin-top: 18px; font-size: 1.1rem; color: var(--sage-deep); }
+.process-card p { margin-top: 10px; font-size: .9rem; color: var(--muted); line-height: 1.6; }
+.process-arrow { display: none; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); font-size: 1.6rem; color: rgba(86,108,80,.35); z-index: 2; }
+@media (min-width: 981px) { .process-arrow { display: block; } }
+.process-callout { margin: 48px auto 0; max-width: 720px; background: #fff; border: 1px solid rgba(86,108,80,.25); border-radius: 18px; padding: 24px; display: flex; gap: 16px; align-items: flex-start; box-shadow: var(--shadow-sm); }
+.callout-ico { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; background: rgba(86,108,80,.1); color: var(--sage); font-weight: 700; flex-shrink: 0; }
+.callout-title { font-weight: 600; color: var(--sage-deep); }
+.process-callout p { color: var(--muted); line-height: 1.6; margin-top: 6px; font-size: .92rem; }
