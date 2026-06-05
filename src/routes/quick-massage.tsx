@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, ArrowRight, Clock, Briefcase, Factory, Users, Stethoscope, CalendarDays, PartyPopper, Award, FileText, Globe2, Zap, Building2, MapPin } from "lucide-react";
-import heroImg from "@/assets/hero-massage.jpg";
+import { Check, ArrowRight, Clock, Briefcase, Factory, Users, Stethoscope, CalendarDays, PartyPopper, Calendar, Wrench, HandHeart, Sparkles, Info, ChevronRight } from "lucide-react";
+import sessionImg from "@/assets/quick-massage-session.jpg";
 import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export const Route = createFileRoute("/quick-massage")({
@@ -13,12 +13,33 @@ export const Route = createFileRoute("/quick-massage")({
   component: QuickMassagePage,
 });
 
-const COMO = [
-  "Atendimento realizado na empresa",
-  "Sessões de 10 a 15 minutos",
-  "Cadeira ergonômica inclusa",
-  "Sem necessidade de troca de roupa",
+const PROCESSO = [
+  {
+    num: "01",
+    icon: Calendar,
+    title: "Agendamento",
+    text: "A empresa define a data, horário e quantidade de colaboradores que participarão da ação.",
+  },
+  {
+    num: "02",
+    icon: Wrench,
+    title: "Montagem",
+    text: "A equipe da Godai realiza toda a preparação necessária no local, levando a estrutura de atendimento e organizando o espaço para a realização das sessões.",
+  },
+  {
+    num: "03",
+    icon: HandHeart,
+    title: "Atendimento",
+    text: "Sessões de Quick Massage de 10 a 15 minutos por colaborador, focadas em ombros, costas e braços, proporcionando alívio imediato das tensões musculares.",
+  },
+  {
+    num: "04",
+    icon: Sparkles,
+    title: "Resultado",
+    text: "Colaboradores mais relaxados, valorizados e engajados, contribuindo para um ambiente corporativo mais saudável.",
+  },
 ];
+
 const BENEFICIOS = [
   "Redução do estresse",
   "Relaxamento muscular",
@@ -34,14 +55,6 @@ const EMPRESAS = [
   { icon: Stethoscope, label: "Clínicas" },
   { icon: CalendarDays, label: "SIPAT" },
   { icon: PartyPopper, label: "Eventos corporativos" },
-];
-const DIFS = [
-  { icon: Award, text: "20+ anos de expertise" },
-  { icon: FileText, text: "Relatórios para o RH" },
-  { icon: Globe2, text: "Experiência internacional" },
-  { icon: Zap, text: "Agilidade e praticidade" },
-  { icon: Building2, text: "Grandes empresas" },
-  { icon: MapPin, text: "Atendimento local" },
 ];
 
 function QuickMassagePage() {
@@ -87,25 +100,56 @@ function QuickMassagePage() {
             </div>
           </div>
           <div className="overflow-hidden rounded-2xl shadow-xl">
-            <img src={heroImg} alt="Sessão de Quick Massage corporativa" loading="lazy" className="aspect-[4/3] w-full object-cover" />
+            <img src={sessionImg} alt="Sessão de Quick Massage corporativa em escritório" loading="lazy" width={1536} height={1024} className="aspect-[4/3] w-full object-cover" />
           </div>
         </div>
       </section>
 
-      {/* COMO FUNCIONA */}
+      {/* COMO FUNCIONA / PROCESSO */}
       <section className="bg-cream py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="max-w-2xl">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Processo</span>
             <h2 className="mt-4 text-3xl text-sage-deep md:text-4xl">Como funciona</h2>
+            <p className="mt-4 text-muted-foreground">
+              Da solicitação ao resultado: quatro etapas para uma experiência simples,
+              fluida e eficiente.
+            </p>
           </div>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {COMO.map((c) => (
-              <div key={c} className="rounded-2xl border border-sage/10 bg-white p-6">
-                <Clock size={20} className="text-sage" strokeWidth={1.5} />
-                <p className="mt-4 text-sm text-sage-deep">{c}</p>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+            {PROCESSO.map((p, idx) => (
+              <div key={p.num} className="relative flex flex-col rounded-2xl border border-sage/10 bg-white p-6 shadow-sm transition-all hover:shadow-md">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-11 w-11 place-items-center rounded-full bg-sage/10 text-sage">
+                    <p.icon size={20} strokeWidth={1.5} />
+                  </span>
+                  <span className="text-2xl font-light text-sage/60">{p.num}</span>
+                </div>
+                <h3 className="mt-5 text-lg font-semibold text-sage-deep">{p.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+                {idx < PROCESSO.length - 1 && (
+                  <ChevronRight
+                    size={22}
+                    className="absolute -right-3 top-1/2 hidden -translate-y-1/2 text-sage/40 lg:block"
+                    aria-hidden="true"
+                  />
+                )}
               </div>
             ))}
+          </div>
+
+          <div className="mx-auto mt-12 flex max-w-3xl items-start gap-4 rounded-2xl border border-sage/20 bg-white p-6 shadow-sm">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sage/10 text-sage">
+              <Info size={18} strokeWidth={1.75} />
+            </span>
+            <div>
+              <p className="text-base font-semibold text-sage-deep">Não é necessário trocar de roupa.</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                O atendimento é realizado diretamente na cadeira ergonômica de massagem,
+                de forma rápida, discreta e eficiente, sem impactar a rotina de trabalho.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -156,26 +200,6 @@ function QuickMassagePage() {
             Atendimento pensado para empresas que valorizam o bem-estar, a experiência dos
             colaboradores e um ambiente corporativo mais saudável e humanizado.
           </p>
-        </div>
-      </section>
-
-      {/* DIFERENCIAIS GODAI */}
-      <section className="bg-white py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Diferenciais</span>
-            <h2 className="mt-4 text-3xl text-sage-deep md:text-4xl">Diferenciais Godai</h2>
-          </div>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {DIFS.map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-start gap-3 rounded-xl border border-sage/15 bg-cream/40 p-5">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-sage/10 text-sage">
-                  <Icon size={18} strokeWidth={1.5} />
-                </span>
-                <p className="pt-1 text-sm text-sage-deep">{text}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
