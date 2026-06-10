@@ -50,10 +50,6 @@ include __DIR__ . '/includes/header.php';
         <li class="line"><span class="ico">💬</span> <a href="<?= e(whatsapp_link()) ?>" target="_blank" rel="noopener">WhatsApp</a></li>
         <li class="line"><span class="ico">◎</span> <a href="<?= e($s['instagram']) ?>" target="_blank" rel="noopener">Instagram</a></li>
       </ul>
-      <div style="margin-top:36px;padding:22px;border:1px solid var(--border);border-radius:14px;background:rgba(244,241,234,.4);">
-        <p style="font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);">Área de atendimento</p>
-        <p style="margin-top:8px;color:var(--sage-deep);">Indaiatuba/SP — demais regiões mediante consulta.</p>
-      </div>
     </div>
 
     <form method="post" class="contact-card" id="contactForm">

@@ -107,8 +107,8 @@ include __DIR__ . '/includes/header.php';
         ['Programa Corporativo','Parceria Estratégica','Programa contínuo de bem-estar para empresas com visão de longo prazo.', ['Atendimento recorrente','Planejamento contínuo das ações','Organização do calendário corporativo','Programa estruturado de qualidade de vida'], false],
       ]; foreach ($plans as [$t,$sub,$desc,$items,$feat]): ?>
         <div class="plan-card<?= $feat ? ' is-featured' : '' ?>">
-          <span class="plan-sub" style="text-align:center;display:block;"><?= e($sub) ?></span>
           <h3 style="text-align:center;"><?= e($t) ?></h3>
+          <span class="plan-sub" style="text-align:center;display:block;margin-top:8px;"><?= e($sub) ?></span>
           <p class="plan-desc" style="text-align:center;"><?= e($desc) ?></p>
           <ul>
             <?php foreach ($items as $i): ?><li><?= e($i) ?></li><?php endforeach; ?>

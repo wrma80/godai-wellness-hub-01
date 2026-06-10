@@ -15,8 +15,8 @@ include __DIR__ . '/includes/header.php';
 <!-- NOSSA ORIGEM -->
 <section class="bg-white">
   <div class="container grid grid-2" style="align-items:center;">
-    <div style="border-radius:20px;overflow:hidden;">
-      <img src="<?= e(base_url('assets/img/about-zen.jpg')) ?>" alt="Equilíbrio zen" loading="lazy" style="aspect-ratio:4/5;width:100%;object-fit:cover;">
+    <div style="border-radius:20px;overflow:hidden;background:var(--cream);display:flex;align-items:center;justify-content:center;padding:48px;">
+      <img src="<?= e(base_url('assets/img/godai-logo-cream.png')) ?>" alt="Logo Godai Terapias Integrativas" loading="lazy" style="width:100%;max-width:420px;height:auto;object-fit:contain;">
     </div>
     <div>
       <span class="eyebrow">Nossa origem</span>

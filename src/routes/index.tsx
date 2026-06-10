@@ -247,8 +247,8 @@ function HomePage() {
                   i === 1 ? "border-sage/40 ring-1 ring-sage/30" : "border-sage/10"
                 }`}
               >
-                <span className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-sage">{p.subtitle}</span>
-                <h3 className="mt-3 text-center text-2xl text-sage-deep">{p.title}</h3>
+                <h3 className="text-center text-2xl text-sage-deep">{p.title}</h3>
+                <span className="mt-3 block text-center text-xs font-semibold uppercase tracking-[0.2em] text-sage">{p.subtitle}</span>
                 <p className="mt-3 text-center text-sm text-muted-foreground">{p.desc}</p>
                 <ul className="mt-6 space-y-3 text-sm">
                   {p.items.map((it) => (
