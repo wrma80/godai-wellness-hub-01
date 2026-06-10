@@ -3,9 +3,7 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <span class="logo-frame logo-frame--sage">
-        <img src="<?= e(base_url('assets/img/godai-logo.png')) ?>" alt="Godai Terapias Integrativas">
-      </span>
+      <img src="<?= e(base_url('assets/img/godai-logo-sage.png')) ?>" alt="Godai Terapias Integrativas" style="height:88px;width:auto;display:block;">
       <p>Bem-estar corporativo com equilíbrio e acolhimento. Levamos a Quick Massage até a sua empresa para promover saúde, produtividade e qualidade de vida.</p>
       <p class="footer-region">Região de atendimento: Indaiatuba/SP e demais regiões mediante consulta</p>
     </div>
