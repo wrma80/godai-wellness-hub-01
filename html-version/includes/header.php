@@ -32,9 +32,7 @@ $pageDesc  = $pageDesc  ?? 'Bem-estar corporativo que transforma ambientes. Quic
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="<?= e(base_url('index.php')) ?>" class="logo" aria-label="Godai Terapias Integrativas">
-      <span class="logo-frame">
-        <img src="<?= e(base_url('assets/img/godai-logo.png')) ?>" alt="Godai Terapias Integrativas">
-      </span>
+      <img src="<?= e(base_url('assets/img/godai-symbol.png')) ?>" alt="Godai Terapias Integrativas" style="height:64px;width:auto;display:block;">
     </a>
     <nav class="nav-desktop">
       <?php foreach ($nav as [$slug, $label]):
