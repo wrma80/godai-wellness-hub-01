@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Award, Target, Eye, Heart, MapPin, Globe2, Users, Sparkles, Check } from "lucide-react";
-import zenImg from "@/assets/about-zen.jpg";
+import logoCream from "@/assets/godai-logo-cream.png";
 
 export const Route = createFileRoute("/sobre")({
   head: () => ({
@@ -56,8 +56,8 @@ function SobrePage() {
       {/* NOSSA ORIGEM */}
       <section className="bg-white py-20 md:py-28">
         <div className="mx-auto grid max-w-7xl gap-14 px-6 md:grid-cols-2 md:items-center lg:px-10">
-          <div className="overflow-hidden rounded-2xl">
-            <img src={zenImg} alt="Equilíbrio e elementos naturais" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl bg-cream p-10 md:p-14">
+            <img src={logoCream} alt="Logo Godai Terapias Integrativas" loading="lazy" className="aspect-square w-full max-w-md object-contain" />
           </div>
           <div>
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Nossa origem</span>

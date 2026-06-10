@@ -115,10 +115,6 @@ function ContatoPage() {
               </li>
             </ul>
 
-            <div className="mt-10 rounded-2xl border border-sage/10 bg-cream/40 p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sage">Área de atendimento</p>
-              <p className="mt-2 text-sm text-sage-deep">Indaiatuba/SP — demais regiões mediante consulta.</p>
-            </div>
           </div>
 
           <form onSubmit={onSubmit} className="rounded-2xl border border-sage/10 bg-white p-8 shadow-sm">
