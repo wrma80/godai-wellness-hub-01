@@ -19,7 +19,7 @@ function PoliticaPage() {
 
       <div className="prose prose-sage mt-10 space-y-6 text-sm leading-relaxed text-muted-foreground md:text-base">
         <p>
-          A GODAI Terapias Integrativas valoriza a privacidade dos visitantes e clientes deste
+          A Godai Terapias Integrativas valoriza a privacidade dos visitantes e clientes deste
           site. Esta Política descreve como coletamos, utilizamos e protegemos as informações
           pessoais fornecidas, em conformidade com a Lei Geral de Proteção de Dados (LGPD —
           Lei nº 13.709/2018).
