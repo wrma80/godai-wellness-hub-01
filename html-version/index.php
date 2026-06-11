@@ -40,7 +40,7 @@ include __DIR__ . '/includes/header.php';
     <div>
       <span class="eyebrow">Sobre a Godai</span>
       <h2 style="margin-top:16px;">Equilíbrio entre corpo, mente e ambiente.</h2>
-      <p class="lead" style="margin-top:24px;">A GODAI Terapias Integrativas nasceu com o propósito de promover equilíbrio, acolhimento e bem-estar através das terapias corporais.</p>
+      <p class="lead" style="margin-top:24px;">A Godai Terapias Integrativas nasceu com o propósito de promover equilíbrio, acolhimento e bem-estar através das terapias corporais.</p>
       <p style="color:var(--muted);margin-top:14px;">Inspirada no conceito oriental dos cinco elementos — Terra, Água, Fogo, Ar e Vazio — a marca traduz harmonia entre corpo, mente e ambiente.</p>
       <p style="color:var(--muted);margin-top:14px;">Atuamos com Quick Massage Corporativa levando experiências de relaxamento e qualidade de vida diretamente às empresas.</p>
       <div class="elements">

@@ -155,7 +155,7 @@ function HomePage() {
             </h2>
             <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
               <p>
-                A GODAI Terapias Integrativas nasceu com o propósito de promover equilíbrio,
+                A Godai Terapias Integrativas nasceu com o propósito de promover equilíbrio,
                 acolhimento e bem-estar através das terapias corporais.
               </p>
               <p>

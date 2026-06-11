@@ -10,7 +10,7 @@ include __DIR__ . '/includes/header.php';
   <h1 style="margin-top:16px;">Política de Privacidade</h1>
   <p class="meta">Última atualização: junho de 2026</p>
 
-  <p style="margin-top:32px;">A GODAI Terapias Integrativas valoriza a privacidade dos visitantes e clientes deste site. Esta Política descreve como coletamos, utilizamos e protegemos as informações pessoais fornecidas, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
+  <p style="margin-top:32px;">A Godai Terapias Integrativas valoriza a privacidade dos visitantes e clientes deste site. Esta Política descreve como coletamos, utilizamos e protegemos as informações pessoais fornecidas, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
 
   <h2>1. Dados coletados</h2>
   <p>Coletamos dados informados voluntariamente em nossos formulários (nome, e-mail, telefone/WhatsApp, empresa, cidade e mensagem) para responder solicitações de orçamento e contato.</p>

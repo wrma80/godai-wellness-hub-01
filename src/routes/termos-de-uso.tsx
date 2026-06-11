@@ -19,7 +19,7 @@ function TermosPage() {
 
       <div className="mt-10 space-y-6 text-sm leading-relaxed text-muted-foreground md:text-base">
         <p>
-          Bem-vindo ao site da GODAI Terapias Integrativas. Ao acessar e utilizar este site,
+          Bem-vindo ao site da Godai Terapias Integrativas. Ao acessar e utilizar este site,
           você concorda integralmente com os termos e condições descritos a seguir.
         </p>
 
@@ -33,7 +33,7 @@ function TermosPage() {
         <h2 className="text-xl font-semibold text-sage-deep">2. Propriedade intelectual</h2>
         <p>
           Todos os textos, imagens, marcas, logotipos e demais elementos visuais são de
-          propriedade da GODAI Terapias Integrativas. É proibida sua reprodução, distribuição
+          propriedade da Godai Terapias Integrativas. É proibida sua reprodução, distribuição
           ou utilização sem autorização prévia e por escrito.
         </p>
 
