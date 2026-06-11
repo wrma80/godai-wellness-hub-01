@@ -5,7 +5,6 @@
     <div class="footer-brand">
       <img src="<?= e(base_url('assets/img/godai-logo-sage.png')) ?>" alt="Godai Terapias Integrativas" style="height:88px;width:auto;display:block;">
       <p>Bem-estar corporativo com equilíbrio e acolhimento. Levamos a Quick Massage até a sua empresa para promover saúde, produtividade e qualidade de vida.</p>
-      <p class="footer-region">Região de atendimento: Indaiatuba/SP e demais regiões mediante consulta</p>
     </div>
     <div>
       <h4>Navegação</h4>
@@ -24,8 +23,8 @@
       <ul>
         <li>📍 <?= e($s['city']) ?></li>
         <li>✉ <a href="mailto:<?= e($s['email']) ?>"><?= e($s['email']) ?></a></li>
-        <li>💬 <a href="<?= e(whatsapp_link()) ?>" target="_blank" rel="noopener">WhatsApp</a></li>
-        <li>◎ <a href="<?= e($s['instagram']) ?>" target="_blank" rel="noopener">Instagram</a></li>
+        <li>💬 <a href="<?= e(whatsapp_link()) ?>" target="_blank" rel="noopener">(19) 99701-6552</a></li>
+        <li>◎ <a href="<?= e($s['instagram']) ?>" target="_blank" rel="noopener">@godai_terapias</a></li>
       </ul>
     </div>
   </div>

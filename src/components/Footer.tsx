@@ -15,9 +15,6 @@ export function Footer() {
             Bem-estar corporativo com equilíbrio e acolhimento. Levamos a Quick Massage
             até a sua empresa para promover saúde, produtividade e qualidade de vida.
           </p>
-          <p className="mt-4 text-xs uppercase tracking-[0.2em] text-cream/60">
-            Região de atendimento: Indaiatuba/SP e demais regiões mediante consulta
-          </p>
         </div>
 
         <div>
@@ -50,12 +47,12 @@ export function Footer() {
             </li>
             <li>
               <a href={buildWhatsappLink(s)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
-                <MessageCircle size={14} /> WhatsApp
+                <MessageCircle size={14} /> (19) 99701-6552
               </a>
             </li>
             <li>
               <a href={s.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cream">
-                <Instagram size={14} /> Instagram
+                <Instagram size={14} /> @godai_terapias
               </a>
             </li>
           </ul>

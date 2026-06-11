@@ -20,14 +20,14 @@ $faq = [
   <p>Reunimos as dúvidas mais comuns sobre a Quick Massage Corporativa.</p>
 </section>
 
-<section class="bg-white">
+<section style="background:var(--cream);">
   <div class="container">
     <div class="accordion">
       <?php foreach ($faq as $i => [$q, $a]): ?>
         <div class="accordion-item<?= $i === 0 ? ' is-open' : '' ?>">
           <button type="button" class="accordion-q" aria-expanded="<?= $i === 0 ? 'true' : 'false' ?>">
             <span><?= e($q) ?></span>
-            <span class="toggle">+</span>
+            <span class="toggle" aria-hidden="true">⌄</span>
           </button>
           <div class="accordion-a"><?= e($a) ?></div>
         </div>

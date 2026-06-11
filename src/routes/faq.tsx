@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Plus, Minus, MessageCircle } from "lucide-react";
+import { ChevronDown, MessageCircle } from "lucide-react";
 import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export const Route = createFileRoute("/faq")({
@@ -59,29 +59,35 @@ function FaqPage() {
         </p>
       </section>
 
-      <section className="bg-white pb-20">
+      <section className="bg-cream pb-20">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
-          <div className="space-y-3">
+          <div className="divide-y divide-sage/15 border-y border-sage/15">
             {FAQ.map((item, i) => {
               const isOpen = open === i;
               return (
-                <div key={item.q} className="overflow-hidden rounded-2xl border border-sage/10 bg-cream/40 transition-all">
+                <div key={item.q}>
                   <button
                     type="button"
                     aria-expanded={isOpen}
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-cream"
+                    className="flex w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-sage"
                   >
                     <span className="text-base font-medium text-sage-deep md:text-lg">{item.q}</span>
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-sage/10 text-sage">
-                      {isOpen ? <Minus size={16} strokeWidth={1.75} /> : <Plus size={16} strokeWidth={1.75} />}
-                    </span>
+                    <ChevronDown
+                      size={20}
+                      strokeWidth={1.75}
+                      className={`shrink-0 text-sage transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    />
                   </button>
-                  {isOpen && (
-                    <div className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground md:text-base">
+                  <div
+                    className={`grid overflow-hidden transition-all duration-300 ${
+                      isOpen ? "grid-rows-[1fr] pb-5" : "grid-rows-[0fr]"
+                    }`}
+                  >
+                    <div className="min-h-0 pr-8 text-sm leading-relaxed text-sage-deep/75 md:text-base">
                       {item.a}
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
