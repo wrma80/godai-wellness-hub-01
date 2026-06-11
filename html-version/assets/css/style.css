@@ -104,9 +104,22 @@ em { font-style: normal; color: var(--sage); }
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--border);
 }
+
 .nav-mobile.is-open {
   display: flex;
 }
+
+/* Garante que o menu mobile nunca apareça no desktop */
+@media (min-width: 768px) {
+  .nav-mobile {
+    display: none !important;
+  }
+
+  .nav-mobile.is-open {
+    display: none !important;
+  }
+}
+
 .nav-mobile a { padding: 12px 8px; border-radius: 8px; font-size: .95rem; color: var(--sage-deep); }
 .nav-mobile a:hover { background: rgba(86,108,80,.06); }
 .nav-mobile .btn { margin-top: 8px; justify-content: center; padding: 14px; }
