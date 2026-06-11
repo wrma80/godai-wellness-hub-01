@@ -10,10 +10,10 @@ export type SettingsMap = {
 };
 
 export const DEFAULT_SETTINGS: SettingsMap = {
-  whatsappNumber: "5519999999999",
+  whatsappNumber: "5519997016552",
   whatsappMessage: "Olá! Gostaria de solicitar um orçamento para Quick Massage Corporativa.",
   email: "contato@godaiterapias.com.br",
-  instagram: "https://instagram.com/godaiterapias",
+  instagram: "https://instagram.com/godai_terapias",
   city: "Indaiatuba/SP",
 };
 
