@@ -4,22 +4,6 @@ $pageTitle = 'Contato — Solicite um orçamento | Godai';
 $pageDesc  = 'Fale com a Godai Terapias Integrativas e leve a Quick Massage Corporativa para a sua empresa em Indaiatuba/SP e região.';
 $s = get_settings();
 
-$wppRedirect = null;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome     = trim($_POST['nome']     ?? '');
-    $empresa  = trim($_POST['empresa']  ?? '');
-    $whatsapp = trim($_POST['whatsapp'] ?? '');
-    $email    = trim($_POST['email']    ?? '');
-    $cidade   = trim($_POST['cidade']   ?? '');
-    $tipo     = trim($_POST['tipo']     ?? '');
-    $qtd      = trim($_POST['colaboradores'] ?? '');
-    $mensagem = trim($_POST['mensagem'] ?? '');
-    $text = "Olá! Gostaria de solicitar um orçamento para Quick Massage Corporativa.\n\n"
-          . "Nome: $nome\nEmpresa: $empresa\nWhatsApp: $whatsapp\nE-mail: $email\nCidade: $cidade\n"
-          . "Tipo de atendimento: $tipo\nQuantidade de colaboradores: $qtd\n\nMensagem: $mensagem";
-    $wppRedirect = whatsapp_link($text);
-}
-
 include __DIR__ . '/includes/header.php';
 ?>
 
@@ -43,23 +27,16 @@ include __DIR__ . '/includes/header.php';
   <div class="grid grid-2" style="align-items:start;">
     <div>
       <h2>Vamos conversar.</h2>
-      <p class="lead" style="margin-top:18px;">Preencha o formulário ou fale conosco diretamente. Respondemos rapidamente com uma proposta personalizada.</p>
+      <p class="lead" style="margin-top:18px;">Preencha o formulário e nossa equipe responderá rapidamente com uma proposta personalizada.</p>
       <ul class="contact-info">
         <li class="line"><span class="ico">📍</span> <?= e($s['city']) ?></li>
         <li class="line"><span class="ico">✉</span> <a href="mailto:<?= e($s['email']) ?>"><?= e($s['email']) ?></a></li>
-        <li class="line"><span class="ico">💬</span> <a href="<?= e(whatsapp_link()) ?>" target="_blank" rel="noopener">WhatsApp</a></li>
         <li class="line"><span class="ico">◎</span> <a href="<?= e($s['instagram']) ?>" target="_blank" rel="noopener">Instagram</a></li>
       </ul>
     </div>
 
-    <form method="post" class="contact-card" id="contactForm">
-      <?php if ($wppRedirect): ?>
-        <div class="alert alert-success">
-          Mensagem encaminhada! Continue a conversa pelo
-          <a href="<?= e($wppRedirect) ?>" target="_blank" rel="noopener" style="font-weight:600;color:var(--sage);">WhatsApp</a>.
-        </div>
-        <script>window.open(<?= json_encode($wppRedirect) ?>, '_blank');</script>
-      <?php endif; ?>
+    <form method="post" class="contact-card" id="contactForm" novalidate>
+      <div id="contactFeedback" role="status" aria-live="polite"></div>
       <div class="field"><label>Nome</label><input type="text" name="nome" maxlength="100" required></div>
       <div class="field"><label>Empresa</label><input type="text" name="empresa" maxlength="120" required></div>
       <div class="field-row">
@@ -84,9 +61,49 @@ include __DIR__ . '/includes/header.php';
         <label>Mensagem</label>
         <textarea name="mensagem" rows="4" maxlength="1000" required></textarea>
       </div>
-      <button type="submit" class="btn btn-primary btn-pill" style="margin-top:24px;width:100%;justify-content:center;">Enviar orçamento ✈</button>
+      <!-- Honeypot anti-spam (não preencher) -->
+      <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+        <label>Não preencha este campo<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-pill" id="contactSubmit" style="margin-top:24px;width:100%;justify-content:center;">Enviar orçamento ✈</button>
     </form>
   </div>
 </section>
+
+<script>
+(function(){
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var feedback = document.getElementById('contactFeedback');
+  var btn = document.getElementById('contactSubmit');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    feedback.innerHTML = '';
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    btn.disabled = true;
+    var originalLabel = btn.textContent;
+    btn.textContent = 'Enviando...';
+    var data = new FormData(form);
+    fetch('<?= e(base_url('processa-contato.php')) ?>', { method: 'POST', body: data, credentials: 'same-origin' })
+      .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
+      .then(function(res){
+        if (res.ok && res.body.ok) {
+          form.reset();
+          feedback.innerHTML = '<div class="alert alert-success" style="margin-bottom:16px;"><strong>Obrigado pelo contato!</strong><br>Recebemos sua solicitação e retornaremos o mais breve possível.</div>';
+        } else {
+          feedback.innerHTML = '<div class="alert alert-error" style="margin-bottom:16px;">' + (res.body && res.body.message ? res.body.message : 'Não foi possível enviar sua solicitação neste momento. Por favor, tente novamente mais tarde.') + '</div>';
+        }
+      })
+      .catch(function(){
+        feedback.innerHTML = '<div class="alert alert-error" style="margin-bottom:16px;">Não foi possível enviar sua solicitação neste momento. Por favor, tente novamente mais tarde.</div>';
+      })
+      .finally(function(){
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+        if (feedback.firstChild) feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+  });
+})();
+</script>
 
 <?php include __DIR__ . '/includes/footer.php';
