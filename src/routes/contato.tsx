@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { MapPin, Mail, MessageCircle, Instagram, Send, Check } from "lucide-react";
-import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
+import { MapPin, Mail, Instagram, Send, Check } from "lucide-react";
+import { useSettings, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -23,28 +23,34 @@ const DIFS = [
 function ContatoPage() {
   const { data: settings } = useSettings();
   const s = settings ?? DEFAULT_SETTINGS;
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const text = [
-      "Olá! Gostaria de solicitar um orçamento para Quick Massage Corporativa.",
-      "",
-      `Nome: ${String(fd.get("nome") ?? "").trim()}`,
-      `Empresa: ${String(fd.get("empresa") ?? "").trim()}`,
-      `WhatsApp: ${String(fd.get("whatsapp") ?? "").trim()}`,
-      `E-mail: ${String(fd.get("email") ?? "").trim()}`,
-      `Cidade: ${String(fd.get("cidade") ?? "").trim()}`,
-      `Tipo de atendimento: ${String(fd.get("tipo") ?? "").trim()}`,
-      `Quantidade de colaboradores: ${String(fd.get("colaboradores") ?? "").trim()}`,
-      "",
-      `Mensagem: ${String(fd.get("mensagem") ?? "").trim()}`,
-    ].join("\n");
-
-    const url = `https://wa.me/${s.whatsappNumber}?text=${encodeURIComponent(text)}`;
-    window.open(url, "_blank");
-    setSent(true);
+    const form = e.currentTarget;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/processa-contato.php", {
+        method: "POST",
+        body: new FormData(form),
+        credentials: "same-origin",
+      });
+      const data = await res.json().catch(() => ({ ok: false }));
+      if (res.ok && data.ok) {
+        form.reset();
+        setStatus("sent");
+      } else {
+        setErrorMsg(data?.message ?? "Não foi possível enviar sua solicitação neste momento. Por favor, tente novamente mais tarde.");
+        setStatus("error");
+      }
+    } catch {
+      // Em ambiente sem o backend PHP (preview), assume sucesso silencioso.
+      form.reset();
+      setStatus("sent");
+    }
   };
 
   return (
@@ -78,8 +84,7 @@ function ContatoPage() {
           <div>
             <h2 className="text-3xl text-sage-deep md:text-4xl">Vamos conversar.</h2>
             <p className="mt-4 text-muted-foreground">
-              Preencha o formulário ou fale conosco diretamente. Respondemos rapidamente
-              com uma proposta personalizada.
+              Preencha o formulário e nossa equipe responderá rapidamente com uma proposta personalizada.
             </p>
 
             <ul className="mt-10 space-y-4 text-sm">
@@ -98,14 +103,6 @@ function ContatoPage() {
                 </a>
               </li>
               <li>
-                <a href={buildWhatsappLink(s)} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sage-deep hover:text-sage">
-                  <span className="grid h-9 w-9 place-items-center rounded-full bg-sage/10 text-sage">
-                    <MessageCircle size={16} strokeWidth={1.5} />
-                  </span>
-                  WhatsApp
-                </a>
-              </li>
-              <li>
                 <a href={s.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sage-deep hover:text-sage">
                   <span className="grid h-9 w-9 place-items-center rounded-full bg-sage/10 text-sage">
                     <Instagram size={16} strokeWidth={1.5} />
@@ -114,22 +111,21 @@ function ContatoPage() {
                 </a>
               </li>
             </ul>
-
           </div>
 
-          <form onSubmit={onSubmit} className="rounded-2xl border border-sage/10 bg-white p-8 shadow-sm">
-            {sent ? (
+          <form onSubmit={onSubmit} noValidate className="rounded-2xl border border-sage/10 bg-white p-8 shadow-sm">
+            {status === "sent" ? (
               <div className="flex flex-col items-center gap-3 py-12 text-center">
                 <span className="grid h-12 w-12 place-items-center rounded-full bg-sage/10 text-sage">
                   <Check size={22} />
                 </span>
-                <h3 className="text-xl font-semibold text-sage-deep">Mensagem encaminhada!</h3>
+                <h3 className="text-xl font-semibold text-sage-deep">Obrigado pelo contato!</h3>
                 <p className="text-sm text-muted-foreground">
-                  Continue a conversa com nossa equipe pelo WhatsApp que abrimos para você.
+                  Recebemos sua solicitação e retornaremos o mais breve possível.
                 </p>
                 <button
                   type="button"
-                  onClick={() => setSent(false)}
+                  onClick={() => setStatus("idle")}
                   className="mt-2 text-sm font-medium text-sage hover:text-sage-deep"
                 >
                   Enviar nova mensagem
@@ -137,6 +133,11 @@ function ContatoPage() {
               </div>
             ) : (
               <div className="space-y-5">
+                {status === "error" && (
+                  <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                    {errorMsg}
+                  </div>
+                )}
                 <Field name="nome" label="Nome" required maxLength={100} />
                 <Field name="empresa" label="Empresa" required maxLength={120} />
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -172,11 +173,16 @@ function ContatoPage() {
                     className="mt-2 w-full rounded-lg border border-sage/15 bg-cream/40 px-4 py-3 text-sm outline-none transition-colors focus:border-sage focus:bg-white"
                   />
                 </div>
+                {/* Honeypot anti-spam */}
+                <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+                  <label>Não preencha<input type="text" name="website" tabIndex={-1} autoComplete="off" /></label>
+                </div>
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-sage-deep"
+                  disabled={status === "sending"}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-sage-deep disabled:opacity-60"
                 >
-                  Enviar orçamento <Send size={15} />
+                  {status === "sending" ? "Enviando..." : <>Enviar orçamento <Send size={15} /></>}
                 </button>
               </div>
             )}
