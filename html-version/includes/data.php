@@ -29,6 +29,7 @@ function get_settings(): array {
         'whatsappNumber'  => '5519999999999',
         'whatsappMessage' => 'Olá! Gostaria de solicitar um orçamento para Quick Massage Corporativa.',
         'email'           => 'contato@godaiterapias.com.br',
+        'contactEmail'    => 'contato@godaiterapias.com.br',
         'instagram'       => 'https://instagram.com/godaiterapias',
         'city'            => 'Indaiatuba/SP',
     ]);
