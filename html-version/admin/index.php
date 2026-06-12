@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'save_settings') {
         $current = get_settings();
-        foreach (['whatsappNumber','whatsappMessage','email','instagram','city'] as $k) {
+        foreach (['whatsappNumber','whatsappMessage','email','contactEmail','instagram','city'] as $k) {
             $current[$k] = trim((string)($_POST[$k] ?? ''));
         }
         save_json('settings', $current);
@@ -265,8 +265,13 @@ $settings = get_settings();
         <div class="field"><label>WhatsApp (com DDI, só números)</label><input name="whatsappNumber" value="<?= e($settings['whatsappNumber']) ?>" placeholder="5519999999999"></div>
         <div class="field" style="margin-top:14px;"><label>Mensagem padrão WhatsApp</label><textarea name="whatsappMessage" rows="2"><?= e($settings['whatsappMessage']) ?></textarea></div>
         <div class="field-row">
-          <div class="field"><label>E-mail</label><input type="email" name="email" value="<?= e($settings['email']) ?>"></div>
+          <div class="field"><label>E-mail (exibido no site)</label><input type="email" name="email" value="<?= e($settings['email']) ?>"></div>
           <div class="field"><label>Cidade / Região</label><input name="city" value="<?= e($settings['city']) ?>"></div>
+        </div>
+        <div class="field" style="margin-top:14px;">
+          <label>E-mail que receberá os formulários</label>
+          <input type="email" name="contactEmail" value="<?= e($settings['contactEmail'] ?? $settings['email']) ?>" placeholder="contato@godaiterapias.com.br">
+          <small style="display:block;margin-top:6px;color:var(--muted);font-size:.8rem;">Destinatário dos pedidos de orçamento enviados pelo formulário de contato.</small>
         </div>
         <div class="field" style="margin-top:14px;"><label>Instagram (URL completa)</label><input type="url" name="instagram" value="<?= e($settings['instagram']) ?>"></div>
         <button class="btn btn-primary btn-pill" style="margin-top:20px;">Salvar contatos</button>
