@@ -1,0 +1,5 @@
+[
+  {"id":"f1","question":"Qual a duração de uma sessão de Quick Massage?","answer":"Cada sessão tem em média 15 minutos por colaborador, focando em cabeça, pescoço, ombros e costas.","display_order":1},
+  {"id":"f2","question":"Vocês levam toda a estrutura?","answer":"Sim. Levamos cadeira ergonômica específica, óleos, lenços descartáveis e som ambiente — sua empresa só precisa fornecer um espaço reservado.","display_order":2},
+  {"id":"f3","question":"Atendem em quais cidades?","answer":"Indaiatuba, Campinas, Salto, Itu, Sorocaba e toda a região metropolitana de Campinas e RMC.","display_order":3}
+]
