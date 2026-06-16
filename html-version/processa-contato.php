@@ -1,27 +1,13 @@
 <?php
 // Handler do formulário de contato / orçamento.
-// Envia e-mail via SMTP autenticado (PHPMailer) compatível com Locaweb.
+// 1) Valida + sanitiza
+// 2) Salva a mensagem em data/messages.json (histórico do painel)
+// 3) Envia e-mail via SMTP (Locaweb) usando includes/mailer.php
 
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/config.php';
-
-// Carrega credenciais SMTP. Em produção (Locaweb) o arquivo real é enviado
-// manualmente via FTP. Em desenvolvimento usamos o .example.php como fallback
-// para que a aplicação não quebre.
-if (is_file(__DIR__ . '/includes/email-config.php')) {
-    require_once __DIR__ . '/includes/email-config.php';
-} else {
-    require_once __DIR__ . '/includes/email-config.example.php';
-}
-
-require_once __DIR__ . '/includes/PHPMailer/Exception.php';
-require_once __DIR__ . '/includes/PHPMailer/PHPMailer.php';
-require_once __DIR__ . '/includes/PHPMailer/SMTP.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception as MailException;
+require_once __DIR__ . '/includes/mailer.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -35,23 +21,21 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     respond(405, ['ok' => false, 'message' => 'Método não permitido.']);
 }
 
-// --- Rate limit básico por sessão (1 envio a cada 30s) ---
+// Rate limit básico por sessão (1 envio a cada 30s)
 $now = time();
 $last = $_SESSION['contact_last_send'] ?? 0;
 if ($now - $last < 30) {
     respond(429, ['ok' => false, 'message' => 'Aguarde alguns segundos antes de enviar novamente.']);
 }
 
-// --- Honeypot ---
+// Honeypot
 if (!empty(trim((string)($_POST['website'] ?? '')))) {
-    // Bot detectado — fingir sucesso para não dar pista.
     respond(200, ['ok' => true, 'message' => 'Sua solicitação foi enviada com sucesso. Em breve nossa equipe entrará em contato.']);
 }
 
-// --- Sanitização ---
 function clean(string $v, int $max = 500): string {
     $v = trim($v);
-    $v = preg_replace("/[\r\n]+/", ' ', $v); // anti header-injection
+    $v = preg_replace("/[\r\n]+/", ' ', $v);
     if (mb_strlen($v) > $max) $v = mb_substr($v, 0, $max);
     return $v;
 }
@@ -75,24 +59,41 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'E-mail inválido.';
 if ($cidade === '')                       $errors[] = 'Informe a cidade.';
 if ($mensagem === '')                     $errors[] = 'Escreva uma mensagem.';
 
-if ($errors) {
-    respond(422, ['ok' => false, 'message' => implode(' ', $errors)]);
-}
+if ($errors) respond(422, ['ok' => false, 'message' => implode(' ', $errors)]);
 
-// Destinatário (configurável no painel)
-$settings = get_settings();
-$destino  = filter_var($settings['contactEmail'] ?? $settings['email'] ?? SMTP_FROM, FILTER_VALIDATE_EMAIL)
-            ?: 'contato@godaiterapias.com.br';
-
-$ip       = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '';
-$ip       = trim(explode(',', (string)$ip)[0]);
+$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '';
+$ip = trim(explode(',', (string)$ip)[0]);
 $dataHora = date('d/m/Y H:i:s');
 
-// --- Corpo HTML do e-mail ---
+// 1) Salvar no histórico (sempre, mesmo se SMTP falhar — para não perder o lead)
+$record = [
+    'id'           => 'm' . substr(bin2hex(random_bytes(6)), 0, 10),
+    'nome'         => $nome,
+    'empresa'      => $empresa,
+    'email'        => $email,
+    'whatsapp'     => $whatsapp,
+    'telefone'     => $telefone,
+    'cidade'       => $cidade,
+    'tipo'         => $tipo,
+    'colaboradores'=> $colaboradores,
+    'mensagem'     => $mensagem,
+    'ip'           => $ip,
+    'created_at'   => date('c'),
+];
+$msgs = load_json('messages', []);
+array_unshift($msgs, $record);
+if (count($msgs) > 2000) $msgs = array_slice($msgs, 0, 2000);
+save_json('messages', $msgs);
+
+// 2) Preparar e-mail
+$settings = get_settings();
+$destino  = filter_var($settings['contactEmail'] ?? $settings['email'] ?? '', FILTER_VALIDATE_EMAIL)
+            ?: 'contato@godaiterapias.com.br';
+
 $esc = fn($v) => htmlspecialchars((string)$v, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 $linhasMsg = nl2br($esc($mensagem));
 
-$html = '<!doctype html><html><body style="font-family:Arial,sans-serif;background:#f5f3ee;padding:24px;color:#2b2b2b;">'
+$html = '<div style="font-family:Arial,sans-serif;background:#f5f3ee;padding:24px;color:#2b2b2b;">'
       . '<div style="max-width:620px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e6e2d8;">'
       . '<div style="background:#6b7d63;padding:22px 28px;color:#fff;">'
       . '<h1 style="margin:0;font-size:18px;font-weight:600;">Novo Pedido de Orçamento</h1>'
@@ -106,7 +107,7 @@ $html = '<!doctype html><html><body style="font-family:Arial,sans-serif;backgrou
       . ($whatsapp !== '' ? '<tr><td style="padding:6px 0;color:#6b7d63;"><strong>WhatsApp</strong></td><td style="padding:6px 0;">' . $esc($whatsapp) . '</td></tr>' : '')
       . '<tr><td style="padding:6px 0;color:#6b7d63;"><strong>E-mail</strong></td><td style="padding:6px 0;">' . $esc($email) . '</td></tr>'
       . '<tr><td style="padding:6px 0;color:#6b7d63;"><strong>Cidade</strong></td><td style="padding:6px 0;">' . $esc($cidade) . '</td></tr>'
-      . ($tipo !== '' ? '<tr><td style="padding:6px 0;color:#6b7d63;"><strong>Tipo de contratação</strong></td><td style="padding:6px 0;">' . $esc($tipo) . '</td></tr>' : '')
+      . ($tipo !== '' ? '<tr><td style="padding:6px 0;color:#6b7d63;"><strong>Tipo</strong></td><td style="padding:6px 0;">' . $esc($tipo) . '</td></tr>' : '')
       . ($colaboradores !== '' ? '<tr><td style="padding:6px 0;color:#6b7d63;"><strong>Qtd. colaboradores</strong></td><td style="padding:6px 0;">' . $esc($colaboradores) . '</td></tr>' : '')
       . '</table>'
       . '<hr style="border:none;border-top:1px solid #ece8de;margin:18px 0;">'
@@ -114,8 +115,8 @@ $html = '<!doctype html><html><body style="font-family:Arial,sans-serif;backgrou
       . '<div style="background:#faf8f2;border:1px solid #ece8de;border-radius:8px;padding:14px;">' . $linhasMsg . '</div>'
       . '<hr style="border:none;border-top:1px solid #ece8de;margin:18px 0;">'
       . '<p style="font-size:12px;color:#888;margin:0;">Enviado em ' . $esc($dataHora) . ' &middot; IP ' . $esc($ip) . '</p>'
-      . '<p style="font-size:12px;color:#888;margin:6px 0 0;">Mensagem automática do site Godai Terapias Integrativas.</p>'
-      . '</div></div></body></html>';
+      . '<p style="font-size:12px;color:#888;margin:6px 0 0;">Disponível também em: Painel &rarr; Mensagens recebidas.</p>'
+      . '</div></div></div>';
 
 $alt = "Novo Pedido de Orçamento - Godai\n\n"
      . "Nome: $nome\nEmpresa: $empresa\n"
@@ -124,46 +125,24 @@ $alt = "Novo Pedido de Orçamento - Godai\n\n"
      . "E-mail: $email\nCidade: $cidade\n"
      . ($tipo !== '' ? "Tipo: $tipo\n" : '')
      . ($colaboradores !== '' ? "Colaboradores: $colaboradores\n" : '')
-     . "\nMensagem:\n$mensagem\n\n"
-     . "Enviado em $dataHora — IP $ip";
+     . "\nMensagem:\n$mensagem\n\nEnviado em $dataHora — IP $ip";
 
-// --- Envio via PHPMailer / SMTP ---
-$mail = new PHPMailer(true);
-try {
-    if (SMTP_HOST === '' || SMTP_USERNAME === '' || SMTP_PASSWORD === '') {
-        // SMTP ainda não configurado — registrar em log e responder erro genérico.
-        @file_put_contents(GODAI_DATA . '/contact-pending.log',
-            "[$dataHora] SMTP não configurado. De: $email — $nome ($empresa)\n",
-            FILE_APPEND);
-        respond(503, ['ok' => false, 'message' => 'Não foi possível enviar sua solicitação neste momento. Por favor, tente novamente mais tarde.']);
-    }
+// 3) Enviar e-mail
+if (!smtp_configured()) {
+    @file_put_contents(GODAI_DATA . '/contact-pending.log',
+        "[$dataHora] SMTP não configurado. De: $email — $nome ($empresa)\n", FILE_APPEND);
+    // Mensagem já salva — responder sucesso para o usuário (lead preservado no painel).
+    $_SESSION['contact_last_send'] = $now;
+    respond(200, ['ok' => true, 'message' => 'Sua solicitação foi recebida com sucesso. Em breve nossa equipe entrará em contato.']);
+}
 
-    $mail->isSMTP();
-    $mail->Host       = SMTP_HOST;
-    $mail->SMTPAuth   = true;
-    $mail->Username   = SMTP_USERNAME;
-    $mail->Password   = SMTP_PASSWORD;
-    $mail->SMTPSecure = SMTP_SECURE === 'ssl' ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = (int)SMTP_PORT;
-    $mail->CharSet    = 'UTF-8';
-    $mail->Timeout    = 15;
+$result = send_mail($destino, 'Novo Pedido de Orçamento - Godai Terapias Integrativas', $html, $alt, $email, $nome);
 
-    $mail->setFrom(SMTP_FROM, SMTP_FROM_NAME);
-    $mail->addAddress($destino);
-    $mail->addReplyTo($email, $nome);
-
-    $mail->isHTML(true);
-    $mail->Subject = 'Novo Pedido de Orçamento - Godai Terapias Integrativas';
-    $mail->Body    = $html;
-    $mail->AltBody = $alt;
-
-    $mail->send();
-
+if ($result['ok']) {
     $_SESSION['contact_last_send'] = $now;
     respond(200, ['ok' => true, 'message' => 'Sua solicitação foi enviada com sucesso. Em breve nossa equipe entrará em contato.']);
-} catch (MailException $e) {
-    @file_put_contents(GODAI_DATA . '/contact-errors.log',
-        "[$dataHora] " . $mail->ErrorInfo . "\n",
-        FILE_APPEND);
-    respond(500, ['ok' => false, 'message' => 'Não foi possível enviar sua solicitação neste momento. Por favor, tente novamente mais tarde.']);
+} else {
+    // E-mail falhou mas a mensagem foi salva no painel.
+    $_SESSION['contact_last_send'] = $now;
+    respond(200, ['ok' => true, 'message' => 'Sua solicitação foi recebida. Nossa equipe retornará em breve.']);
 }
