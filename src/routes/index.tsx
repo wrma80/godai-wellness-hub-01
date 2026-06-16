@@ -203,6 +203,23 @@ function HomePage() {
               </div>
             ))}
           </div>
+
+          <div className="mx-auto mt-14 max-w-2xl rounded-2xl border border-cream/20 bg-cream/5 p-8 text-center md:p-10">
+            <h3 className="text-xl text-cream md:text-2xl">
+              Quer entender como a Quick Massage pode gerar valor para sua empresa?
+            </h3>
+            <p className="mt-4 text-sm leading-relaxed text-cream/80">
+              Descubra como ações de bem-estar podem contribuir para a qualidade de vida dos
+              colaboradores, fortalecer programas internos, apoiar iniciativas relacionadas à
+              NR-1 e agregar valor às ações corporativas.
+            </p>
+            <Link
+              to="/beneficios"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-medium text-sage-deep transition-transform hover:scale-[1.02]"
+            >
+              Conhecer os benefícios para empresas <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
 
