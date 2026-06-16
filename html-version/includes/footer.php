@@ -12,6 +12,7 @@
         <li><a href="<?= e(base_url('index.php')) ?>">Home</a></li>
         <li><a href="<?= e(base_url('sobre.php')) ?>">Sobre</a></li>
         <li><a href="<?= e(base_url('quick-massage.php')) ?>">Quick Massage</a></li>
+        <li><a href="<?= e(base_url('beneficios.php')) ?>">Benefícios para Empresas</a></li>
         <li><a href="<?= e(base_url('faq.php')) ?>">FAQ</a></li>
         <li><a href="<?= e(base_url('contato.php')) ?>">Contato</a></li>
         <li style="margin-top:10px;"><a href="<?= e(base_url('politica-de-privacidade.php')) ?>">Política de Privacidade</a></li>

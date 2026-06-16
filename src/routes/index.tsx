@@ -92,8 +92,9 @@ function HomePage() {
               Bem-estar corporativo que <em className="not-italic text-sage">transforma</em> ambientes.
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
-              A Godai Terapias Integrativas oferece experiências de relaxamento e qualidade
-              de vida diretamente na sua empresa através da Quick Massage Corporativa.
+              A Godai Terapias Integrativas leva experiências de bem-estar para empresas que
+              desejam valorizar pessoas, fortalecer ações de qualidade de vida e promover
+              ambientes corporativos mais saudáveis.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -201,6 +202,23 @@ function HomePage() {
                 <p className="text-sm text-cream/95">{b}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mx-auto mt-14 max-w-2xl rounded-2xl border border-cream/20 bg-cream/5 p-8 text-center md:p-10">
+            <h3 className="text-xl text-cream md:text-2xl">
+              Quer entender como a Quick Massage pode gerar valor para sua empresa?
+            </h3>
+            <p className="mt-4 text-sm leading-relaxed text-cream/80">
+              Descubra como ações de bem-estar podem contribuir para a qualidade de vida dos
+              colaboradores, fortalecer programas internos, apoiar iniciativas relacionadas à
+              NR-1 e agregar valor às ações corporativas.
+            </p>
+            <Link
+              to="/beneficios"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-medium text-sage-deep transition-transform hover:scale-[1.02]"
+            >
+              Conhecer os benefícios para empresas <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>

@@ -25,6 +25,7 @@ export function Footer() {
             <li><Link to="/" className="text-cream/85 hover:text-cream">Home</Link></li>
             <li><Link to="/sobre" className="text-cream/85 hover:text-cream">Sobre</Link></li>
             <li><Link to="/quick-massage" className="text-cream/85 hover:text-cream">Quick Massage</Link></li>
+            <li><Link to="/beneficios" className="text-cream/85 hover:text-cream">Benefícios para Empresas</Link></li>
             <li><Link to="/faq" className="text-cream/85 hover:text-cream">FAQ</Link></li>
             <li><Link to="/contato" className="text-cream/85 hover:text-cream">Contato</Link></li>
             <li className="pt-2"><Link to="/politica-de-privacidade" className="text-cream/70 hover:text-cream">Política de Privacidade</Link></li>

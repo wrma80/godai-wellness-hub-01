@@ -6,6 +6,7 @@ $nav = [
   ['index',        'Home'],
   ['sobre',        'Sobre'],
   ['quick-massage','Quick Massage'],
+  ['beneficios',   'Benefícios para Empresas'],
   ['faq',          'FAQ'],
   ['contato',      'Contato'],
 ];

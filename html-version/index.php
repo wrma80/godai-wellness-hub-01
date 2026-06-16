@@ -12,7 +12,7 @@ include __DIR__ . '/includes/header.php';
     <div class="fade-up">
       <span class="eyebrow eyebrow-pill">🌿 Bem-estar Corporativo</span>
       <h1 style="margin-top:24px;">Bem-estar corporativo que <em>transforma</em> ambientes.</h1>
-      <p class="lead" style="margin-top:24px;">A Godai Terapias Integrativas oferece experiências de relaxamento e qualidade de vida diretamente na sua empresa através da Quick Massage Corporativa.</p>
+      <p class="lead" style="margin-top:24px;">A Godai Terapias Integrativas leva experiências de bem-estar para empresas que desejam valorizar pessoas, fortalecer ações de qualidade de vida e promover ambientes corporativos mais saudáveis.</p>
       <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">
         <a href="<?= e(base_url('contato.php')) ?>" class="btn btn-primary btn-pill">Solicitar orçamento →</a>
         <a href="<?= e(whatsapp_link()) ?>" target="_blank" rel="noopener" class="btn btn-outline btn-pill">Falar no WhatsApp</a>
@@ -64,6 +64,14 @@ include __DIR__ . '/includes/header.php';
       <?php foreach (['Redução do estresse','Melhora do clima organizacional','Valorização dos colaboradores','Aumento do bem-estar','Ações de qualidade de vida','Experiência corporativa diferenciada'] as $b): ?>
         <div class="benefit"><span class="check">✓</span><span><?= e($b) ?></span></div>
       <?php endforeach; ?>
+    </div>
+
+    <div style="margin-top:56px;max-width:720px;margin-left:auto;margin-right:auto;text-align:center;border:1px solid rgba(244,241,234,.18);background:rgba(244,241,234,.06);border-radius:20px;padding:36px 28px;">
+      <h3 style="color:var(--cream);font-size:1.4rem;line-height:1.3;">Quer entender como a Quick Massage pode gerar valor para sua empresa?</h3>
+      <p style="margin-top:14px;color:rgba(244,241,234,.85);line-height:1.7;">Descubra como ações de bem-estar podem contribuir para a qualidade de vida dos colaboradores, fortalecer programas internos, apoiar iniciativas relacionadas à NR-1 e agregar valor às ações corporativas.</p>
+      <div style="margin-top:24px;">
+        <a href="<?= e(base_url('beneficios.php')) ?>" class="btn btn-cream btn-pill">Conhecer os benefícios para empresas →</a>
+      </div>
     </div>
   </div>
 </section>
