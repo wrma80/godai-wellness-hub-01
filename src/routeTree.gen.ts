@@ -15,6 +15,7 @@ import { Route as QuickMassageRouteImport } from './routes/quick-massage'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as BeneficiosRouteImport } from './routes/beneficios'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
@@ -47,6 +48,11 @@ const ContatoRoute = ContatoRouteImport.update({
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BeneficiosRoute = BeneficiosRouteImport.update({
+  id: '/beneficios',
+  path: '/beneficios',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -55,6 +61,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/beneficios': typeof BeneficiosRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/beneficios': typeof BeneficiosRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -74,6 +82,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/beneficios': typeof BeneficiosRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/beneficios'
     | '/contato'
     | '/faq'
     | '/politica-de-privacidade'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/beneficios'
     | '/contato'
     | '/faq'
     | '/politica-de-privacidade'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/beneficios'
     | '/contato'
     | '/faq'
     | '/politica-de-privacidade'
@@ -113,6 +125,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BeneficiosRoute: typeof BeneficiosRoute
   ContatoRoute: typeof ContatoRoute
   FaqRoute: typeof FaqRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
@@ -165,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/beneficios': {
+      id: '/beneficios'
+      path: '/beneficios'
+      fullPath: '/beneficios'
+      preLoaderRoute: typeof BeneficiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -177,6 +197,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BeneficiosRoute: BeneficiosRoute,
   ContatoRoute: ContatoRoute,
   FaqRoute: FaqRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
