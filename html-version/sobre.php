@@ -6,7 +6,7 @@ include __DIR__ . '/includes/header.php';
 ?>
 
 <section class="page-hero container">
-  <span class="eyebrow" style="text-transform:none;letter-spacing:normal;font-weight:500;">Sobre a Godai</span>
+  <span class="eyebrow">Sobre a Godai</span>
   <h1 style="margin-top:24px;">Uma história construída pelo cuidado com as pessoas.</h1>
   <p>Há mais de duas décadas, nossa trajetória é guiada por um propósito simples: promover experiências de bem-estar que contribuam para uma rotina mais equilibrada, saudável e humana.</p>
   <p style="margin-top:14px;">Hoje, a Godai Terapias Integrativas reúne experiência nacional e internacional para levar às empresas soluções de bem-estar voltadas à valorização das pessoas e à qualidade de vida no ambiente corporativo.</p>

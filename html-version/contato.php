@@ -13,15 +13,6 @@ include __DIR__ . '/includes/header.php';
   <p>A Godai oferece experiências de bem-estar voltadas ao cuidado, valorização e qualidade de vida no ambiente corporativo.</p>
 </section>
 
-<section class="bg-white" style="padding:30px 0 0;">
-  <div class="container">
-    <div class="bullet-list" style="margin-top:0;">
-      <?php foreach (['Atendimento personalizado','Estrutura inclusa','Atendimento corporativo','Flexibilidade de horários'] as $d): ?>
-        <div class="item"><?= e($d) ?></div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
 
 <section class="container" style="padding:60px 0 100px;">
   <div class="grid grid-2" style="align-items:start;">
@@ -31,7 +22,7 @@ include __DIR__ . '/includes/header.php';
       <ul class="contact-info">
         <li class="line"><span class="ico">📍</span> <?= e($s['city']) ?></li>
         <li class="line"><span class="ico">✉</span> <a href="mailto:<?= e($s['email']) ?>"><?= e($s['email']) ?></a></li>
-        <li class="line"><span class="ico">◎</span> <a href="<?= e($s['instagram']) ?>" target="_blank" rel="noopener">Instagram</a></li>
+        <li class="line"><span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></span> <a href="<?= e($s['instagram']) ?>" target="_blank" rel="noopener">@godai_terapias</a></li>
       </ul>
     </div>
 
