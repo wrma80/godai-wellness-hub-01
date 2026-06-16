@@ -163,7 +163,7 @@ include __DIR__ . '/includes/header.php';
       <h2 style="margin-top:14px;">Escolha o formato ideal para sua empresa</h2>
       <p class="lead" style="margin:20px auto 0;max-width:640px;">A Godai oferece diferentes modalidades de contratação — Avulso, Pacote Corporativo e Programa Corporativo — para atender desde ações pontuais até programas contínuos de qualidade de vida corporativa.</p>
       <div style="margin-top:32px;">
-        <a href="<?= e(base_url('index.php')) ?>#planos" class="btn btn-primary btn-pill">Conhecer modalidades de contratação →</a>
+        <a href="<?= e(base_url('index.php#modalidades-contratacao')) ?>" class="btn btn-primary btn-pill">Conhecer modalidades de contratação →</a>
       </div>
     </div>
   </div>
