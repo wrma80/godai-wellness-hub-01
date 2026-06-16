@@ -24,7 +24,7 @@
         <li>📍 <?= e($s['city']) ?></li>
         <li>✉ <a href="mailto:<?= e($s['email']) ?>"><?= e($s['email']) ?></a></li>
         <li>💬 <a href="<?= e(whatsapp_link()) ?>" target="_blank" rel="noopener">(19) 99701-6552</a></li>
-        <li>◎ <a href="<?= e($s['instagram']) ?>" target="_blank" rel="noopener">@godai_terapias</a></li>
+        <li><span aria-hidden="true" style="display:inline-block;vertical-align:-3px;margin-right:6px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></span><a href="<?= e($s['instagram']) ?>" target="_blank" rel="noopener">@godai_terapias</a></li>
       </ul>
     </div>
   </div>

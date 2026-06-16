@@ -1,75 +1,61 @@
-# Plano de implementação
+## Ajustes solicitados — Sobre, Contato e Instagram
 
-Esta é uma entrega grande. Vou dividir em **2 fases**. Confirme antes de eu seguir — especialmente a Fase 2, que é extensa e precisa de algumas decisões.
+Aplicar nas duas versões do site (React em `src/routes/` e PHP em `html-version/`) sem alterar a identidade visual.
 
----
+### 1. Padronização dos títulos da página "Sobre"
 
-## Fase 1 — Ajuste SMTP para Locaweb (rápido, seguro)
+Hoje o hero usa "Sobre a Godai" como `<span>` pequeno (eyebrow) e o título principal é "Uma história construída pelo cuidado com as pessoas." Já em "Nossa origem" o eyebrow é "Nossa origem" e o título grande é "Como nasceu a Godai".
 
-Objetivo: separar credenciais SMTP do código versionado.
+A solicitação é que **"Sobre a Godai" tenha o mesmo tamanho/peso/altura/espaçamento de "Nossa Origem"** (ou seja, mesmo estilo de eyebrow). Para isso:
 
-### Arquivos
-- **Criar** `html-version/includes/email-config.example.php` — modelo com constantes vazias e comentários.
-- **Renomear conceito**: `html-version/includes/email-config.php` deixa de ser versionado. O arquivo atual (com constantes vazias) vira o `.example.php`. O `.php` real será criado manualmente no servidor via FTP.
-- **Atualizar** `.gitignore` na raiz: adicionar `html-version/includes/email-config.php`.
-- **Atualizar** `html-version/processa-contato.php` para:
-  - Verificar se `email-config.php` existe; se não, carregar o `.example.php` como fallback para evitar fatal error.
-  - Mensagem clara no log se as credenciais ainda não foram configuradas.
-- **Atualizar** `html-version/README.md` com instruções: "após deploy FTP, copiar `email-config.example.php` → `email-config.php` e preencher".
-- **Remover do repo** o `email-config.php` atual (ele tem só constantes vazias — sem perda).
+- **React (`src/routes/sobre.tsx`, linha 38):** trocar a classe do `<span>` "Sobre a Godai" de `text-sm font-medium tracking-wide text-sage` para `text-xs font-semibold uppercase tracking-[0.25em] text-sage` — idêntico ao eyebrow de "Nossa origem" (linha 63). Sem inline-style.
+- **PHP (`html-version/sobre.php`, linha 9):** remover os overrides inline (`style="text-transform:none;letter-spacing:normal;font-weight:500;"`) deixando apenas `<span class="eyebrow">Sobre a Godai</span>`, igual aos demais eyebrows da página.
 
-Sem variáveis do GitHub Actions. Compatível 100% com hospedagem compartilhada Locaweb.
+### 2. Simplificação da página de Contato
 
----
+Remover a faixa de 4 cards ("Atendimento personalizado / Estrutura inclusa / Atendimento corporativo / Flexibilidade de horários"). Formulário e bloco de contato permanecem inalterados.
 
-## Fase 2 — Reformulação do Painel Administrativo (PHP)
+- **React (`src/routes/contato.tsx`):** remover o array `DIFS` (linhas 16–21) e a `<section>` inteira que o renderiza (linhas 67–80). Remover o import `Check` se não for mais usado em outras partes (continuará sendo usado no estado "sent", então mantém).
+- **PHP (`html-version/contato.php`):** remover a `<section>` linhas 16–24 (bloco `bullet-list`).
 
-Escopo MUITO grande. Vou listar o que entendi e os pontos que precisam de decisão.
+### 3. Rótulo do Instagram → `@godai_terapias`
 
-### Premissas que assumi (confirme)
-1. **Tudo em PHP puro** (mesma stack do `html-version/admin/`), sem tocar no painel React/Supabase.
-2. **Banco de dados**: o site hoje usa arquivos JSON em `html-version/data/`. Você quer migrar para **MySQL** (padrão Locaweb) ou **manter JSON** e só adicionar autenticação/módulos?
-   - MySQL → preciso que você crie o banco no painel Locaweb e me passe host/usuário/senha/nome (via secret, não no chat).
-   - JSON → mais simples, sem dependência externa, mas menos robusto para "formulários recebidos" com filtros/exportação.
-3. **Recuperação de senha por e-mail**: depende do SMTP da Fase 1 estar configurado em produção. Vou implementar mas só funcionará após você preencher `email-config.php` no servidor.
-4. **Upload de imagens da galeria**: armazenadas em `html-version/assets/uploads/` com `.htaccess` bloqueando execução de PHP.
-5. **Usuário inicial Godai / 123456**: vou criar via script `bootstrap-admin.php` que roda 1x e se autodeleta, OU já incluir o hash no `data/admin.json` (mais simples). Prefere qual?
+- **`src/components/Footer.tsx` (linha 55):** já mostra `@godai_terapias` — nenhum ajuste necessário.
+- **`src/routes/contato.tsx` (linha 110):** trocar o texto "Instagram" por `@godai_terapias`.
+- **`html-version/contato.php` (linha 34):** trocar o texto do link "Instagram" por `@godai_terapias`.
+- **`html-version/includes/footer.php`:** já mostra `@godai_terapias` — sem alteração.
 
-### Módulos a construir (PHP)
+### 4. Ícone oficial do Instagram
 
-| Módulo | Arquivo | Origem dos dados |
-|---|---|---|
-| Login + logout + sessão | `admin/login.php`, `admin/logout.php` | `admin.json` ou tabela `usuarios` |
-| Recuperar senha | `admin/esqueci.php`, `admin/redefinir.php?token=` | tokens em `data/password-resets.json` ou tabela |
-| Alterar senha | `admin/seguranca.php` | — |
-| Dashboard | `admin/index.php` | agregados dos demais |
-| Conteúdo do Site (Home/Sobre/Quick Massage) | `admin/conteudo.php` | JSON ou tabela |
-| FAQ (CRUD + reorder) | `admin/faq.php` | JSON/tabela |
-| Galeria (upload + categorias) | `admin/galeria.php` | filesystem + JSON/tabela |
-| Contatos (empresa, redes, endereço) | `admin/contatos.php` | `settings.json` expandido |
-| SEO por página | `admin/seo.php` | JSON/tabela |
-| Formulários recebidos (histórico + CSV) | `admin/mensagens.php` | tabela (ou JSON append) |
-| Configurações SMTP | `admin/email.php` | escreve em `email-config.php` no servidor |
+Verificar o ícone usado. No React, `Footer.tsx` e `contato.tsx` já importam `Instagram` do `lucide-react`, que é o glifo oficial (câmera quadrada com lente). Manter.
 
-### Layout
-- Menu lateral fixo, paleta Verde Sage + Creme (mesma do site).
-- CSS próprio em `html-version/admin/assets/admin.css`.
-- Responsivo mobile.
+No PHP, hoje é usado o caractere `◎` (footer e contato). Substituir por um SVG inline do ícone oficial do Instagram (mesmo path do Lucide), mantendo as classes/estilo atuais:
 
-### Segurança
-- Todas as rotas exigem `require_login()` (já existe esqueleto em `admin/_auth.php`).
-- CSRF em todos os formulários (já existe `csrf_token()`).
-- `password_hash()` / `password_verify()` (bcrypt).
-- Tokens de reset com `random_bytes(32)`, expiração 60min, single-use.
+- `html-version/includes/footer.php` (linha do Instagram dentro da `<ul>` de contato).
+- `html-version/contato.php` (linha 34, dentro do `<span class="ico">`).
 
-### Frente React/Supabase
-- **Não vou mexer** no painel `/admin` React/Supabase nem nas tabelas do Lovable Cloud. Esse painel continua existindo em paralelo. Se você quiser desativá-lo, me diga.
+SVG a usar (24×24, `currentColor`, traço 1.5, igual ao Lucide):
 
----
+```html
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+  fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+</svg>
+```
 
-## Perguntas para decidir antes da Fase 2
+### 5. Consistência geral
 
-1. **Banco**: MySQL na Locaweb ou manter JSON?
-2. **Usuário inicial**: hash já no `admin.json` (mais simples) ou script bootstrap?
-3. **Painel React/Supabase atual** (`/admin` na versão TanStack): manter, ocultar ou remover?
-4. **Quer que eu execute a Fase 1 agora** (é rápida e independente) **enquanto você decide a Fase 2**?
+Após as alterações, conferir visualmente Sobre e Contato em desktop e mobile (preview React e snapshot do PHP) para garantir alinhamento, espaçamento e responsividade.
+
+### Entrega
+
+**Arquivos a alterar:**
+- `src/routes/sobre.tsx` — estilo do eyebrow "Sobre a Godai".
+- `src/routes/contato.tsx` — remover seção de cards; trocar texto do link Instagram.
+- `html-version/sobre.php` — remover overrides inline do eyebrow.
+- `html-version/contato.php` — remover seção `bullet-list`; trocar texto e ícone do Instagram.
+- `html-version/includes/footer.php` — trocar ícone `◎` por SVG oficial do Instagram.
+
+**Sem alterações em:** formulário, identidade visual (cores/tipografia), demais páginas, backend PHP, painel admin.

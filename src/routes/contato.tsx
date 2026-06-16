@@ -13,12 +13,6 @@ export const Route = createFileRoute("/contato")({
   component: ContatoPage,
 });
 
-const DIFS = [
-  "Atendimento personalizado",
-  "Estrutura inclusa",
-  "Atendimento corporativo",
-  "Flexibilidade de horários",
-];
 
 function ContatoPage() {
   const { data: settings } = useSettings();
@@ -64,20 +58,6 @@ function ContatoPage() {
         </p>
       </section>
 
-      <section className="bg-white py-10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {DIFS.map((d) => (
-              <div key={d} className="flex items-center gap-3 rounded-xl border border-sage/10 bg-cream/40 p-4">
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-sage/10 text-sage">
-                  <Check size={14} strokeWidth={1.75} />
-                </span>
-                <p className="text-sm text-sage-deep">{d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="mx-auto max-w-7xl px-6 pb-20 pt-10 md:pb-28 lg:px-10">
         <div className="grid gap-12 md:grid-cols-2 md:gap-16">
@@ -107,7 +87,7 @@ function ContatoPage() {
                   <span className="grid h-9 w-9 place-items-center rounded-full bg-sage/10 text-sage">
                     <Instagram size={16} strokeWidth={1.5} />
                   </span>
-                  Instagram
+                  @godai_terapias
                 </a>
               </li>
             </ul>
