@@ -50,9 +50,25 @@ html-version/
 
 Todas as alterações refletem **imediatamente** no site público, sem precisar editar código.
 
-## Captura de leads
+## Formulário de contato (envio por e-mail)
 
-O formulário de contato monta uma mensagem completa e abre o WhatsApp do número configurado. Não há armazenamento de leads em banco — preparado para integração futura com CRM.
+O formulário envia os dados via **PHP + PHPMailer + SMTP autenticado** (compatível com Locaweb). As credenciais SMTP **não** são versionadas no Git.
+
+### Configuração SMTP (1x após o deploy)
+
+1. No servidor (via FTP/painel Locaweb), entre em `html-version/includes/`.
+2. Copie `email-config.example.php` para `email-config.php`.
+3. Edite `email-config.php` com as credenciais SMTP da Locaweb:
+   - `SMTP_HOST` — geralmente `email-ssl.com.br` ou `smtp.seudominio.com.br`
+   - `SMTP_PORT` — `587` (TLS) ou `465` (SSL)
+   - `SMTP_SECURE` — `tls` ou `ssl`
+   - `SMTP_USERNAME` — e-mail completo (ex.: `contato@godaiterapias.com.br`)
+   - `SMTP_PASSWORD` — senha do e-mail
+4. Pronto. Os formulários passam a enviar para o e-mail configurado em **Admin → Contatos → "E-mail que receberá os formulários"**.
+
+> ⚠️ **Nunca** commite o arquivo `email-config.php` — ele está no `.gitignore`. Apenas o modelo `email-config.example.php` é versionado.
+
+
 
 ## Requisitos técnicos
 
