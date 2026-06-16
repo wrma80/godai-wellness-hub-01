@@ -247,7 +247,7 @@ function HomePage() {
       </section>
 
       {/* FORMAS DE CONTRATAÇÃO */}
-      <section className="bg-cream py-20 md:py-28">
+      <section id="modalidades-corporativas" className="bg-cream py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="text-center">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Formas de Contratação</span>
