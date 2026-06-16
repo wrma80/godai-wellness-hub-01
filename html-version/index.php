@@ -65,6 +65,14 @@ include __DIR__ . '/includes/header.php';
         <div class="benefit"><span class="check">✓</span><span><?= e($b) ?></span></div>
       <?php endforeach; ?>
     </div>
+
+    <div style="margin-top:56px;max-width:720px;margin-left:auto;margin-right:auto;text-align:center;border:1px solid rgba(244,241,234,.18);background:rgba(244,241,234,.06);border-radius:20px;padding:36px 28px;">
+      <h3 style="color:var(--cream);font-size:1.4rem;line-height:1.3;">Quer entender como a Quick Massage pode gerar valor para sua empresa?</h3>
+      <p style="margin-top:14px;color:rgba(244,241,234,.85);line-height:1.7;">Descubra como ações de bem-estar podem contribuir para a qualidade de vida dos colaboradores, fortalecer programas internos, apoiar iniciativas relacionadas à NR-1 e agregar valor às ações corporativas.</p>
+      <div style="margin-top:24px;">
+        <a href="<?= e(base_url('beneficios.php')) ?>" class="btn btn-cream btn-pill">Conhecer os benefícios para empresas →</a>
+      </div>
+    </div>
   </div>
 </section>
 
