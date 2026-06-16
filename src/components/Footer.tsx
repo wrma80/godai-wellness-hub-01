@@ -60,11 +60,8 @@ export function Footer() {
       </div>
 
       <div className="border-t border-cream/15">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-2 px-6 py-6 text-xs text-cream/60 md:flex-row md:items-center lg:px-10">
+        <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-6 py-6 text-xs text-cream/60 md:justify-between lg:px-10">
           <p>© {new Date().getFullYear()} Godai Terapias Integrativas. Todos os direitos reservados.</p>
-          <div className="flex items-center gap-4">
-            <Link to="/admin" className="text-cream/40 hover:text-cream/80">Painel</Link>
-          </div>
         </div>
       </div>
     </footer>

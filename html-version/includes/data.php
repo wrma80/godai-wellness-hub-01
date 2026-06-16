@@ -26,13 +26,38 @@ function save_json(string $name, $value): bool {
 
 function get_settings(): array {
     return load_json('settings', [
-        'whatsappNumber'  => '5519999999999',
-        'whatsappMessage' => 'Olá! Gostaria de solicitar um orçamento para Quick Massage Corporativa.',
-        'email'           => 'contato@godaiterapias.com.br',
-        'contactEmail'    => 'contato@godaiterapias.com.br',
-        'instagram'       => 'https://instagram.com/godaiterapias',
-        'city'            => 'Indaiatuba/SP',
+        'companyName'      => 'Godai Terapias Integrativas',
+        'slogan'           => '',
+        'shortDescription' => '',
+        'whatsappNumber'   => '5519997016552',
+        'whatsappMessage'  => 'Olá! Gostaria de solicitar um orçamento para Quick Massage Corporativa.',
+        'email'            => 'contato@godaiterapias.com.br',
+        'contactEmail'     => 'contato@godaiterapias.com.br',
+        'phone'            => '(19) 99701-6552',
+        'instagram'        => 'https://instagram.com/godai_terapias',
+        'linkedin'         => '',
+        'address'          => '',
+        'city'             => 'Indaiatuba',
+        'state'            => 'SP',
     ]);
+}
+
+function get_faq(): array {
+    $list = load_json('faq', []);
+    usort($list, fn($a, $b) => ($a['display_order'] ?? 0) <=> ($b['display_order'] ?? 0));
+    return $list;
+}
+
+function get_seo(string $page = ''): array {
+    $all = load_json('seo', []);
+    if ($page === '') return $all;
+    return $all[$page] ?? [];
+}
+
+function get_gallery(string $category = ''): array {
+    $list = load_json('gallery', []);
+    if ($category !== '') $list = array_filter($list, fn($g) => ($g['category'] ?? '') === $category);
+    return array_values($list);
 }
 
 function get_services(): array {
