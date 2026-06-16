@@ -5,7 +5,16 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/config.php';
-require_once __DIR__ . '/includes/email-config.php';
+
+// Carrega credenciais SMTP. Em produção (Locaweb) o arquivo real é enviado
+// manualmente via FTP. Em desenvolvimento usamos o .example.php como fallback
+// para que a aplicação não quebre.
+if (is_file(__DIR__ . '/includes/email-config.php')) {
+    require_once __DIR__ . '/includes/email-config.php';
+} else {
+    require_once __DIR__ . '/includes/email-config.example.php';
+}
+
 require_once __DIR__ . '/includes/PHPMailer/Exception.php';
 require_once __DIR__ . '/includes/PHPMailer/PHPMailer.php';
 require_once __DIR__ . '/includes/PHPMailer/SMTP.php';
