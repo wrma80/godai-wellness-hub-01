@@ -30,23 +30,37 @@ html-version/
 
 ## Como publicar
 
-1. Faça upload da pasta `html-version/` para a sua hospedagem (pode ser a raiz ou um subdiretório).
-2. Garanta que a pasta `data/` tenha **permissão de escrita** para o servidor (geralmente 755 ou 775).
-3. Acesse `seu-dominio.com/` (ou o caminho onde subiu) — o site já carrega.
-4. Acesse `seu-dominio.com/admin/` para entrar no painel.
+1. Faça upload da pasta `html-version/` para a sua hospedagem (raiz ou subdiretório).
+2. Garanta permissão de escrita (775) para `data/` e `assets/uploads/`.
+3. Acesse `seu-dominio.com/admin/bootstrap.php` **uma única vez** para criar o usuário inicial.
+4. **Apague** `admin/bootstrap.php` via FTP após o setup.
+5. Configure o SMTP em **Painel → E-mail / SMTP** ou copiando manualmente `includes/email-config.example.php` → `includes/email-config.php`.
 
 ## Acesso ao painel
 
-- **Usuário:** `admin`
-- **Senha:** `admin123`
+URL: `seu-dominio.com/admin/login.php`
 
-> **Importante:** Altere a senha no primeiro login na aba **Conta**.
+- **Usuário inicial:** `Godai`
+- **Senha inicial:** `123456`
 
-## O que é editável
+> **Importante:** altere a senha em **Painel → Segurança** logo após o primeiro login.
 
-- **Serviços** — títulos, duração, capacidade, descrição, ordem (adicionar/remover)
-- **Preços** — tabela 4h / 6h / 8h (1 e 2 terapeutas, valores e capacidades)
-- **Contatos** — WhatsApp, mensagem padrão, e-mail, Instagram, cidade
+### Esqueci minha senha
+
+Em `admin/login.php` → "Esqueci minha senha". O link de recuperação é enviado para o e-mail cadastrado em **Segurança → E-mail de recuperação**. Validade: 60 minutos. Requer SMTP configurado.
+
+## Módulos do painel
+
+- **Dashboard** — visão geral, atalhos, alertas
+- **Mensagens** — histórico dos formulários recebidos, busca, filtros e exportação CSV
+- **Conteúdo do site** — textos editáveis das páginas Home, Sobre e Quick Massage
+- **Serviços / Preços / FAQ** — CRUD completo
+- **Galeria** — upload (JPG/PNG/WEBP até 8MB) por categoria, imagem principal
+- **SEO** — title, description, keywords e Open Graph por página
+- **Contatos** — empresa, redes sociais, endereço, e-mail destinatário dos formulários
+- **E-mail / SMTP** — credenciais Locaweb (grava `includes/email-config.php`)
+- **Segurança** — alterar senha, alterar e-mail de recuperação
+
 
 Todas as alterações refletem **imediatamente** no site público, sem precisar editar código.
 
