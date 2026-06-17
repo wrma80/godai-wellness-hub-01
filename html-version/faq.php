@@ -14,7 +14,7 @@ $faq = [
 ];
 ?>
 
-<section class="page-hero container">
+<section class="page-hero container fade-up">
   <span class="eyebrow">FAQ</span>
   <h1 style="margin-top:24px;">Perguntas frequentes</h1>
   <p>Reunimos as dúvidas mais comuns sobre a Quick Massage Corporativa.</p>

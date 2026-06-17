@@ -205,6 +205,14 @@ section { padding: 80px 0; }
   font-size: .9rem;
 }
 .benefit .check { flex: 0 0 24px; height: 24px; border-radius: 999px; background: rgba(244,241,234,.18); display: grid; place-items: center; }
+/* When .benefit lives on a light surface (white/cream) — readable text */
+.bg-white .benefit, section[style*="--cream"] .benefit, .benefit.benefit-light {
+  background: #fff; border-color: rgba(86,108,80,.18);
+  color: var(--sage-deep); font-weight: 500; font-size: .95rem;
+}
+.bg-white .benefit .check, section[style*="--cream"] .benefit .check, .benefit.benefit-light .check {
+  background: rgba(86,108,80,.12); color: var(--sage);
+}
 
 /* ---------- PRICING TABLE ---------- */
 .pricing-card {
@@ -319,9 +327,11 @@ section { padding: 80px 0; }
 
 /* ---------- ANIMATIONS ---------- */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeOnly { from { opacity: 0; } to { opacity: 1; } }
 .fade-up { animation: fadeUp .8s ease-out both; }
 .fade-up-d1 { animation: fadeUp .8s ease-out .15s both; }
 .fade-up-d2 { animation: fadeUp .8s ease-out .3s both; }
+.fade-in-d2 { animation: fadeOnly .8s ease-out .45s both; }
 
 /* ---------- DIFERENCIAIS / GRID 3 ---------- */
 .diff-grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 48px; }

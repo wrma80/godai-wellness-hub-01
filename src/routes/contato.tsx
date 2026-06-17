@@ -49,7 +49,7 @@ function ContatoPage() {
 
   return (
     <>
-      <section className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28 lg:px-10">
+      <section className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28 lg:px-10 fade-up">
         <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Contato</span>
         <h1 className="mt-6 text-4xl leading-tight text-sage-deep md:text-5xl">Solicite um orçamento</h1>
         <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">

@@ -34,7 +34,7 @@ function SobrePage() {
   return (
     <>
       {/* HERO */}
-      <section className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28 lg:px-10">
+      <section className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28 lg:px-10 fade-up">
         <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Sobre a Godai</span>
         <h1 className="mt-6 text-4xl leading-tight text-sage-deep md:text-5xl">
           Uma história construída pelo cuidado com as pessoas.

@@ -19,7 +19,7 @@ include __DIR__ . '/includes/header.php';
       </div>
     </div>
     <div class="hero-img fade-up-d1">
-      <img src="<?= e(base_url('assets/img/hero-massage.jpg')) ?>" alt="Terapeuta realizando Quick Massage em ambiente corporativo moderno">
+      <img src="<?= e(base_url('assets/img/beneficios-hero.png')) ?>" alt="Terapeuta Godai realizando Quick Massage em ambiente corporativo">
     </div>
   </div>
 </section>
@@ -66,7 +66,7 @@ include __DIR__ . '/includes/header.php';
         'Pausa saudável na rotina',
         'Recuperação da disposição',
       ] as $b): ?>
-        <div class="benefit" style="background:#fff;border:1px solid var(--border);"><span class="check">✓</span><span><?= e($b) ?></span></div>
+        <div class="benefit benefit-light"><span class="check">✓</span><span><?= e($b) ?></span></div>
       <?php endforeach; ?>
     </div>
   </div>
@@ -163,7 +163,7 @@ include __DIR__ . '/includes/header.php';
       <h2 style="margin-top:14px;">Escolha o formato ideal para sua empresa</h2>
       <p class="lead" style="margin:20px auto 0;max-width:640px;">A Godai oferece diferentes modalidades de contratação — Avulso, Pacote Corporativo e Programa Corporativo — para atender desde ações pontuais até programas contínuos de qualidade de vida corporativa.</p>
       <div style="margin-top:32px;">
-        <a href="<?= e(base_url('index.php#modalidades-contratacao')) ?>" class="btn btn-primary btn-pill">Conhecer modalidades de contratação →</a>
+        <a href="<?= e(base_url('index.php#formas-contratacao')) ?>" class="btn btn-primary btn-pill">Conhecer modalidades de contratação →</a>
       </div>
     </div>
   </div>

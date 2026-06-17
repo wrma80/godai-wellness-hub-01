@@ -7,7 +7,7 @@ $s = get_settings();
 include __DIR__ . '/includes/header.php';
 ?>
 
-<section class="page-hero container">
+<section class="page-hero container fade-up">
   <span class="eyebrow">Contato</span>
   <h1 style="margin-top:24px;">Solicite um orçamento</h1>
   <p>A Godai oferece experiências de bem-estar voltadas ao cuidado, valorização e qualidade de vida no ambiente corporativo.</p>

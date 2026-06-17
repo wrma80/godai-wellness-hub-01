@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Building2, Sparkles } from "lucide-react";
-import heroImg from "@/assets/hero-massage.jpg";
+import heroImg from "@/assets/beneficios-hero.png";
 import { useSettings, buildWhatsappLink, DEFAULT_SETTINGS } from "@/lib/cms";
 
 export const Route = createFileRoute("/beneficios")({
@@ -135,11 +135,11 @@ function BeneficiosPage() {
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {BENEFICIOS_QM.map((b) => (
-              <div key={b} className="flex items-start gap-3 rounded-xl border border-sage/15 bg-white p-5">
-                <span className="mt-0.5 grid h-6 w-6 place-items-center rounded-full bg-sage/10 text-sage">
-                  <Check size={14} strokeWidth={1.75} />
+              <div key={b} className="flex items-start gap-3 rounded-xl border border-sage/20 bg-white p-5 shadow-sm">
+                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sage/15 text-sage">
+                  <Check size={14} strokeWidth={2} />
                 </span>
-                <p className="text-sm text-sage-deep">{b}</p>
+                <p className="text-base font-medium text-sage-deep">{b}</p>
               </div>
             ))}
           </div>
@@ -244,7 +244,7 @@ function BeneficiosPage() {
               A Godai oferece diferentes modalidades de contratação — Avulso, Pacote Corporativo e Programa Corporativo — para atender desde ações pontuais até programas contínuos de qualidade de vida corporativa.
             </p>
             <div className="mt-8">
-              <Link to="/" hash="modalidades-corporativas" className="inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-sm font-medium text-cream shadow-sm transition-all hover:bg-sage-deep hover:shadow-md">
+              <Link to="/" hash="formas-contratacao" className="inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-sm font-medium text-cream shadow-sm transition-all hover:bg-sage-deep hover:shadow-md">
                 Conhecer modalidades de contratação <ArrowRight size={16} />
               </Link>
             </div>
