@@ -20,7 +20,7 @@ include __DIR__ . '/includes/header.php';
     </div>
     <div class="hero-img fade-up-d1">
       <img src="<?= e(base_url('assets/img/hero-massage.jpg')) ?>" alt="Sessão de Quick Massage corporativa">
-      <div class="hero-bubble">
+      <div class="hero-bubble fade-in-d2">
         <span class="dot">♡</span>
         <div>
           <p style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Saúde corporativa</p>

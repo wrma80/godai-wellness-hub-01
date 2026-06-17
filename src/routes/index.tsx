@@ -126,7 +126,7 @@ function HomePage() {
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 hidden rounded-2xl border border-sage/10 bg-cream p-5 shadow-xl md:block fade-up-delay-2">
+            <div className="absolute -bottom-6 -left-6 hidden rounded-2xl border border-sage/10 bg-cream p-5 shadow-xl md:block fade-in-delay-2">
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-full bg-sage/10 text-sage">
                   <Heart size={18} />
@@ -247,7 +247,7 @@ function HomePage() {
       </section>
 
       {/* FORMAS DE CONTRATAÇÃO */}
-      <section id="modalidades-corporativas" className="bg-cream py-20 md:py-28">
+      <section id="formas-contratacao" className="bg-cream py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="text-center">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Formas de Contratação</span>
