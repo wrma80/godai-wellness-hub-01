@@ -19,7 +19,7 @@ include __DIR__ . '/includes/header.php';
       </div>
     </div>
     <div class="hero-img fade-up-d1">
-      <img src="<?= e(base_url('assets/img/beneficios-hero.png')) ?>" alt="Terapeuta Godai realizando Quick Massage em ambiente corporativo">
+      <img src="<?= e(site_image_url('beneficios_hero')) ?>" alt="Terapeuta Godai realizando Quick Massage em ambiente corporativo">
     </div>
   </div>
 </section>
