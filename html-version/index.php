@@ -19,7 +19,7 @@ include __DIR__ . '/includes/header.php';
       </div>
     </div>
     <div class="hero-img fade-up-d1">
-      <img src="<?= e(base_url('assets/img/hero-massage.jpg')) ?>" alt="Sessão de Quick Massage corporativa">
+      <img src="<?= e(site_image_url('home_hero')) ?>" alt="Sessão de Quick Massage corporativa">
       <div class="hero-bubble fade-in-d2">
         <span class="dot">♡</span>
         <div>
@@ -35,7 +35,7 @@ include __DIR__ . '/includes/header.php';
 <section class="bg-white">
   <div class="container grid grid-2">
     <div style="border-radius:20px;overflow:hidden;">
-      <img src="<?= e(base_url('assets/img/about-zen.jpg')) ?>" alt="Equilíbrio e elementos naturais" loading="lazy" style="aspect-ratio:4/5;width:100%;object-fit:cover;">
+      <img src="<?= e(site_image_url('home_about')) ?>" alt="Equilíbrio e elementos naturais" loading="lazy" style="aspect-ratio:4/5;width:100%;object-fit:cover;">
     </div>
     <div>
       <span class="eyebrow">Sobre a Godai</span>

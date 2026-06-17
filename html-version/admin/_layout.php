@@ -22,6 +22,7 @@ function admin_menu(): array {
         ['key'=>'pricing',   'label'=>'Preços',        'href'=>'pricing.php',   'icon'=>'$'],
         ['key'=>'faq',       'label'=>'FAQ',           'href'=>'faq.php',       'icon'=>'?'],
         ['key'=>'galeria',   'label'=>'Galeria',       'href'=>'galeria.php',   'icon'=>'▣'],
+        ['key'=>'imagens',   'label'=>'Imagens do site','href'=>'imagens.php',  'icon'=>'◰'],
         ['key'=>'seo',       'label'=>'SEO',           'href'=>'seo.php',       'icon'=>'⌖'],
 
         ['group'=>'Configurações'],
