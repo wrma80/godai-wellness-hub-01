@@ -19,7 +19,7 @@ include __DIR__ . '/includes/header.php';
       </div>
     </div>
     <div class="hero-img fade-up-d1">
-      <img src="<?= e(base_url('assets/img/hero-massage.jpg')) ?>" alt="Terapeuta realizando Quick Massage em ambiente corporativo moderno">
+      <img src="<?= e(base_url('assets/img/beneficios-hero.png')) ?>" alt="Terapeuta Godai realizando Quick Massage em ambiente corporativo">
     </div>
   </div>
 </section>
@@ -66,7 +66,7 @@ include __DIR__ . '/includes/header.php';
         'Pausa saudável na rotina',
         'Recuperação da disposição',
       ] as $b): ?>
-        <div class="benefit" style="background:#fff;border:1px solid var(--border);"><span class="check">✓</span><span><?= e($b) ?></span></div>
+        <div class="benefit benefit-light"><span class="check">✓</span><span><?= e($b) ?></span></div>
       <?php endforeach; ?>
     </div>
   </div>
