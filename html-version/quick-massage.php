@@ -5,7 +5,7 @@ $pageDesc  = 'Quick Massage in company: sessões de 10 a 15 minutos com cadeira 
 include __DIR__ . '/includes/header.php';
 ?>
 
-<section class="page-hero container">
+<section class="page-hero container fade-up">
   <span class="eyebrow">Quick Massage</span>
   <h1 style="margin-top:24px;">Quick Massage Corporativa</h1>
   <p>Experiências voltadas à redução do estresse, alívio de tensões musculares e promoção da qualidade de vida no ambiente corporativo.</p>

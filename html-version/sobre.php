@@ -5,7 +5,7 @@ $pageDesc  = 'Conheça a história, a fundadora e a trajetória da Godai Terapia
 include __DIR__ . '/includes/header.php';
 ?>
 
-<section class="page-hero container">
+<section class="page-hero container fade-up">
   <span class="eyebrow">Sobre a Godai</span>
   <h1 style="margin-top:24px;">Uma história construída pelo cuidado com as pessoas.</h1>
   <p>Há mais de duas décadas, nossa trajetória é guiada por um propósito simples: promover experiências de bem-estar que contribuam para uma rotina mais equilibrada, saudável e humana.</p>
