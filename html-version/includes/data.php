@@ -78,3 +78,44 @@ function whatsapp_link(?string $customMessage = null): string {
     $text   = $customMessage ?? ($s['whatsappMessage'] ?? '');
     return 'https://wa.me/' . $number . '?text=' . rawurlencode($text);
 }
+
+/* =============================================================
+ * Site Images — gerenciamento centralizado pelo painel admin.
+ * Registry hardcoded das imagens substituíveis. Overrides ficam
+ * em data/site-images.json apontando para arquivos enviados em
+ * assets/uploads/site-images/. Backups em assets/uploads/backups/.
+ * ============================================================= */
+function site_image_registry(): array {
+    return [
+        'home_hero' => [
+            'label'   => 'Hero Principal',
+            'page'    => 'Home',
+            'default' => 'assets/img/hero-massage.jpg',
+            'reco'    => '1920 × 1080 px (paisagem)',
+        ],
+        'home_about' => [
+            'label'   => 'Sobre a Godai',
+            'page'    => 'Home',
+            'default' => 'assets/img/about-zen.jpg',
+            'reco'    => '1200 × 1500 px (retrato 4:5)',
+        ],
+        'beneficios_hero' => [
+            'label'   => 'Hero Benefícios para Empresas',
+            'page'    => 'Benefícios para Empresas',
+            'default' => 'assets/img/beneficios-hero.png',
+            'reco'    => '1920 × 1080 px (paisagem)',
+        ],
+    ];
+}
+
+function site_image_path(string $key): string {
+    $reg = site_image_registry();
+    if (!isset($reg[$key])) return '';
+    $over = load_json('site-images', []);
+    return $over[$key] ?? $reg[$key]['default'];
+}
+
+function site_image_url(string $key): string {
+    $rel = site_image_path($key);
+    return $rel ? base_url($rel) : '';
+}
