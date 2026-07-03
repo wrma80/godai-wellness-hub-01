@@ -1,5 +1,9 @@
 [
-  {"id":"f1","question":"Qual a duração de uma sessão de Quick Massage?","answer":"Cada sessão tem em média 15 minutos por colaborador, focando em cabeça, pescoço, ombros e costas.","display_order":1},
-  {"id":"f2","question":"Vocês levam toda a estrutura?","answer":"Sim. Levamos cadeira ergonômica específica, óleos, lenços descartáveis e som ambiente — sua empresa só precisa fornecer um espaço reservado.","display_order":2},
-  {"id":"f3","question":"Atendem em quais cidades?","answer":"Indaiatuba, Campinas, Salto, Itu, Sorocaba e toda a região metropolitana de Campinas e RMC.","display_order":3}
+  {"id":"f1","question":"Quantos colaboradores são atendidos por hora?","answer":"Em média, um terapeuta atende de 4 a 6 colaboradores por hora considerando sessões de 10 a 15 minutos. O número exato é definido conforme o formato do evento e a quantidade de profissionais alocados.","display_order":1},
+  {"id":"f2","question":"Precisa de sala?","answer":"Não é obrigatório. Atendemos em qualquer ambiente reservado, como sala de reunião, copa, recepção ou área de descompressão. Apenas indicamos um espaço com boa privacidade e ventilação.","display_order":2},
+  {"id":"f3","question":"Vocês levam cadeira?","answer":"Sim. A cadeira ergonômica de Quick Massage está inclusa em todos os atendimentos, sem custo adicional.","display_order":3},
+  {"id":"f4","question":"A Quick Massage utiliza óleo?","answer":"Não. A técnica é realizada com o colaborador vestido, sem uso de óleos ou cremes — totalmente prática para o ambiente corporativo.","display_order":4},
+  {"id":"f5","question":"Atendem finais de semana?","answer":"Sim, atendemos finais de semana mediante agendamento prévio, especialmente para eventos, SIPATs e ações pontuais.","display_order":5},
+  {"id":"f6","question":"Emitem nota fiscal?","answer":"Sim. Emitimos Nota Fiscal de Serviço para todos os atendimentos corporativos.","display_order":6},
+  {"id":"f7","question":"Atendem outras cidades?","answer":"Nosso atendimento principal é em Indaiatuba/SP. Demais regiões são atendidas mediante consulta de disponibilidade e custos de deslocamento.","display_order":7}
 ]

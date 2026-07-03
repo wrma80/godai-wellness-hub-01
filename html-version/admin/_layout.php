@@ -18,8 +18,6 @@ function admin_menu(): array {
 
         ['group'=>'Conteúdo'],
         ['key'=>'conteudo',  'label'=>'Conteúdo do site','href'=>'conteudo.php','icon'=>'✎'],
-        ['key'=>'servicos',  'label'=>'Serviços',      'href'=>'servicos.php',  'icon'=>'❋'],
-        ['key'=>'pricing',   'label'=>'Preços',        'href'=>'pricing.php',   'icon'=>'$'],
         ['key'=>'faq',       'label'=>'FAQ',           'href'=>'faq.php',       'icon'=>'?'],
         ['key'=>'galeria',   'label'=>'Galeria',       'href'=>'galeria.php',   'icon'=>'▣'],
         ['key'=>'imagens',   'label'=>'Imagens do site','href'=>'imagens.php',  'icon'=>'◰'],

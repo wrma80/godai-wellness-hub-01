@@ -60,17 +60,6 @@ function get_gallery(string $category = ''): array {
     return array_values($list);
 }
 
-function get_services(): array {
-    $list = load_json('services', []);
-    usort($list, fn($a, $b) => ($a['display_order'] ?? 0) <=> ($b['display_order'] ?? 0));
-    return $list;
-}
-
-function get_pricing(): array {
-    $list = load_json('pricing', []);
-    usort($list, fn($a, $b) => ($a['display_order'] ?? 0) <=> ($b['display_order'] ?? 0));
-    return $list;
-}
 
 function whatsapp_link(?string $customMessage = null): string {
     $s = get_settings();
