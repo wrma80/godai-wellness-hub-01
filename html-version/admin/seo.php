@@ -2,7 +2,7 @@
 require_once __DIR__ . '/_auth.php';
 require_login();
 
-$PAGES = ['home'=>'Home','sobre'=>'Sobre','quick-massage'=>'Quick Massage','contato'=>'Contato','faq'=>'FAQ'];
+$PAGES = ['home'=>'Home','sobre'=>'Sobre','quick-massage'=>'Quick Massage','beneficios'=>'Benefícios para Empresas','contato'=>'Contato','faq'=>'FAQ'];
 $activePage = $_GET['p'] ?? 'home';
 if (!isset($PAGES[$activePage])) $activePage = 'home';
 

@@ -54,6 +54,48 @@ function get_seo(string $page = ''): array {
     return $all[$page] ?? [];
 }
 
+/**
+ * Retorna a chave do seo.json / content.json correspondente à página atual.
+ * 'index' → 'home' (por convenção do JSON).
+ */
+function page_seo_key(?string $page = null): string {
+    $p = $page ?? current_page();
+    return $p === 'index' ? 'home' : $p;
+}
+
+/**
+ * Lê texto do content.json (gerenciado em admin/conteudo.php) com fallback.
+ * Ex: get_content('home', 'hero_title', 'Título padrão')
+ */
+function get_content(string $section, string $key, string $default = ''): string {
+    $all = load_json('content', []);
+    $val = $all[$section][$key] ?? '';
+    return $val !== '' ? $val : $default;
+}
+
+/**
+ * Extrai o @handle a partir de uma URL do Instagram.
+ * https://instagram.com/godai_terapias → @godai_terapias
+ */
+function instagram_handle(string $url): string {
+    if ($url === '') return '';
+    $path = trim(parse_url($url, PHP_URL_PATH) ?? '', '/');
+    $handle = explode('/', $path)[0] ?? '';
+    return $handle ? '@' . $handle : $url;
+}
+
+/**
+ * Formata número de WhatsApp E.164 (5519997016552) para exibição BR: (19) 99701-6552.
+ */
+function format_phone(string $raw): string {
+    $d = preg_replace('/\D/', '', $raw);
+    if (strlen($d) === 13 && substr($d,0,2) === '55') $d = substr($d, 2);
+    if (strlen($d) === 11) return '(' . substr($d,0,2) . ') ' . substr($d,2,5) . '-' . substr($d,7);
+    if (strlen($d) === 10) return '(' . substr($d,0,2) . ') ' . substr($d,2,4) . '-' . substr($d,6);
+    return $raw;
+}
+
+
 function get_gallery(string $category = ''): array {
     $list = load_json('gallery', []);
     if ($category !== '') $list = array_filter($list, fn($g) => ($g['category'] ?? '') === $category);
