@@ -7,6 +7,7 @@ $faq = load_json('faq', []);
 $gal = load_json('gallery', []);
 $lastMsg = $messages[0] ?? null;
 $last30 = array_filter($messages, fn($m) => strtotime($m['created_at'] ?? 'now') >= strtotime('-30 days'));
+$unreadCount = count(array_filter($messages, fn($m) => empty($m['is_read'])));
 
 $page_title = 'Dashboard';
 $active = 'dashboard';
@@ -14,7 +15,11 @@ require __DIR__ . '/_layout.php';
 layout_start();
 ?>
 <div class="grid grid-4">
-  <div class="kpi"><div class="lbl">Mensagens recebidas</div><div class="num"><?= count($messages) ?></div><div class="meta"><?= count($last30) ?> nos últimos 30 dias</div></div>
+  <div class="kpi">
+    <div class="lbl">Mensagens recebidas</div>
+    <div class="num"><?= count($messages) ?><?php if ($unreadCount > 0): ?> <span style="font-size:14px;background:var(--sage);color:#fff;padding:3px 10px;border-radius:999px;vertical-align:middle;"><?= $unreadCount ?> nova<?= $unreadCount === 1 ? '' : 's' ?></span><?php endif; ?></div>
+    <div class="meta"><?= count($last30) ?> nos últimos 30 dias</div>
+  </div>
   <div class="kpi"><div class="lbl">FAQs cadastradas</div><div class="num"><?= count($faq) ?></div><div class="meta">Perguntas frequentes ativas</div></div>
   <div class="kpi"><div class="lbl">Imagens na galeria</div><div class="num"><?= count($gal) ?></div><div class="meta"><?= count(array_filter($gal, fn($g)=>!empty($g['is_primary']))) ?> marcadas como principais</div></div>
   <div class="kpi"><div class="lbl">Último orçamento</div><div class="num" style="font-size:18px;line-height:1.3;"><?= $lastMsg ? e(date('d/m/Y H:i', strtotime($lastMsg['created_at']))) : '—' ?></div><div class="meta"><?= $lastMsg ? e($lastMsg['nome'] ?? '') : 'Nenhum recebido' ?></div></div>
