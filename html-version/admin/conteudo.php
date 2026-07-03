@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $data[$s] = $entry;
     save_json('content', $data);
-    flash('success', 'Conteúdo salvo.');
+    admin_log('conteudo.save', ''); flash('success', 'Conteúdo salvo.');
     header('Location: ' . base_url('admin/conteudo.php?s='.urlencode($s)));
     exit;
 }

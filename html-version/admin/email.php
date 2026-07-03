@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             flash('error', 'Não foi possível escrever em includes/email-config.php. Verifique as permissões de escrita (chmod 664).');
         } else {
             @chmod($CONFIG_PATH, 0640);
-            flash('success', 'Configurações SMTP salvas.');
+            admin_log('email.save', ''); flash('success', 'Configurações SMTP salvas.');
         }
         header('Location: ' . base_url('admin/email.php'));
         exit;

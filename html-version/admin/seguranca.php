@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             flash('error', 'Confirmação não confere.');
         else {
             update_user($user['id'], ['password_hash' => password_hash($new, PASSWORD_BCRYPT)]);
-            flash('success', 'Senha atualizada com sucesso.');
+            admin_log('security.password_change', ''); flash('success', 'Senha atualizada com sucesso.');
         }
     } elseif ($action === 'change_email') {
         $email = trim((string)($_POST['email'] ?? ''));

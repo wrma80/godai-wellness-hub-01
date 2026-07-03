@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'uploaded_at'=> date('c'),
                     ];
                     save_json('gallery', $list);
-                    flash('success', 'Imagem enviada.');
+                    admin_log('galeria.upload', ''); flash('success', 'Imagem enviada.');
                 } else {
                     flash('error', 'Falha ao salvar arquivo. Verifique permissões de escrita em assets/uploads/.');
                 }
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $list = array_values(array_filter($list, fn($g)=>$g['id']!==$id));
         save_json('gallery', $list);
-        flash('success', 'Imagem removida.');
+        admin_log('galeria.delete', ''); flash('success', 'Imagem removida.');
     } elseif ($action === 'set_primary') {
         $id = $_POST['id'] ?? '';
         $cat = $_POST['category'] ?? '';
