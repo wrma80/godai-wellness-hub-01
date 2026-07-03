@@ -69,6 +69,61 @@ function whatsapp_link(?string $customMessage = null): string {
 }
 
 /* =============================================================
+ * Navegação — itens do menu principal, gerenciável em admin/navegacao.php
+ * ============================================================= */
+function get_navigation(): array {
+    $data = load_json('navigation', ['items' => []]);
+    $items = $data['items'] ?? [];
+    $items = array_values(array_filter($items, fn($it) => !empty($it['enabled'])));
+    usort($items, fn($a,$b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
+    return $items;
+}
+
+/* =============================================================
+ * CTAs — textos/links de botões, gerenciável em admin/ctas.php
+ * ============================================================= */
+function get_cta(string $key, array $fallback = ['label'=>'','href'=>'']): array {
+    $all = load_json('ctas', []);
+    $cta = $all[$key] ?? $fallback;
+    // Se href vazio E é um CTA de WhatsApp por convenção, usa whatsapp_link()
+    if (empty($cta['href']) && (strpos($key, 'whatsapp') !== false || strpos($key, 'wpp') !== false)) {
+        $cta['href'] = whatsapp_link();
+    }
+    return $cta;
+}
+
+/* =============================================================
+ * Depoimentos — CRUD em admin/depoimentos.php (ainda não renderizado no site)
+ * ============================================================= */
+function get_testimonials(bool $onlyActive = true): array {
+    $list = load_json('testimonials', []);
+    if ($onlyActive) $list = array_filter($list, fn($t) => !empty($t['active']));
+    usort($list, fn($a,$b) => ($a['display_order'] ?? 0) <=> ($b['display_order'] ?? 0));
+    return array_values($list);
+}
+
+/* =============================================================
+ * Logs administrativos — histórico de ações no painel
+ * ============================================================= */
+function admin_log(string $action, string $detail = ''): void {
+    $logs = load_json('admin-logs', []);
+    $user = function_exists('current_user') ? current_user() : null;
+    $logs[] = [
+        'ts'     => date('c'),
+        'user'   => $user['username'] ?? '(anônimo)',
+        'action' => $action,
+        'detail' => $detail,
+        'ip'     => $_SERVER['REMOTE_ADDR'] ?? '',
+    ];
+    // Mantém no máximo 500 entradas (descarta as mais antigas)
+    if (count($logs) > 500) {
+        $logs = array_slice($logs, -500);
+    }
+    save_json('admin-logs', $logs);
+}
+
+
+/* =============================================================
  * Site Images — gerenciamento centralizado pelo painel admin.
  * Registry hardcoded das imagens substituíveis. Overrides ficam
  * em data/site-images.json apontando para arquivos enviados em

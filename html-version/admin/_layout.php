@@ -17,16 +17,22 @@ function admin_menu(): array {
         ['key'=>'mensagens', 'label'=>'Mensagens',     'href'=>'mensagens.php', 'icon'=>'✉'],
 
         ['group'=>'Conteúdo'],
-        ['key'=>'conteudo',  'label'=>'Conteúdo do site','href'=>'conteudo.php','icon'=>'✎'],
-        ['key'=>'faq',       'label'=>'FAQ',           'href'=>'faq.php',       'icon'=>'?'],
-        ['key'=>'galeria',   'label'=>'Galeria',       'href'=>'galeria.php',   'icon'=>'▣'],
-        ['key'=>'imagens',   'label'=>'Imagens do site','href'=>'imagens.php',  'icon'=>'◰'],
-        ['key'=>'seo',       'label'=>'SEO',           'href'=>'seo.php',       'icon'=>'⌖'],
+        ['key'=>'conteudo',    'label'=>'Conteúdo do site','href'=>'conteudo.php','icon'=>'✎'],
+        ['key'=>'faq',         'label'=>'FAQ',             'href'=>'faq.php',         'icon'=>'?'],
+        ['key'=>'depoimentos', 'label'=>'Depoimentos',     'href'=>'depoimentos.php', 'icon'=>'❝'],
+        ['key'=>'galeria',     'label'=>'Galeria',         'href'=>'galeria.php',     'icon'=>'▣'],
+        ['key'=>'imagens',     'label'=>'Imagens do site', 'href'=>'imagens.php',     'icon'=>'◰'],
+        ['key'=>'seo',         'label'=>'SEO',             'href'=>'seo.php',         'icon'=>'⌖'],
+
+        ['group'=>'Interface'],
+        ['key'=>'navegacao',   'label'=>'Navegação',       'href'=>'navegacao.php',   'icon'=>'☰'],
+        ['key'=>'ctas',        'label'=>'CTAs e Botões',   'href'=>'ctas.php',        'icon'=>'▶'],
 
         ['group'=>'Configurações'],
-        ['key'=>'contatos',  'label'=>'Contatos',      'href'=>'contatos.php',  'icon'=>'☎'],
-        ['key'=>'email',     'label'=>'E-mail / SMTP', 'href'=>'email.php',     'icon'=>'✦'],
-        ['key'=>'seguranca', 'label'=>'Segurança',     'href'=>'seguranca.php', 'icon'=>'⚿'],
+        ['key'=>'contatos',    'label'=>'Contatos',        'href'=>'contatos.php',    'icon'=>'☎'],
+        ['key'=>'email',       'label'=>'E-mail / SMTP',   'href'=>'email.php',       'icon'=>'✦'],
+        ['key'=>'seguranca',   'label'=>'Segurança',       'href'=>'seguranca.php',   'icon'=>'⚿'],
+        ['key'=>'logs',        'label'=>'Logs',            'href'=>'logs.php',        'icon'=>'⌘'],
     ];
 }
 
