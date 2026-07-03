@@ -79,6 +79,7 @@ $record = [
     'mensagem'     => $mensagem,
     'ip'           => $ip,
     'created_at'   => date('c'),
+    'is_read'      => false,
 ];
 $msgs = load_json('messages', []);
 array_unshift($msgs, $record);

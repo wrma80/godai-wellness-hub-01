@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     $overrides[$key] = $UPLOADS_REL . '/' . $fname;
                     save_json('site-images', $overrides);
-                    flash('success', 'Imagem "' . $registry[$key]['label'] . '" substituída com sucesso.');
+                    admin_log('imagens.upload', $key); flash('success', 'Imagem "' . $registry[$key]['label'] . '" substituída com sucesso.');
                 } else {
                     flash('error', 'Não foi possível processar o arquivo enviado.');
                 }
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             unset($overrides[$key]);
             save_json('site-images', $overrides);
-            flash('success', 'Imagem restaurada para a versão original.');
+            admin_log('imagens.restore', $key); flash('success', 'Imagem restaurada para a versão original.');
         }
     }
     header('Location: ' . base_url('admin/imagens.php')); exit;

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/_auth.php';
 require_login();
 
-$PAGES = ['home'=>'Home','sobre'=>'Sobre','quick-massage'=>'Quick Massage','contato'=>'Contato','faq'=>'FAQ'];
+$PAGES = ['home'=>'Home','sobre'=>'Sobre','quick-massage'=>'Quick Massage','beneficios'=>'Benefícios para Empresas','contato'=>'Contato','faq'=>'FAQ'];
 $activePage = $_GET['p'] ?? 'home';
 if (!isset($PAGES[$activePage])) $activePage = 'home';
 
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'og_image'       => trim((string)($_POST['og_image'] ?? '')),
     ];
     save_json('seo', $data);
-    flash('success', 'SEO da página "' . $PAGES[$p] . '" salvo.');
+    admin_log('seo.save', $p); flash('success', 'SEO da página "' . $PAGES[$p] . '" salvo.');
     header('Location: ' . base_url('admin/seo.php?p='.urlencode($p)));
     exit;
 }

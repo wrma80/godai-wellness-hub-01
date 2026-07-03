@@ -10,9 +10,9 @@ include __DIR__ . '/includes/header.php';
 <section class="hero container">
   <div class="grid grid-2">
     <div class="fade-up">
-      <span class="eyebrow eyebrow-pill">🌿 Bem-estar Corporativo</span>
-      <h1 style="margin-top:24px;">Bem-estar corporativo que <em>transforma</em> ambientes.</h1>
-      <p class="lead" style="margin-top:24px;">A Godai Terapias Integrativas leva experiências de bem-estar para empresas que desejam valorizar pessoas, fortalecer ações de qualidade de vida e promover ambientes corporativos mais saudáveis.</p>
+      <span class="eyebrow eyebrow-pill"><?= e(get_content('home','hero_eyebrow','🌿 Bem-estar Corporativo')) ?></span>
+      <h1 style="margin-top:24px;"><?= get_content('home','hero_title','Bem-estar corporativo que <em>transforma</em> ambientes.') /* HTML permitido */ ?></h1>
+      <p class="lead" style="margin-top:24px;"><?= e(get_content('home','hero_subtitle','A Godai Terapias Integrativas leva experiências de bem-estar para empresas que desejam valorizar pessoas, fortalecer ações de qualidade de vida e promover ambientes corporativos mais saudáveis.')) ?></p>
       <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">
         <a href="<?= e(base_url('contato.php')) ?>" class="btn btn-primary btn-pill">Solicitar orçamento →</a>
         <a href="<?= e(whatsapp_link()) ?>" target="_blank" rel="noopener" class="btn btn-outline btn-pill">Falar no WhatsApp</a>

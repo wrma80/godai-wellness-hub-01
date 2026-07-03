@@ -13,9 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = find_user_by_username($u);
     if ($user && password_verify($p, $user['password_hash'] ?? '')) {
         login_user($user);
+        admin_log('auth.login', 'usuário: ' . $u);
         header('Location: ' . base_url('admin/index.php'));
         exit;
     }
+    admin_log('auth.login_failed', 'tentativa: ' . $u);
     flash('error', 'Usuário ou senha incorretos.');
 }
 

@@ -7,14 +7,28 @@ $list = load_json('messages', []);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     check_csrf();
     $action = $_POST['action'] ?? '';
+    $id = $_POST['id'] ?? '';
     if ($action === 'delete') {
-        $id = $_POST['id'] ?? '';
         $list = array_values(array_filter($list, fn($m)=>$m['id']!==$id));
         save_json('messages', $list);
+        admin_log('mensagens.delete', $id);
         flash('success', 'Mensagem excluída.');
-        header('Location: ' . base_url('admin/mensagens.php'));
-        exit;
+    } elseif ($action === 'toggle_read') {
+        foreach ($list as &$m) {
+            if (($m['id'] ?? '') === $id) $m['is_read'] = empty($m['is_read']);
+        }
+        unset($m);
+        save_json('messages', $list);
+        admin_log('mensagens.toggle_read', $id);
+    } elseif ($action === 'mark_all_read') {
+        foreach ($list as &$m) $m['is_read'] = true;
+        unset($m);
+        save_json('messages', $list);
+        admin_log('mensagens.mark_all_read', '');
+        flash('success', 'Todas as mensagens marcadas como lidas.');
     }
+    header('Location: ' . base_url('admin/mensagens.php' . (!empty($_GET['id']) ? '?id=' . urlencode($_GET['id']) : '')));
+    exit;
 }
 
 // CSV export
@@ -69,6 +83,17 @@ $active = 'mensagens';
 require __DIR__ . '/_layout.php';
 layout_start();
 ?>
+<?php
+// Auto-marcar como lida ao abrir o detalhe
+if ($detail && empty($detail['is_read'])) {
+    foreach ($list as &$m) {
+        if (($m['id'] ?? '') === $detail['id']) $m['is_read'] = true;
+    }
+    unset($m);
+    save_json('messages', $list);
+    $detail['is_read'] = true;
+}
+?>
 <?php if ($detail): ?>
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
@@ -87,15 +112,45 @@ layout_start();
     </table>
     <h3 style="margin-top:20px;color:var(--sage-deep);">Mensagem</h3>
     <div style="background:var(--cream-2);border:1px solid var(--line);border-radius:8px;padding:14px 16px;white-space:pre-wrap;"><?= e($detail['mensagem'] ?? '') ?></div>
-    <form method="post" onsubmit="return confirm('Excluir esta mensagem?')" style="margin-top:20px;">
-      <input type="hidden" name="_csrf" value="<?= e($csrf) ?>">
-      <input type="hidden" name="action" value="delete">
-      <input type="hidden" name="id" value="<?= e($detail['id']) ?>">
-      <button class="btn btn-danger">Excluir mensagem</button>
-    </form>
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <form method="post" style="margin:0;">
+        <input type="hidden" name="_csrf" value="<?= e($csrf) ?>">
+        <input type="hidden" name="action" value="toggle_read">
+        <input type="hidden" name="id" value="<?= e($detail['id']) ?>">
+        <button class="btn btn-out">Marcar como <?= !empty($detail['is_read']) ? 'não lida' : 'lida' ?></button>
+      </form>
+      <form method="post" onsubmit="return confirm('Excluir esta mensagem?')" style="margin:0;">
+        <input type="hidden" name="_csrf" value="<?= e($csrf) ?>">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="id" value="<?= e($detail['id']) ?>">
+        <button class="btn btn-danger">Excluir mensagem</button>
+      </form>
+    </div>
   </div>
 <?php else: ?>
+  <?php
+    // Ordena por data DESC (mais nova primeiro). array_unshift já faz isso, mas usort garante consistência.
+    $ordered = $filtered;
+    usort($ordered, fn($a,$b) => strcmp($b['created_at'] ?? '', $a['created_at'] ?? ''));
+    $unreadCount = count(array_filter($list, fn($m) => empty($m['is_read'])));
+  ?>
   <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+      <div>
+        <strong><?= count($ordered) ?></strong> mensagens
+        <?php if ($unreadCount > 0): ?>
+          · <span style="background:var(--sage);color:#fff;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;"><?= $unreadCount ?> não lida<?= $unreadCount === 1 ? '' : 's' ?></span>
+        <?php endif; ?>
+      </div>
+      <?php if ($unreadCount > 0): ?>
+        <form method="post" style="margin:0;" onsubmit="return confirm('Marcar todas as mensagens como lidas?');">
+          <input type="hidden" name="_csrf" value="<?= e($csrf) ?>">
+          <input type="hidden" name="action" value="mark_all_read">
+          <button class="btn btn-sm btn-out">Marcar todas como lidas</button>
+        </form>
+      <?php endif; ?>
+    </div>
+
     <form method="get" style="display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin-bottom:14px;">
       <div class="field" style="margin:0;flex:1;min-width:200px;"><label>Buscar</label><input name="q" value="<?= e($q) ?>" placeholder="Nome, empresa, e-mail..."></div>
       <div class="field" style="margin:0;"><label>De</label><input type="date" name="from" value="<?= e($from) ?>"></div>
@@ -104,14 +159,15 @@ layout_start();
       <a href="?<?= e(http_build_query(array_merge($_GET, ['export'=>'csv']))) ?>" class="btn btn-primary">Exportar CSV</a>
     </form>
 
-    <?php if (!$filtered): ?>
+    <?php if (!$ordered): ?>
       <p class="sub">Nenhuma mensagem encontrada.</p>
     <?php else: ?>
       <table class="tbl">
-        <thead><tr><th>Data</th><th>Nome</th><th>Empresa</th><th>E-mail</th><th>Cidade</th><th></th></tr></thead>
+        <thead><tr><th style="width:32px;"></th><th>Data</th><th>Nome</th><th>Empresa</th><th>E-mail</th><th>Cidade</th><th></th></tr></thead>
         <tbody>
-          <?php foreach (array_reverse($filtered) as $m): ?>
-            <tr>
+          <?php foreach ($ordered as $m): $unread = empty($m['is_read']); ?>
+            <tr style="<?= $unread ? 'background:var(--cream-2);font-weight:500;' : '' ?>">
+              <td style="text-align:center;"><?php if ($unread): ?><span title="Não lida" style="display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--sage);"></span><?php endif; ?></td>
               <td><?= e(date('d/m/Y H:i', strtotime($m['created_at']))) ?></td>
               <td><?= e($m['nome'] ?? '') ?></td>
               <td><?= e($m['empresa'] ?? '') ?></td>
