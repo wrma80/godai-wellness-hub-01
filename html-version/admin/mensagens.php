@@ -7,14 +7,28 @@ $list = load_json('messages', []);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     check_csrf();
     $action = $_POST['action'] ?? '';
+    $id = $_POST['id'] ?? '';
     if ($action === 'delete') {
-        $id = $_POST['id'] ?? '';
         $list = array_values(array_filter($list, fn($m)=>$m['id']!==$id));
         save_json('messages', $list);
+        admin_log('mensagens.delete', $id);
         flash('success', 'Mensagem excluída.');
-        header('Location: ' . base_url('admin/mensagens.php'));
-        exit;
+    } elseif ($action === 'toggle_read') {
+        foreach ($list as &$m) {
+            if (($m['id'] ?? '') === $id) $m['is_read'] = empty($m['is_read']);
+        }
+        unset($m);
+        save_json('messages', $list);
+        admin_log('mensagens.toggle_read', $id);
+    } elseif ($action === 'mark_all_read') {
+        foreach ($list as &$m) $m['is_read'] = true;
+        unset($m);
+        save_json('messages', $list);
+        admin_log('mensagens.mark_all_read', '');
+        flash('success', 'Todas as mensagens marcadas como lidas.');
     }
+    header('Location: ' . base_url('admin/mensagens.php' . (!empty($_GET['id']) ? '?id=' . urlencode($_GET['id']) : '')));
+    exit;
 }
 
 // CSV export
@@ -68,6 +82,17 @@ $page_title = 'Mensagens recebidas';
 $active = 'mensagens';
 require __DIR__ . '/_layout.php';
 layout_start();
+?>
+<?php
+// Auto-marcar como lida ao abrir o detalhe
+if ($detail && empty($detail['is_read'])) {
+    foreach ($list as &$m) {
+        if (($m['id'] ?? '') === $detail['id']) $m['is_read'] = true;
+    }
+    unset($m);
+    save_json('messages', $list);
+    $detail['is_read'] = true;
+}
 ?>
 <?php if ($detail): ?>
   <div class="card">
