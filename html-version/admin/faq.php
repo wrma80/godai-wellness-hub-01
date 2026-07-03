@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         usort($rows, fn($a,$b)=>$a['display_order']<=>$b['display_order']);
         save_json('faq', $rows);
         flash('success', 'FAQ atualizado.');
+        admin_log('faq.save', count($rows) . ' perguntas');
     } elseif ($action === 'add') {
         $list[] = ['id'=>'f'.substr(bin2hex(random_bytes(4)),0,8),'question'=>'Nova pergunta','answer'=>'','display_order'=>count($list)+1];
         save_json('faq', $list);
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $list = array_values(array_filter($list, fn($r)=>$r['id']!==$id));
         save_json('faq', $list);
         flash('success', 'Pergunta removida.');
+        admin_log('faq.delete', $id);
     }
     header('Location: ' . base_url('admin/faq.php'));
     exit;

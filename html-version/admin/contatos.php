@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     save_json('settings', $current);
     flash('success', 'Informações de contato atualizadas.');
+    admin_log('contatos.save', 'settings');
     header('Location: ' . base_url('admin/contatos.php'));
     exit;
 }
