@@ -3,15 +3,8 @@ require_once __DIR__ . '/includes/config.php';
 $pageTitle = 'FAQ — Perguntas frequentes | Godai';
 $pageDesc  = 'Tire suas dúvidas sobre a Quick Massage Corporativa da Godai: estrutura, atendimento, regiões, nota fiscal e mais.';
 include __DIR__ . '/includes/header.php';
-$faq = [
-  ['Quantos colaboradores são atendidos por hora?', 'Em média, um terapeuta atende de 4 a 6 colaboradores por hora considerando sessões de 10 a 15 minutos. O número exato é definido conforme o formato do evento e a quantidade de profissionais alocados.'],
-  ['Precisa de sala?', 'Não é obrigatório. Atendemos em qualquer ambiente reservado, como sala de reunião, copa, recepção ou área de descompressão. Apenas indicamos um espaço com boa privacidade e ventilação.'],
-  ['Vocês levam cadeira?', 'Sim. A cadeira ergonômica de Quick Massage está inclusa em todos os atendimentos, sem custo adicional.'],
-  ['A Quick Massage utiliza óleo?', 'Não. A técnica é realizada com o colaborador vestido, sem uso de óleos ou cremes — totalmente prática para o ambiente corporativo.'],
-  ['Atendem finais de semana?', 'Sim, atendemos finais de semana mediante agendamento prévio, especialmente para eventos, SIPATs e ações pontuais.'],
-  ['Emitem nota fiscal?', 'Sim. Emitimos Nota Fiscal de Serviço para todos os atendimentos corporativos.'],
-  ['Atendem outras cidades?', 'Nosso atendimento principal é em Indaiatuba/SP. Demais regiões são atendidas mediante consulta de disponibilidade e custos de deslocamento.'],
-];
+$faq = get_faq();
+
 ?>
 
 <section class="page-hero container fade-up">
@@ -23,15 +16,19 @@ $faq = [
 <section style="background:var(--cream);">
   <div class="container">
     <div class="accordion">
-      <?php foreach ($faq as $i => [$q, $a]): ?>
+      <?php foreach ($faq as $i => $item): ?>
         <div class="accordion-item<?= $i === 0 ? ' is-open' : '' ?>">
           <button type="button" class="accordion-q" aria-expanded="<?= $i === 0 ? 'true' : 'false' ?>">
-            <span><?= e($q) ?></span>
+            <span><?= e($item['question']) ?></span>
             <span class="toggle" aria-hidden="true">⌄</span>
           </button>
-          <div class="accordion-a"><?= e($a) ?></div>
+          <div class="accordion-a"><?= e($item['answer']) ?></div>
         </div>
       <?php endforeach; ?>
+      <?php if (empty($faq)): ?>
+        <p style="text-align:center;padding:40px 0;color:var(--muted);">Nenhuma pergunta cadastrada no momento.</p>
+      <?php endif; ?>
+    </div>
     </div>
   </div>
 </section>
