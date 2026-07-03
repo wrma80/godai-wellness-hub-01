@@ -2,14 +2,23 @@
 require_once __DIR__ . '/config.php';
 $s = get_settings();
 $page = current_page();
-$nav = [
-  ['index',        'Home'],
-  ['sobre',        'Sobre'],
-  ['quick-massage','Quick Massage'],
-  ['beneficios',   'Benefícios para Empresas'],
-  ['faq',          'FAQ'],
-  ['contato',      'Contato'],
-];
+
+// Menu vem do painel (admin/navegacao.php). Fallback para lista padrão se vazio.
+$navItems = get_navigation();
+if (empty($navItems)) {
+    $navItems = [
+        ['key'=>'home','label'=>'Home','href'=>'index.php'],
+        ['key'=>'sobre','label'=>'Sobre','href'=>'sobre.php'],
+        ['key'=>'quick-massage','label'=>'Quick Massage','href'=>'quick-massage.php'],
+        ['key'=>'beneficios','label'=>'Benefícios para Empresas','href'=>'beneficios.php'],
+        ['key'=>'faq','label'=>'FAQ','href'=>'faq.php'],
+        ['key'=>'contato','label'=>'Contato','href'=>'contato.php'],
+    ];
+}
+
+// CTA principal do header
+$primaryCta = get_cta('primary_quote', ['label'=>'Solicitar orçamento','href'=>'contato.php']);
+
 $pageTitle = $pageTitle ?? 'Godai Terapias Integrativas — Quick Massage Corporativa';
 $pageDesc  = $pageDesc  ?? 'Bem-estar corporativo que transforma ambientes. Quick Massage in company para empresas, SIPATs e programas de qualidade de vida.';
 ?><!doctype html>
@@ -36,23 +45,23 @@ $pageDesc  = $pageDesc  ?? 'Bem-estar corporativo que transforma ambientes. Quic
       <img src="<?= e(base_url('assets/img/godai-symbol.png')) ?>" alt="Godai Terapias Integrativas" style="height:64px;width:auto;display:block;">
     </a>
     <nav class="nav-desktop">
-      <?php foreach ($nav as [$slug, $label]):
-        $href = $slug === 'index' ? base_url('index.php') : base_url($slug . '.php');
-        $isActive = $page === $slug; ?>
-        <a href="<?= e($href) ?>" class="nav-link<?= $isActive ? ' is-active' : '' ?>"><?= e($label) ?></a>
+      <?php foreach ($navItems as $item):
+        $slug = $item['key'] ?? '';
+        $href = base_url($item['href']);
+        $isActive = $page === $slug || $page === pathinfo($item['href'], PATHINFO_FILENAME); ?>
+        <a href="<?= e($href) ?>" class="nav-link<?= $isActive ? ' is-active' : '' ?>"><?= e($item['label']) ?></a>
       <?php endforeach; ?>
-      <a href="<?= e(base_url('contato.php')) ?>" class="btn btn-primary btn-pill">Solicitar orçamento</a>
+      <a href="<?= e(base_url($primaryCta['href'] ?: 'contato.php')) ?>" class="btn btn-primary btn-pill"><?= e($primaryCta['label'] ?: 'Solicitar orçamento') ?></a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
   <div class="nav-mobile" id="navMobile" hidden>
-    <?php foreach ($nav as [$slug, $label]):
-      $href = $slug === 'index' ? base_url('index.php') : base_url($slug . '.php'); ?>
-      <a href="<?= e($href) ?>"><?= e($label) ?></a>
+    <?php foreach ($navItems as $item): ?>
+      <a href="<?= e(base_url($item['href'])) ?>"><?= e($item['label']) ?></a>
     <?php endforeach; ?>
-    <a href="<?= e(base_url('contato.php')) ?>" class="btn btn-primary btn-pill">Solicitar orçamento</a>
+    <a href="<?= e(base_url($primaryCta['href'] ?: 'contato.php')) ?>" class="btn btn-primary btn-pill"><?= e($primaryCta['label'] ?: 'Solicitar orçamento') ?></a>
   </div>
 </header>
 <main class="site-main">
