@@ -31,6 +31,19 @@ jobs:
             **/.git*
             **/.git*/**
             **/.DS_Store
-            data/**
-            assets/uploads/**
+            data/admin.json
+            data/admin-logs.json
+            data/content.json
+            data/ctas.json
+            data/faq.json
+            data/gallery.json
+            data/messages.json
+            data/navigation.json
+            data/password-resets.json
+            data/seo.json
+            data/settings.json
+            data/site-images.json
+            data/testimonials.json
+            assets/uploads/site-images/**
+            assets/uploads/backups/**
             includes/email-config.php
