@@ -1,0 +1,10 @@
+{
+  "items": [
+    {"key":"home","label":"Home","href":"index.php","enabled":true,"order":1},
+    {"key":"sobre","label":"Sobre","href":"sobre.php","enabled":true,"order":2},
+    {"key":"quick-massage","label":"Quick Massage","href":"quick-massage.php","enabled":true,"order":3},
+    {"key":"beneficios","label":"Benefícios para Empresas","href":"beneficios.php","enabled":true,"order":4},
+    {"key":"faq","label":"FAQ","href":"faq.php","enabled":true,"order":5},
+    {"key":"contato","label":"Contato","href":"contato.php","enabled":true,"order":6}
+  ]
+}
