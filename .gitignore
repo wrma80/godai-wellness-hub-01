@@ -33,3 +33,12 @@ dist-ssr
 
 # SMTP credentials (Locaweb shared hosting — uploaded manually via FTP)
 html-version/includes/email-config.php
+
+# Godai — runtime data (managed via admin panel, seeds versionados como *.example.json)
+html-version/data/*.json
+!html-version/data/*.example.json
+html-version/assets/uploads/site-images/*
+!html-version/assets/uploads/site-images/.gitkeep
+html-version/assets/uploads/backups/*
+!html-version/assets/uploads/backups/.gitkeep
+html-version/includes/email-config.php

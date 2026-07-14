@@ -7,8 +7,21 @@ function data_path(string $name): string {
     return GODAI_DATA . '/' . $name . '.json';
 }
 
+function data_seed_path(string $name): string {
+    return GODAI_DATA . '/' . $name . '.example.json';
+}
+
 function load_json(string $name, $default = []) {
     $path = data_path($name);
+    // Fallback: se o arquivo de runtime não existe, semeia a partir do .example.json.
+    // Isso garante que o painel/site funcione em ambientes novos sem sobrescrever
+    // dados existentes no servidor (o workflow de deploy ignora data/**).
+    if (!is_file($path)) {
+        $seed = data_seed_path($name);
+        if (is_file($seed)) {
+            @copy($seed, $path);
+        }
+    }
     if (!is_file($path)) return $default;
     $raw = file_get_contents($path);
     $val = json_decode($raw, true);
