@@ -1,61 +1,55 @@
-## Ajustes solicitados — Sobre, Contato e Instagram
+## Causa
 
-Aplicar nas duas versões do site (React em `src/routes/` e PHP em `html-version/`) sem alterar a identidade visual.
+O workflow `.github/workflows/deploy.yml` faz FTP sync de `./html-version/` inteiro para `/public_html/` a cada push. Isso sobrescreve os arquivos de runtime no servidor pelos do repositório — inclusive `data/admin.json`, que no repo está com `"users": []`. Resultado: toda vez que você faz deploy, o usuário criado via bootstrap é apagado, junto com FAQ, mensagens, conteúdo editado, imagens enviadas, logs, etc.
 
-### 1. Padronização dos títulos da página "Sobre"
+Ou seja, não é só o login — qualquer alteração feita no painel é perdida no próximo deploy.
 
-Hoje o hero usa "Sobre a Godai" como `<span>` pequeno (eyebrow) e o título principal é "Uma história construída pelo cuidado com as pessoas." Já em "Nossa origem" o eyebrow é "Nossa origem" e o título grande é "Como nasceu a Godai".
+## Correção
 
-A solicitação é que **"Sobre a Godai" tenha o mesmo tamanho/peso/altura/espaçamento de "Nossa Origem"** (ou seja, mesmo estilo de eyebrow). Para isso:
+**1. Excluir dados de runtime do deploy**
 
-- **React (`src/routes/sobre.tsx`, linha 38):** trocar a classe do `<span>` "Sobre a Godai" de `text-sm font-medium tracking-wide text-sage` para `text-xs font-semibold uppercase tracking-[0.25em] text-sage` — idêntico ao eyebrow de "Nossa origem" (linha 63). Sem inline-style.
-- **PHP (`html-version/sobre.php`, linha 9):** remover os overrides inline (`style="text-transform:none;letter-spacing:normal;font-weight:500;"`) deixando apenas `<span class="eyebrow">Sobre a Godai</span>`, igual aos demais eyebrows da página.
+Editar `.github/workflows/deploy.yml` e adicionar `exclude` no passo FTP-Deploy-Action para nunca sobrescrever:
 
-### 2. Simplificação da página de Contato
+- `html-version/data/**` (admin.json, faq.json, messages.json, content.json, settings.json, seo.json, gallery.json, navigation.json, ctas.json, testimonials.json, site-images.json, admin-logs.json, password-resets.json)
+- `html-version/assets/uploads/**` (imagens enviadas pelo painel, backups)
+- `html-version/includes/email-config.php` (credenciais SMTP)
 
-Remover a faixa de 4 cards ("Atendimento personalizado / Estrutura inclusa / Atendimento corporativo / Flexibilidade de horários"). Formulário e bloco de contato permanecem inalterados.
+Assim o FTP continua publicando código (`.php`, CSS, JS, imagens fixas de `assets/img/`), mas preserva estado editável.
 
-- **React (`src/routes/contato.tsx`):** remover o array `DIFS` (linhas 16–21) e a `<section>` inteira que o renderiza (linhas 67–80). Remover o import `Check` se não for mais usado em outras partes (continuará sendo usado no estado "sent", então mantém).
-- **PHP (`html-version/contato.php`):** remover a `<section>` linhas 16–24 (bloco `bullet-list`).
+**2. Converter os JSONs versionados em seeds**
 
-### 3. Rótulo do Instagram → `@godai_terapias`
+Renomear os arquivos de `data/` do repositório para `*.example.json` (ou mover para `data/seed/`) e ajustar `.gitignore` para ignorar os `data/*.json` reais. Isso evita conflito futuro e deixa claro no repo o schema esperado.
 
-- **`src/components/Footer.tsx` (linha 55):** já mostra `@godai_terapias` — nenhum ajuste necessário.
-- **`src/routes/contato.tsx` (linha 110):** trocar o texto "Instagram" por `@godai_terapias`.
-- **`html-version/contato.php` (linha 34):** trocar o texto do link "Instagram" por `@godai_terapias`.
-- **`html-version/includes/footer.php`:** já mostra `@godai_terapias` — sem alteração.
+O `includes/data.php` já cria arquivos ausentes quando lidos (`load_json` retorna default). Se não criar, adicionar fallback que copia do seed na primeira leitura.
 
-### 4. Ícone oficial do Instagram
+**3. Refazer o setup uma última vez**
 
-Verificar o ícone usado. No React, `Footer.tsx` e `contato.tsx` já importam `Instagram` do `lucide-react`, que é o glifo oficial (câmera quadrada com lente). Manter.
+Depois que o workflow corrigido entrar em produção, você acessa `admin/bootstrap.php` uma vez e cria o usuário. A partir daí, deploys futuros não mexem mais em `data/` nem em `assets/uploads/`.
 
-No PHP, hoje é usado o caractere `◎` (footer e contato). Substituir por um SVG inline do ícone oficial do Instagram (mesmo path do Lucide), mantendo as classes/estilo atuais:
+## Detalhes técnicos
 
-- `html-version/includes/footer.php` (linha do Instagram dentro da `<ul>` de contato).
-- `html-version/contato.php` (linha 34, dentro do `<span class="ico">`).
+Trecho do workflow após ajuste:
 
-SVG a usar (24×24, `currentColor`, traço 1.5, igual ao Lucide):
-
-```html
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-  fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-</svg>
+```yaml
+- name: FTP Deploy
+  uses: SamKirkland/FTP-Deploy-Action@master
+  with:
+    server: ${{ secrets.HOST }}
+    username: ${{ secrets.USER }}
+    password: ${{ secrets.PASS }}
+    local-dir: ./html-version/
+    server-dir: /public_html/
+    exclude: |
+      **/.git*
+      **/.git*/**
+      html-version/data/**
+      html-version/assets/uploads/**
+      html-version/includes/email-config.php
 ```
 
-### 5. Consistência geral
+(Como `local-dir` já é `./html-version/`, os padrões de exclude serão relativos a essa raiz — ajustar para `data/**`, `assets/uploads/**`, `includes/email-config.php`.)
 
-Após as alterações, conferir visualmente Sobre e Contato em desktop e mobile (preview React e snapshot do PHP) para garantir alinhamento, espaçamento e responsividade.
+## Fora do escopo
 
-### Entrega
-
-**Arquivos a alterar:**
-- `src/routes/sobre.tsx` — estilo do eyebrow "Sobre a Godai".
-- `src/routes/contato.tsx` — remover seção de cards; trocar texto do link Instagram.
-- `html-version/sobre.php` — remover overrides inline do eyebrow.
-- `html-version/contato.php` — remover seção `bullet-list`; trocar texto e ícone do Instagram.
-- `html-version/includes/footer.php` — trocar ícone `◎` por SVG oficial do Instagram.
-
-**Sem alterações em:** formulário, identidade visual (cores/tipografia), demais páginas, backend PHP, painel admin.
+- Backup automático dos JSONs (posso adicionar depois se quiser).
+- Migração para banco (Supabase/MySQL) — mudança maior, tratamos separadamente.

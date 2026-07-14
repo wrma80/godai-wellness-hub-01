@@ -25,3 +25,12 @@ jobs:
           password: ${{ secrets.PASS }}
           local-dir: ./html-version/
           server-dir: /public_html/
+          # Preserve runtime state on the server (created/edited via admin panel).
+          # These paths are relative to local-dir (./html-version/).
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.DS_Store
+            data/**
+            assets/uploads/**
+            includes/email-config.php
