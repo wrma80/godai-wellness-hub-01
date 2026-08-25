@@ -106,13 +106,12 @@ include __DIR__ . '/includes/header.php';
     <div class="text-center">
       <span class="eyebrow">Formas de Contratação</span>
       <h2 style="margin-top:16px;">Escolha o formato ideal para sua empresa</h2>
-      <p class="lead" style="margin:16px auto 0;">Três modalidades pensadas para diferentes momentos e necessidades corporativas.</p>
+      <p class="lead" style="margin:16px auto 0;">Duas modalidades pensadas para diferentes momentos e necessidades corporativas.</p>
     </div>
-    <div class="plans-grid">
+    <div class="plans-grid plans-grid--two">
       <?php $plans = [
-        ['Avulso','Ação Pontual','Perfeito para SIPAT, eventos internos e campanhas de bem-estar.', ['Agendamento único','Ideal para ações pontuais','Ideal para datas comemorativas','Contratação por período de atendimento'], false],
-        ['Pacote Corporativo','Flexibilidade de Utilização','Ideal para empresas que desejam múltiplos atendimentos corporativos sem fidelização recorrente.', ['Utilização conforme agenda da empresa','Condições corporativas diferenciadas','Melhor custo-benefício','Ideal para SIPATs e campanhas periódicas'], true],
-        ['Programa Corporativo','Parceria Estratégica','Programa contínuo de bem-estar para empresas com visão de longo prazo.', ['Atendimento recorrente','Planejamento contínuo das ações','Organização do calendário corporativo','Programa estruturado de qualidade de vida'], false],
+        ['Ação Pontual','Sob Demanda','Perfeito para SIPAT, eventos internos e campanhas de bem-estar.', ['Agendamento único','Ideal para ações pontuais','Ideal para datas comemorativas','Contratação por período de atendimento'], false],
+        ['Plano Corporativo','Parceria Estratégica','Programa contínuo de bem-estar para empresas com visão de longo prazo.', ['Atendimento recorrente','Planejamento contínuo das ações','Organização do calendário corporativo','Programa estruturado de qualidade de vida'], true],
       ]; foreach ($plans as [$t,$sub,$desc,$items,$feat]): ?>
         <div class="plan-card<?= $feat ? ' is-featured' : '' ?>">
           <h3 style="text-align:center;"><?= e($t) ?></h3>
