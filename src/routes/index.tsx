@@ -43,7 +43,7 @@ const DIFERENCIAIS = [
 const PLANOS = [
   {
     title: "Ação Pontual",
-    subtitle: "Ação Pontual",
+    subtitle: "Sob Demanda",
     desc: "Perfeito para SIPAT, eventos internos e campanhas de bem-estar.",
     items: [
       "Agendamento único",
