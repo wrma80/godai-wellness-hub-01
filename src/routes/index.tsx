@@ -247,13 +247,11 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
-            {PLANOS.map((p, i) => (
+          <div className="mx-auto mt-12 grid max-w-4xl place-items-center gap-6 md:grid-cols-2">
+            {PLANOS.map((p) => (
               <div
                 key={p.title}
-                className={`relative flex flex-col rounded-2xl border bg-white p-8 shadow-sm transition-all hover:shadow-md ${
-                  i === 1 ? "border-sage/40 ring-1 ring-sage/30" : "border-sage/10"
-                }`}
+                className="relative flex flex-col rounded-2xl border border-sage/10 bg-white p-8 shadow-sm transition-all hover:shadow-md"
               >
                 <h3 className="text-center text-2xl text-sage-deep">{p.title}</h3>
                 <span className="mt-3 block text-center text-xs font-semibold uppercase tracking-[0.2em] text-sage">{p.subtitle}</span>
@@ -275,6 +273,7 @@ function HomePage() {
               </div>
             ))}
           </div>
+
         </div>
       </section>
 

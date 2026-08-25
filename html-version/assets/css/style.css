@@ -343,11 +343,10 @@ section { padding: 80px 0; }
 .diff-item p { color: var(--sage-deep); font-size: .92rem; margin: 6px 0 0; }
 
 /* ---------- PLANS / FORMAS DE CONTRATAÇÃO ---------- */
-.plans-grid { display: grid; gap: 24px; grid-template-columns: 1fr; margin-top: 56px; }
+.plans-grid { display: grid; gap: 24px; grid-template-columns: 1fr; justify-items: center; margin: 56px auto 0; width: 100%; }
 @media (min-width: 768px){ .plans-grid { grid-template-columns: repeat(3, 1fr); } .plans-grid--two { grid-template-columns: repeat(2, 1fr); max-width: 860px; margin-left: auto; margin-right: auto; } }
-.plan-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 32px; box-shadow: var(--shadow-sm); transition: all .25s; }
+.plan-card { display: flex; flex-direction: column; width: 100%; background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 32px; box-shadow: var(--shadow-sm); transition: all .25s; }
 .plan-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-.plan-card.is-featured { border-color: rgba(86,108,80,.4); box-shadow: 0 0 0 1px rgba(86,108,80,.3), var(--shadow-md); }
 .plan-card .plan-sub { font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--sage); }
 .plan-card h3 { margin-top: 12px; font-size: 1.5rem; color: var(--sage-deep); }
 .plan-card .plan-desc { color: var(--muted); font-size: .92rem; margin-top: 12px; }
@@ -355,6 +354,7 @@ section { padding: 80px 0; }
 .plan-card ul li { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; color: var(--sage-deep); }
 .plan-card ul li::before { content: "✓"; color: var(--sage); font-weight: 700; }
 .plan-card .btn { margin-top: 32px; justify-content: center; }
+
 
 /* ---------- FAQ ACCORDION ---------- */
 .accordion { display: flex; flex-direction: column; max-width: 760px; margin: 40px auto 0; border-top: 1px solid rgba(86,108,80,.18); }
