@@ -243,7 +243,7 @@ function HomePage() {
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Formas de Contratação</span>
             <h2 className="mt-4 text-3xl text-sage-deep md:text-4xl">Escolha o formato ideal para sua empresa</h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Três modalidades pensadas para diferentes momentos e necessidades corporativas.
+              Duas modalidades pensadas para diferentes momentos e necessidades corporativas.
             </p>
           </div>
 
