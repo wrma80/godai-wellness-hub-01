@@ -42,7 +42,7 @@ const DIFERENCIAIS = [
 
 const PLANOS = [
   {
-    title: "Avulso",
+    title: "Ação Pontual",
     subtitle: "Ação Pontual",
     desc: "Perfeito para SIPAT, eventos internos e campanhas de bem-estar.",
     items: [
@@ -53,18 +53,7 @@ const PLANOS = [
     ],
   },
   {
-    title: "Pacote Corporativo",
-    subtitle: "Flexibilidade de Utilização",
-    desc: "Ideal para empresas que desejam múltiplos atendimentos corporativos sem fidelização recorrente.",
-    items: [
-      "Utilização conforme agenda da empresa",
-      "Condições corporativas diferenciadas",
-      "Melhor custo-benefício",
-      "Ideal para SIPATs e campanhas periódicas",
-    ],
-  },
-  {
-    title: "Programa Corporativo",
+    title: "Plano Corporativo",
     subtitle: "Parceria Estratégica",
     desc: "Programa contínuo de bem-estar para empresas com visão de longo prazo.",
     items: [
@@ -75,6 +64,7 @@ const PLANOS = [
     ],
   },
 ];
+
 
 function HomePage() {
   const { data: settings } = useSettings();
