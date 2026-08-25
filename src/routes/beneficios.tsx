@@ -241,7 +241,7 @@ function BeneficiosPage() {
             <span className="mt-4 inline-block text-xs font-semibold uppercase tracking-[0.25em] text-sage">Formas de contratação</span>
             <h2 className="mt-3 text-3xl text-sage-deep md:text-4xl">Escolha o formato ideal para sua empresa</h2>
             <p className="mx-auto mt-5 max-w-2xl text-muted-foreground">
-              A Godai oferece diferentes modalidades de contratação — Avulso, Pacote Corporativo e Programa Corporativo — para atender desde ações pontuais até programas contínuos de qualidade de vida corporativa.
+              A Godai oferece duas modalidades de contratação — Ação Pontual e Plano Corporativo — para atender desde ações pontuais até programas contínuos de qualidade de vida corporativa.
             </p>
             <div className="mt-8">
               <Link to="/" hash="formas-contratacao" className="inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-sm font-medium text-cream shadow-sm transition-all hover:bg-sage-deep hover:shadow-md">

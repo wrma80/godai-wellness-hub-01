@@ -135,9 +135,8 @@ function ContatoPage() {
                       className="mt-2 w-full rounded-lg border border-sage/15 bg-cream/40 px-4 py-3 text-sm outline-none transition-colors focus:border-sage focus:bg-white"
                     >
                       <option value="" disabled>Selecione</option>
-                      <option>Avulso / Ação Pontual</option>
-                      <option>Pacote Corporativo</option>
-                      <option>Programa Corporativo</option>
+                      <option>Ação Pontual</option>
+                      <option>Plano Corporativo</option>
                       <option>SIPAT / Evento</option>
                     </select>
                   </div>
