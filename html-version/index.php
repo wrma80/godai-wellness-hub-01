@@ -108,12 +108,12 @@ include __DIR__ . '/includes/header.php';
       <h2 style="margin-top:16px;">Escolha o formato ideal para sua empresa</h2>
       <p class="lead" style="margin:16px auto 0;">Duas modalidades pensadas para diferentes momentos e necessidades corporativas.</p>
     </div>
-    <div class="plans-grid plans-grid--two">
+    <div class="plans-grid plans-grid--two" style="justify-items:center;align-items:stretch;">
       <?php $plans = [
-        ['Ação Pontual','Sob Demanda','Perfeito para SIPAT, eventos internos e campanhas de bem-estar.', ['Agendamento único','Ideal para ações pontuais','Ideal para datas comemorativas','Contratação por período de atendimento'], false],
-        ['Plano Corporativo','Parceria Estratégica','Programa contínuo de bem-estar para empresas com visão de longo prazo.', ['Atendimento recorrente','Planejamento contínuo das ações','Organização do calendário corporativo','Programa estruturado de qualidade de vida'], true],
-      ]; foreach ($plans as [$t,$sub,$desc,$items,$feat]): ?>
-        <div class="plan-card<?= $feat ? ' is-featured' : '' ?>">
+        ['Ação Pontual','Sob Demanda','Perfeito para SIPAT, eventos internos e campanhas de bem-estar.', ['Agendamento único','Ideal para ações pontuais','Ideal para datas comemorativas','Contratação por período de atendimento']],
+        ['Plano Corporativo','Parceria Estratégica','Programa contínuo de bem-estar para empresas com visão de longo prazo.', ['Atendimento recorrente','Planejamento contínuo das ações','Organização do calendário corporativo','Programa estruturado de qualidade de vida']],
+      ]; foreach ($plans as [$t,$sub,$desc,$items]): ?>
+        <div class="plan-card">
           <h3 style="text-align:center;"><?= e($t) ?></h3>
           <span class="plan-sub" style="text-align:center;display:block;margin-top:8px;"><?= e($sub) ?></span>
           <p class="plan-desc" style="text-align:center;"><?= e($desc) ?></p>
@@ -124,6 +124,7 @@ include __DIR__ . '/includes/header.php';
         </div>
       <?php endforeach; ?>
     </div>
+
   </div>
 </section>
 
