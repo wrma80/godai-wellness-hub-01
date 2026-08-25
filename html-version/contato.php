@@ -40,9 +40,8 @@ include __DIR__ . '/includes/header.php';
           <label>Tipo de atendimento</label>
           <select name="tipo" required>
             <option value="" disabled selected>Selecione</option>
-            <option>Avulso / Ação Pontual</option>
-            <option>Pacote Corporativo</option>
-            <option>Programa Corporativo</option>
+            <option>Ação Pontual</option>
+            <option>Plano Corporativo</option>
             <option>SIPAT / Evento</option>
           </select>
         </div>

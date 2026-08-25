@@ -42,8 +42,8 @@ const DIFERENCIAIS = [
 
 const PLANOS = [
   {
-    title: "Avulso",
-    subtitle: "Ação Pontual",
+    title: "Ação Pontual",
+    subtitle: "Sob Demanda",
     desc: "Perfeito para SIPAT, eventos internos e campanhas de bem-estar.",
     items: [
       "Agendamento único",
@@ -53,18 +53,7 @@ const PLANOS = [
     ],
   },
   {
-    title: "Pacote Corporativo",
-    subtitle: "Flexibilidade de Utilização",
-    desc: "Ideal para empresas que desejam múltiplos atendimentos corporativos sem fidelização recorrente.",
-    items: [
-      "Utilização conforme agenda da empresa",
-      "Condições corporativas diferenciadas",
-      "Melhor custo-benefício",
-      "Ideal para SIPATs e campanhas periódicas",
-    ],
-  },
-  {
-    title: "Programa Corporativo",
+    title: "Plano Corporativo",
     subtitle: "Parceria Estratégica",
     desc: "Programa contínuo de bem-estar para empresas com visão de longo prazo.",
     items: [
@@ -75,6 +64,7 @@ const PLANOS = [
     ],
   },
 ];
+
 
 function HomePage() {
   const { data: settings } = useSettings();
@@ -253,11 +243,11 @@ function HomePage() {
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-sage">Formas de Contratação</span>
             <h2 className="mt-4 text-3xl text-sage-deep md:text-4xl">Escolha o formato ideal para sua empresa</h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Três modalidades pensadas para diferentes momentos e necessidades corporativas.
+              Duas modalidades pensadas para diferentes momentos e necessidades corporativas.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
             {PLANOS.map((p, i) => (
               <div
                 key={p.title}
