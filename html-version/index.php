@@ -101,7 +101,7 @@ include __DIR__ . '/includes/header.php';
 </section>
 
 <!-- FORMAS DE CONTRATAÇÃO -->
-<section id="modalidades-corporativas" style="background:var(--cream);">
+<section id="formas-contratacao" style="background:var(--cream);">
   <div class="container">
     <div class="text-center">
       <span class="eyebrow">Formas de Contratação</span>
